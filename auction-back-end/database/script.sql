@@ -1,3 +1,5 @@
+drop owned by auction;
+
 create table admin
 (
     id       serial primary key,
@@ -44,6 +46,12 @@ create table user_token
     user_id         integer   not null references "user" (id)
 );
 
+create table commission (
+    id serial primary key,
+    rate double precision not null check ( rate > 0 and rate < 1 ),
+    set_date timestamp not null default current_timestamp
+);
+
 create table auction
 (
     id          serial primary key,
@@ -52,7 +60,8 @@ create table auction
     start_date  timestamp    not null default current_timestamp,
     end_date    timestamp    not null check ( end_date > start_date ),
     product_id  integer      not null references product (id),
-    start_price double precision check ( start_price > 0 )
+    start_price double precision check ( start_price > 0 ),
+    commission double precision not null check ( commission > 0 and commission < 1 )
 );
 
 create table auction_pic
