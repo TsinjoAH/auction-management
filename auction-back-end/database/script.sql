@@ -174,11 +174,11 @@ insert into "user"(name,email,password,signup_date) values('Steven','Steven@exem
                                                           ('Perle','Perle@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-07'),
                                                           ('Amethiste','Amethiste@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-10'),
                                                           ('Jaspe','Jaspe@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-12')
-        , ('Peridote','Peridote@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-15'),
+                                                             ('Peridote','Peridote@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-15'),
                                                           ('Lapislazuli','Lapislazuli@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-17')
-        , ('RoseQuartz','RoseQuartz@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-19')
-        , ('Ruby','Ruby@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-20')
-        , ('Saphir','Saphir@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-22');
+                                                            , ('RoseQuartz','RoseQuartz@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-19')
+                                                            , ('Ruby','Ruby@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-20')
+                                                            , ('Saphir','Saphir@exemple.com','602260addce6b6f6f7a3b3bd8f55d95241dd0c5c','2023-01-22');
 
 insert into commission(rate,set_date) values(0.5,'2023-01-28');
 

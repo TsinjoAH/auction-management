@@ -4,8 +4,11 @@ import custom.springutils.LoginEntity;
 import custom.springutils.model.HasName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Entity
+@Table(name = "admin")
 public class Admin extends HasName implements LoginEntity {
     @Column
     String name;
@@ -37,6 +40,6 @@ public class Admin extends HasName implements LoginEntity {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DigestUtils.sha1Hex(password);
     }
 }
