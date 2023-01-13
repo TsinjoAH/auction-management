@@ -6,6 +6,7 @@ import custom.springutils.model.HasId;
 This class can be changed but if you want to delete it or change the classname, don't forget to change the fk
 in the class Deposit, the repo class and the service class
 Thanks
+- Lars Ratovo.
  */
 @Entity
 @Table(name = "\"user\"")
