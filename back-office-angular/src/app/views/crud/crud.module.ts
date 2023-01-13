@@ -13,11 +13,14 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {CustomModule} from "@custom-components/custom/custom.module";
 import {MatTableModule} from "@angular/material/table";
 import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
+import { ProductComponent } from './product/product.component';
+import { ProductFormModalComponent } from './product/product-form-modal/product-form-modal.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 
 @NgModule({
-  declarations: [CategoryComponent, CategoryFormModalComponent],
+  declarations: [CategoryComponent, CategoryFormModalComponent, ProductComponent, ProductFormModalComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -30,7 +33,8 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
     MatDialogModule,
     CustomModule,
     MatTableModule,
-    SweetAlert2Module
+    SweetAlert2Module,
+    MatAutocompleteModule
   ]
 })
 export class CrudModule { }
