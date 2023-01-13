@@ -5,15 +5,13 @@ import com.management.auction.models.Product;
 import com.management.auction.models.User;
 import custom.springutils.exception.CustomException;
 import custom.springutils.model.HasFK;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +23,9 @@ public class AuctionBase extends HasFK<User> {
     private String description;
     @ManyToOne
     private User user;
+
+    @Column
+    private Long duration;
     @Column
     private Timestamp startDate = Timestamp.valueOf(LocalDateTime.now());
     @Column
@@ -36,7 +37,8 @@ public class AuctionBase extends HasFK<User> {
     private Double startPrice;
     @Column
     private Double commission;
-
+    @OneToMany(mappedBy = "auctionId")
+    private List<AuctionPic> images;
 
 
     @Override
@@ -48,6 +50,16 @@ public class AuctionBase extends HasFK<User> {
         }
     }
 
+    public void setDuration(Long duration) throws CustomException {
+        this.duration = duration;
+        if(this.getStartDate()==null){
+            throw new CustomException("Start Date is null");
+        }else {
+            this.setEndDate(Timestamp.valueOf(this.getStartDate().toLocalDateTime().plusMinutes(this.duration)));
+        }
+    }
+
+
     public void setStartPrice(Double startPrice) throws CustomException {
         if(startPrice < 0) {
             throw new CustomException("Start Price should be positive");
@@ -55,5 +67,6 @@ public class AuctionBase extends HasFK<User> {
             this.startPrice = startPrice;
         }
     }
+
 }
 
