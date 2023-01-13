@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {CustomModule} from "@custom-components/custom/custom.module";
 import {MatTableModule} from "@angular/material/table";
+import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 
 
 
@@ -28,7 +29,8 @@ import {MatTableModule} from "@angular/material/table";
     GridModule,
     MatDialogModule,
     CustomModule,
-    MatTableModule
+    MatTableModule,
+    SweetAlert2Module
   ]
 })
 export class CrudModule { }
