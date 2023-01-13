@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/commission")
 public class CommissionController extends CrudController<Commission, CommissionService> {
+
     public CommissionController(CommissionService service) {
         super(service);
     }
+
     @GetMapping("")
     @Override
     public ResponseEntity<SuccessResponse> findAll(){

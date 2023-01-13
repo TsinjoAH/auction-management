@@ -10,8 +10,9 @@ import java.time.LocalDate;
 public class Commission extends HasId {
     @Column
     double rate;
+
     @Column
-    Date set_date=Date.valueOf(LocalDate.now());
+    Date setDate=Date.valueOf(LocalDate.now());
     public double getRate() {
         return rate;
     }
@@ -20,12 +21,11 @@ public class Commission extends HasId {
         this.rate = rate;
     }
 
-    public Date getSet_date() {
-        return set_date;
+    public Date getSetDate() {
+        return setDate;
     }
 
-    public void setSet_date(Date set_date) {
-        this.set_date = set_date;
+    public void setSetDate(Date setDate) {
+        this.setDate = setDate;
     }
-
 }

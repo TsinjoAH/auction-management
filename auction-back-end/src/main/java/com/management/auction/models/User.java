@@ -17,7 +17,7 @@ public class User extends HasId {
     @Column
     String password;
     @Column
-    String signup_date;
+    String signupDate;
 
     public String getName() {
         return name;
@@ -43,12 +43,11 @@ public class User extends HasId {
         this.password = password;
     }
 
-    public String getSignup_date() {
-        return signup_date;
+    public String getSignupDate() {
+        return signupDate;
     }
 
-    public void setSignup_date(String signup_date) {
-        this.signup_date = signup_date;
+    public void setSignupDate(String signupDate) {
+        this.signupDate = signupDate;
     }
-
 }

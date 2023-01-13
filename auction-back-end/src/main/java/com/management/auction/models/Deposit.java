@@ -17,7 +17,7 @@ public class Deposit extends HasFK<User> {
     @Column
     boolean approved=false;
     @Column
-    Date approval_date;
+    Date approvalDate;
 
     public User getUser() {
         return user;
@@ -43,13 +43,14 @@ public class Deposit extends HasFK<User> {
         this.approved = approved;
     }
 
-    public Date getApproval_date() {
-        return approval_date;
+    public Date getApprovalDate() {
+        return approvalDate;
     }
 
-    public void setApproval_date(Date approval_date) {
-        this.approval_date = approval_date;
+    public void setApprovalDate(Date approvalDate) {
+        this.approvalDate = approvalDate;
     }
+
     @Override
     public void setFK(User user) throws CustomException {
         if(user!=null){
