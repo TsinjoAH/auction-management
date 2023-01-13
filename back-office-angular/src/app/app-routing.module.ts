@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DefaultLayoutComponent } from './containers';
 import {LoginComponent} from "./views/login/login.component";
-import {CategoryComponent} from "./views/category/category.component";
+import {CategoryComponent} from "./views/crud/category/category.component";
 
 const routes: Routes = [
   {
