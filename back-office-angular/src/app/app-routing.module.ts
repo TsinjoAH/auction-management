@@ -3,11 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DefaultLayoutComponent } from './containers';
 import {LoginComponent} from "./views/login/login.component";
+import {CategoryComponent} from "./views/category/category.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: DefaultLayoutComponent
+    component: DefaultLayoutComponent,
+    children: [
+      {
+        path: 'categories',
+        component: CategoryComponent,
+        pathMatch: "full"
+      }
+    ]
   },
   {
     path: 'login',

@@ -57,8 +57,10 @@ create table auction
     id          serial primary key,
     title       varchar(40)  not null,
     description varchar(255) not null,
+    user_id int references "user"(id),
     start_date  timestamp    not null default current_timestamp,
     end_date    timestamp    not null check ( end_date > start_date ),
+    duration double precision not null check ( duration > 0 ),
     product_id  integer      not null references product (id),
     start_price double precision check ( start_price > 0 ),
     commission double precision not null check ( commission > 0 and commission < 1 )
