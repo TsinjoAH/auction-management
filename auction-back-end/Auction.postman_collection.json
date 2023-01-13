@@ -289,6 +289,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"lahatra\",\r\n    \"email\":\"lahatra@exemple.com\",\r\n    \"password\":\"ef1f317fd621f877d5eda651bf488c2c00def481\",\r\n    \"signupDate\":\"2023-01-13T20:05:19+03:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
