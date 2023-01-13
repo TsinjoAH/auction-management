@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "7fc45f6b-d9f2-40d7-bb56-166415247ae0",
+		"name": "Auction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetLatestCommission",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/commission",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetCommission",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rate\":0.12\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/commission",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"commission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all deposits of a specific user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/1/deposits",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"deposits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add deposit for a user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":1,\n    \"amount\":6969.2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/users/1/deposits",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"deposits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate a deposit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/1/deposits/3/validate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"deposits",
+						"3",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
