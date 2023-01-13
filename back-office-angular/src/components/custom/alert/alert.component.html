@@ -1,1 +1,8 @@
-<p>alert works!</p>
+<div mat-dialog-title class="title" >
+  Veuillez confirmez
+</div>
+<div mat-dialog-actions class="d-flex justify-content-between">
+  <button mat-raised-button color="primary" (click)="confirm()" >Confirmer</button>
+  <button mat-raised-button color="light" (click)="cancel()" >Annuler</button>
+</div>
+

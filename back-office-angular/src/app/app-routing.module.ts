@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './containers';
 import {LoginComponent} from "./views/login/login.component";
 import {CategoryComponent} from "./views/crud/category/category.component";
+import {ProductComponent} from "./views/crud/product/product.component";
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
         path: 'categories',
         component: CategoryComponent,
         pathMatch: "full"
+      },
+      {
+        path: 'products',
+        component: ProductComponent,
+        pathMatch: 'full'
       }
     ]
   },

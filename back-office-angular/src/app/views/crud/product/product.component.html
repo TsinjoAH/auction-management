@@ -9,7 +9,7 @@
       <input #input (keyup)="filter($event)" matInput placeholder="Ex. OP5">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
-    <div class="mat-elevation-z4">
+    <div class="mat-elevation-z4 table-container">
       <table [dataSource]="dataSource" class="w-100" mat-table>
 
         <!-- Position Column -->
@@ -21,6 +21,11 @@
         <ng-container matColumnDef="name">
           <th *matHeaderCellDef mat-header-cell> NAME</th>
           <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th *matHeaderCellDef mat-header-cell> CATEGORIE</th>
+          <td *matCellDef="let element" mat-cell> {{element.category.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

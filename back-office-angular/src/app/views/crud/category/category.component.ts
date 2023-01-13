@@ -5,6 +5,8 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryFormData, CategoryFormModalComponent} from "./category-form-modal/category-form-modal.component";
+import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
+import Swal, {SweetAlertIcon} from "sweetalert2";
 
 @Component({
   selector: 'app-category',
@@ -12,6 +14,7 @@ import {CategoryFormData, CategoryFormModalComponent} from "./category-form-moda
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
+
 
   constructor(
     private dialog: MatDialog
@@ -70,6 +73,24 @@ export class CategoryComponent implements OnInit {
 
   add () {
     this.openDialog('Ajouter categorie', 'Ajouter');
+  }
+
+  delete(category: Category) {
+    Swal.fire({
+      title: 'Etes vous sur ?',
+      text: 'Veuillez confirmer la suppression',
+      icon: 'warning' as SweetAlertIcon,
+      confirmButtonText: 'Ok',
+      allowOutsideClick: true,
+      showCancelButton: true
+    }).then(result => {
+      if (result.value) {
+
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+
+      }
+    })
   }
 
 }
