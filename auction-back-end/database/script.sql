@@ -70,7 +70,7 @@ create table auction_pic
 (
     id         serial primary key,
     auction_id integer     not null references auction (id),
-    pic_path   varchar(40) not null
+    pic_path   varchar(255) not null
 );
 
 create table account_deposit

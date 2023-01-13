@@ -1,28 +1,23 @@
 package com.management.auction.models.auction;
 
+import com.management.auction.models.Bid;
 import custom.springutils.exception.CustomException;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Entity
 public class Auction extends AuctionBase{
-    @Column
-    private Long duration;
+    @Transient
+    private List<Bid> bids;
 
-    public Long getDuration() {
-        return duration;
+    public List<Bid> getBids() {
+        return bids;
     }
 
-    public void setDuration(Long duration) throws CustomException {
-        this.duration = duration;
-        if(this.getStartDate()==null){
-            throw new CustomException("Start Date is null");
-        }else {
-            this.setEndDate(Timestamp.valueOf(this.getStartDate().toLocalDateTime().plusMinutes(this.duration)));
-        }
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
     }
-
 }

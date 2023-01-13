@@ -1,4 +1,4 @@
-package com.management.auction.repos;
+package com.management.auction.repos.auction;
 
 import com.management.auction.models.auction.Auction;
 import org.springframework.data.jpa.repository.JpaRepository;
