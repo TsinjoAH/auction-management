@@ -26,7 +26,7 @@ create table product
 (
     id          serial primary key,
     name        varchar(40) not null,
-    category_id integer     not null references category (id)
+    "category_id" integer     not null references category (id)
 );
 
 create table "user"
@@ -35,7 +35,7 @@ create table "user"
     name        varchar(40) not null,
     email       varchar(40) not null,
     password    varchar(40) not null,
-    signup_date timestamp   not null default current_timestamp
+    signup_date timestamp  not null default current_timestamp
 );
 
 create table user_token
