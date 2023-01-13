@@ -267,8 +267,26 @@
 				{
 					"name": "logout",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "user_token",
+								"value": "699e31deb003eee5dc384a238d69287994eadaf3",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
 					},
 					"response": []
 				}
