@@ -1,1 +1,0 @@
-SELECT * FROM commission ORDER BY set_date;
