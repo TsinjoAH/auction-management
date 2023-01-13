@@ -1,0 +1,48 @@
+<br>
+<c-card>
+  <c-card-header>
+    Liste des categories
+  </c-card-header>
+  <c-card-body>
+    <mat-form-field appearance="outline">
+      <mat-label>Rechercher</mat-label>
+      <input #input (keyup)="filter($event)" matInput placeholder="Ex. OP5">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="mat-elevation-z4">
+      <table [dataSource]="dataSource" class="w-100" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell> ID</th>
+          <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell> NAME</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef mat-header-cell> ACTIONS</th>
+          <td *matCellDef="let element" mat-cell>
+            <span (click)="modify(element)"  color="primary" class="m-r" >
+              <mat-icon>edit</mat-icon>
+            </span>
+            <span>
+              <mat-icon>delete</mat-icon>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" class="one-row" mat-row></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements" showFirstLastButtons></mat-paginator>
+    </div>
+  </c-card-body>
+  <c-card-footer>
+    <button mat-raised-button color="primary" (click)="add()" >Ajouter</button>
+  </c-card-footer>
+</c-card>

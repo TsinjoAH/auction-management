@@ -1,7 +1,11 @@
 package com.management.auction.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import custom.springutils.LoginEntity;
 import jakarta.persistence.*;
 import custom.springutils.model.HasId;
+import org.apache.commons.codec.digest.DigestUtils;
+
 /*
 This class can be changed but if you want to delete it or change the classname, don't forget to change the fk
 in the class Deposit, the repo class and the service class
@@ -10,13 +14,18 @@ Thanks
  */
 @Entity
 @Table(name = "\"user\"")
-public class User extends HasId {
+public class User extends HasId implements LoginEntity {
+
     @Column
     String name;
+
     @Column
     String email;
+
     @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
+
     @Column
     String signupDate;
 
@@ -41,7 +50,7 @@ public class User extends HasId {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DigestUtils.sha1Hex(password);
     }
 
     public String getSignupDate() {

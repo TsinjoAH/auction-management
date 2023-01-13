@@ -1,4 +1,4 @@
-package com.management.auction.services;
+package com.management.auction.services.user;
 
 import com.management.auction.models.User;
 import com.management.auction.repos.UserRepo;

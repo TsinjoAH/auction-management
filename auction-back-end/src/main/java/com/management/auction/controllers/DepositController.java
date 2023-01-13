@@ -3,7 +3,7 @@ package com.management.auction.controllers;
 import com.management.auction.models.Deposit;
 import com.management.auction.models.User;
 import com.management.auction.services.DepositService;
-import com.management.auction.services.UserService;
+import com.management.auction.services.user.UserService;
 import custom.springutils.controller.CrudWithFK;
 import custom.springutils.util.ControllerUtil;
 import custom.springutils.util.SuccessResponse;
