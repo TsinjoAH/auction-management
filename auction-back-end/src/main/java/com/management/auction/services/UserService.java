@@ -2,7 +2,7 @@ package com.management.auction.services;
 
 import com.management.auction.models.User;
 import com.management.auction.repos.UserRepo;
-import com.management.auction.services.common.CrudService;
+import custom.springutils.service.CrudService;
 import org.springframework.stereotype.Service;
 
 @Service

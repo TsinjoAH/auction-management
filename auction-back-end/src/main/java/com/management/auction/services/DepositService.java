@@ -3,7 +3,7 @@ package com.management.auction.services;
 import com.management.auction.models.Deposit;
 import com.management.auction.models.User;
 import com.management.auction.repos.DepositRepo;
-import com.management.auction.services.common.CrudServiceWithFK;
+import custom.springutils.service.CrudServiceWithFK;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;

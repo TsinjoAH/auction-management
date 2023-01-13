@@ -1,9 +1,10 @@
 package com.management.auction.controllers;
 
-import com.management.auction.controllers.common.CrudController;
 import com.management.auction.models.Commission;
-import com.management.auction.responses.Success;
 import com.management.auction.services.CommissionService;
+import custom.springutils.controller.CrudController;
+import custom.springutils.util.ControllerUtil;
+import custom.springutils.util.SuccessResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,8 @@ public class CommissionController extends CrudController<Commission, CommissionS
     }
     @GetMapping("")
     @Override
-    public ResponseEntity<Success> findAll(){
-        return CrudController.returnSuccess(this.service.getLatest(), HttpStatus.OK);
+    public ResponseEntity<SuccessResponse> findAll(){
+        return ControllerUtil.returnSuccess(this.service.getLatest(), HttpStatus.OK);
     }
 
 }

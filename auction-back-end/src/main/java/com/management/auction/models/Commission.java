@@ -1,6 +1,5 @@
 package com.management.auction.models;
 
-import com.management.auction.models.common.HasID;
 import custom.springutils.model.HasId;
 import jakarta.persistence.*;
 
@@ -8,11 +7,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
-public class Commission implements HasID {
-    @Id
-    @SequenceGenerator(name = "commission_id_seq",sequenceName = "commission_id_seq",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "commission_id_seq")
-    Long id;
+public class Commission extends HasId {
     @Column
     double rate;
     @Column
@@ -33,13 +28,4 @@ public class Commission implements HasID {
         this.set_date = set_date;
     }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

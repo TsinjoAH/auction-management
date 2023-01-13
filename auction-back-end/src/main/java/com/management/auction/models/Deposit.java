@@ -1,19 +1,15 @@
 
 package com.management.auction.models;
 
-import com.management.auction.exception.CustomValidation;
-import com.management.auction.models.common.HasFK;
+import custom.springutils.exception.CustomException;
+import custom.springutils.model.HasFK;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 @Entity
 @Table(name = "account_deposit")
-public class Deposit implements HasFK<User> {
-    @Id
-    @SequenceGenerator(name = "id_deposit",sequenceName = "account_deposit_id_seq",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "id_deposit")
-    Long id;
-    @OneToOne
+public class Deposit extends HasFK<User> {
+    @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
     @Column
@@ -54,23 +50,12 @@ public class Deposit implements HasFK<User> {
     public void setApproval_date(Date approval_date) {
         this.approval_date = approval_date;
     }
-
     @Override
-    public void setId(Long id) {
-        this.id=id;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setFK(User user) throws CustomValidation {
+    public void setFK(User user) throws CustomException {
         if(user!=null){
             this.user=user;
         }else {
-            throw new CustomValidation("User not found");
+            throw new CustomException("User not found");
         }
     }
 
