@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {Category} from "../../../../shared/shared.interfaces";
+import {Category} from "../../../../../shared/shared.interfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export interface CategoryFormData {
   category?: Category;
