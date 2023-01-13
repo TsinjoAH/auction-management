@@ -11,6 +11,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
 import {CustomModule} from "@custom-components/custom/custom.module";
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -20,14 +21,14 @@ import {CustomModule} from "@custom-components/custom/custom.module";
     CommonModule,
     MatIconModule,
     MatPaginatorModule,
-    MatLegacyTableModule,
     CardModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     GridModule,
     MatDialogModule,
-    CustomModule
+    CustomModule,
+    MatTableModule
   ]
 })
 export class CrudModule { }
