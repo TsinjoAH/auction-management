@@ -7,6 +7,7 @@ import custom.springutils.model.HasId;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /*
 This class can be changed but if you want to delete it or change the classname, don't forget to change the fk
@@ -29,7 +30,7 @@ public class User extends HasId implements LoginEntity {
     String password;
 
     @Column
-    Timestamp signupDate;
+    Timestamp signupDate = Timestamp.valueOf(LocalDateTime.now());
 
     public String getName() {
         return name;

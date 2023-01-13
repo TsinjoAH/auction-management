@@ -11,6 +11,9 @@
         </mat-form-field>
       </c-col>
     </c-row>
-    <button mat-raised-button color="primary" >{{data.data.actionButton}}</button>
+    <div class="d-flex justify-content-between">
+      <button mat-stroked-button (click)="cancel()" color="light" >Annuler</button>
+      <button mat-raised-button (click)="add()" color="primary" >{{data.data.actionButton}}</button>
+    </div>
   </form>
 </div>
