@@ -26,10 +26,10 @@
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef mat-header-cell> ACTIONS</th>
           <td *matCellDef="let element" mat-cell>
-            <span (click)="modify(element)"  color="primary" class="m-r" >
+            <span (click)="modify(element)" class="m-r action">
               <mat-icon>edit</mat-icon>
             </span>
-            <span>
+            <span (click)="delete(element)" class="action">
               <mat-icon>delete</mat-icon>
             </span>
           </td>
@@ -42,7 +42,7 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements" showFirstLastButtons></mat-paginator>
     </div>
   </c-card-body>
-  <c-card-footer>
+  <c-card-footer class="d-flex justify-content-end">
     <button mat-raised-button color="primary" (click)="add()" >Ajouter</button>
   </c-card-footer>
 </c-card>

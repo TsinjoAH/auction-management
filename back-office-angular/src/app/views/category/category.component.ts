@@ -5,6 +5,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryFormData, CategoryFormModalComponent} from "./category-form-modal/category-form-modal.component";
+import {AlertComponent} from "@custom-components/custom/alert/alert.component";
 
 @Component({
   selector: 'app-category',
@@ -70,6 +71,10 @@ export class CategoryComponent implements OnInit {
 
   add () {
     this.openDialog('Ajouter categorie', 'Ajouter');
+  }
+
+  delete(category: Category) {
+    this.dialog.open(AlertComponent);
   }
 
 }

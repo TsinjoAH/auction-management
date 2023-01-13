@@ -11,6 +11,7 @@ import { CategoryFormModalComponent } from './category-form-modal/category-form-
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {CustomModule} from "@custom-components/custom/custom.module";
 
 
 
@@ -30,7 +31,8 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
     MatDialogModule,
     ReactiveFormsModule,
     GridModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    CustomModule
   ]
 })
 export class CategoryModule { }
