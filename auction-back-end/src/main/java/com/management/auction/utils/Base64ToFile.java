@@ -1,4 +1,4 @@
-package utils;
+package com.management.auction.utils;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
