@@ -18,11 +18,4 @@ public class CommissionService extends CrudService<Commission, CommissionRepo>{
         return this.repo.getLatest();
     }
 
-    @Override
-    public Commission create(Commission obj) throws CustomValidation {
-        if(obj.getSet_date()==null){
-            obj.setSet_date( Date.valueOf(LocalDate.now()));
-        }
-        return super.create(obj);
-    }
 }

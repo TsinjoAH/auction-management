@@ -5,10 +5,10 @@ import custom.springutils.model.HasId;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Commission implements HasID {
-    @Column
     @Id
     @SequenceGenerator(name = "commission_id_seq",sequenceName = "commission_id_seq",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "commission_id_seq")
@@ -16,7 +16,7 @@ public class Commission implements HasID {
     @Column
     double rate;
     @Column
-    Date set_date;
+    Date set_date=Date.valueOf(LocalDate.now());
     public double getRate() {
         return rate;
     }

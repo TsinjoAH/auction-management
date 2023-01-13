@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 public class CrudWithFK <FK, FKS extends Service<FK>, E extends HasFK<FK>, S extends ServiceWithFK<E, FK>> {
 
-    private final S service;
-    private final FKS fkService;
+    protected final S service;
+    protected final FKS fkService;
 
     public CrudWithFK(S service, FKS fkService) {
         this.service = service;
