@@ -1,0 +1,9 @@
+<c-toast #toast="cToast" [autohide]="autohide" [color]="color" [visible]="visible"
+         class="align-items-center text-white border-0 mb-3">
+    <c-toast-header (click)="toast.visible=false">
+        <strong>{{title}}</strong>
+    </c-toast-header>
+    <c-toast-body>
+        <p class="mb-1">{{message}}</p>
+    </c-toast-body>
+</c-toast>
