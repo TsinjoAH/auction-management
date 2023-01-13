@@ -47,6 +47,7 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {LoginComponent} from "./views/login/login.component";
 import {ToastSampleComponent} from "./views/login/toast-sample/toast-sample.component";
+import {CategoryModule} from "./views/category/category.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -88,6 +89,7 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     ToastModule,
+    CategoryModule
   ],
   providers: [
     {

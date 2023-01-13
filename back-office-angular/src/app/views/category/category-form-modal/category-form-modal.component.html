@@ -1,0 +1,16 @@
+<div mat-dialog-title>
+  {{data.data.title}}
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="categoryForm">
+    <c-row class="mt-2">
+      <c-col md="6">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom</mat-label>
+          <input formControlName="name" matInput>
+        </mat-form-field>
+      </c-col>
+    </c-row>
+    <button mat-raised-button color="primary" >{{data.data.actionButton}}</button>
+  </form>
+</div>
