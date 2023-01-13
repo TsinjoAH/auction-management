@@ -267,10 +267,25 @@
 				{
 					"name": "logout",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "user_token",
+								"value": "699e31deb003eee5dc384a238d69287994eadaf3",
+								"type": "default"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8080/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"logout"
+							]
 						}
 					},
 					"response": []
@@ -321,7 +336,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1/auctions/2",
+							"raw": "http://localhost:8080/users/1/auctions",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -330,8 +345,7 @@
 							"path": [
 								"users",
 								"1",
-								"auctions",
-								"2"
+								"auctions"
 							]
 						}
 					},
@@ -350,7 +364,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1/auctions/2",
+							"raw": "http://localhost:8080/users/1/auctions/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,7 +374,7 @@
 								"users",
 								"1",
 								"auctions",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -373,7 +387,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"auction\": {\r\n        \"title\": \"Enchere bg\",\r\n        \"description\": \"Tena bg oaa\",\r\n        \"startDate\": \"2023-01-13T22:49:14.228+00:00\",\r\n        \"duration\": 120,\r\n        \"product\": {\r\n            \"id\": 2\r\n        },\r\n        \"startPrice\": 45000.0,\r\n        \"commission\": 0.1\r\n    },\r\n    \"images\":[{\r\n        \"name\":\"product.png\",\r\n        \"base64\":\"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\"\r\n    }]\r\n}\r\n",
+							"raw": "{\r\n            \"title\": \"Enchere bg\",\r\n            \"description\": \"Tena bg oaa\",\r\n            \"startDate\": \"2023-01-13T04:49:14.228+00:00\",\r\n            \"endDate\": \"2023-01-13T08:49:03.000+00:00\",\r\n            \"product\": {\r\n                \"id\": 1,\r\n                \"name\": \"Sac Gucci\",\r\n                \"category\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"Clothes\"\r\n                }\r\n            },\r\n            \"startPrice\": 45000.0,\r\n            \"commission\": 0.1\r\n        }\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -546,6 +560,26 @@
 							"path": [
 								"product",
 								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/search/Laine",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"search",
+								"Laine"
 							]
 						}
 					},
