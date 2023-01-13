@@ -273,6 +273,98 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "auction",
+			"item": [
+				{
+					"name": "get auctions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/auctions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"auctions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get auctions by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/auctions/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"auctions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new auction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"title\": \"Enchere bg\",\r\n            \"description\": \"Tena bg oaa\",\r\n            \"startDate\": \"2023-01-13T04:49:14.228+00:00\",\r\n            \"endDate\": \"2023-01-13T08:49:03.000+00:00\",\r\n            \"product\": {\r\n                \"id\": 1,\r\n                \"name\": \"Sac Gucci\",\r\n                \"category\": {\r\n                    \"id\": 1,\r\n                    \"name\": \"Clothes\"\r\n                }\r\n            },\r\n            \"startPrice\": 45000.0,\r\n            \"commission\": 0.1\r\n        }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/auctions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"auctions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

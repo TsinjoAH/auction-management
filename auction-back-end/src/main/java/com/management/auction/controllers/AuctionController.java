@@ -3,7 +3,7 @@ package com.management.auction.controllers;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.services.AuctionService;
-import com.management.auction.services.UserService;
+import com.management.auction.services.user.UserService;
 import custom.springutils.controller.CrudWithFK;
 import org.springframework.web.bind.annotation.*;
 
