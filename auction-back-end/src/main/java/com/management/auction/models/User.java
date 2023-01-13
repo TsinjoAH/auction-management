@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import custom.springutils.model.HasId;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.sql.Timestamp;
+
 /*
 This class can be changed but if you want to delete it or change the classname, don't forget to change the fk
 in the class Deposit, the repo class and the service class
@@ -27,7 +29,7 @@ public class User extends HasId implements LoginEntity {
     String password;
 
     @Column
-    String signupDate;
+    Timestamp signupDate;
 
     public String getName() {
         return name;
@@ -53,11 +55,11 @@ public class User extends HasId implements LoginEntity {
         this.password = DigestUtils.sha1Hex(password);
     }
 
-    public String getSignupDate() {
+    public Timestamp getSignupDate() {
         return signupDate;
     }
 
-    public void setSignupDate(String signupDate) {
+    public void setSignupDate(Timestamp signupDate) {
         this.signupDate = signupDate;
     }
 }
