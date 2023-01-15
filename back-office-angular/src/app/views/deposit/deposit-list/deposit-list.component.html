@@ -1,0 +1,56 @@
+<br>
+<c-card>
+  <c-card-header>
+    Depot en attente de validation
+  </c-card-header>
+  <c-card-body>
+    <mat-form-field appearance="outline">
+      <mat-label>Rechercher</mat-label>
+      <input #input (keyup)="filter($event)" matInput placeholder="Ex. OP5">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="mat-elevation-z4 table-container">
+      <table [dataSource]="dataSource" class="w-100" mat-table>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell> ID</th>
+          <td *matCellDef="let element" mat-cell> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th *matHeaderCellDef mat-header-cell> DATE</th>
+          <td *matCellDef="let element" mat-cell> {{element.date | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <th *matHeaderCellDef mat-header-cell> UTILISATEUR</th>
+          <td *matCellDef="let element" mat-cell> {{element.user.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th *matHeaderCellDef mat-header-cell> VALEUR</th>
+          <td *matCellDef="let element" mat-cell> {{element.amount}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef mat-header-cell> ACTIONS</th>
+          <td *matCellDef="let element" mat-cell>
+            <span (click)="validate(element)" class="m-r action text-success">
+              <mat-icon>check</mat-icon>
+            </span>
+            <span (click)="disapprove(element)" class="action text-danger">
+              <mat-icon>clear</mat-icon>
+            </span>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements" showFirstLastButtons></mat-paginator>
+    </div>
+  </c-card-body>
+</c-card>
+<br>
