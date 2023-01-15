@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "07ef86c9-675e-40ec-8e91-d97d010c854a",
+		"_postman_id": "c7eee5bc-bcce-4b32-ad2e-6abea71083e6",
 		"name": "Auction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -571,15 +571,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/search/Laine",
+							"raw": "http://localhost:8080/products/search?name=rol",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"search",
-								"Laine"
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "rol"
+								}
 							]
 						}
 					},
