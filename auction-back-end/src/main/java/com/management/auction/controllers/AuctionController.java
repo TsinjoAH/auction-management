@@ -1,5 +1,6 @@
 package com.management.auction.controllers;
 
+import com.management.auction.models.Criteria;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.AuctionReceiver;
@@ -41,5 +42,9 @@ public class AuctionController{
         User fk = this.userService.findById(fkId);
         auctionReceiver.getAuction().setFK(fk);
         return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
+    }
+    @PostMapping("/filter")
+    public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria) throws CustomException{
+        return ControllerUtil.returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);
     }
 }

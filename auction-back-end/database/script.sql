@@ -205,12 +205,38 @@ CREATE OR REPLACE VIEW v_auction
 AS
 SELECT auction.id,title,description,u.name as "user",start_date,end_date,duration,p.name as product,start_price,commission,
 CASE
-    WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 'In progress'
-    WHEN end_date < current_timestamp THEN 'Completed'
-    WHEN start_date > current_timestamp THEN 'Not yet started'
+    WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
+    WHEN end_date < current_timestamp THEN 2
+    WHEN start_date > current_timestamp THEN 0
 END AS Status
 FROM auction
 INNER JOIN "user" u on u.id = auction.user_id
 INNER JOIN product p on p.id = auction.product_id;
 
+CREATE OR REPLACE VIEW full_v_auction
+AS
+SELECT a.id,a.title,a.description,start_date,end_date,duration,p.name,c2.name category,c2.id category_id,start_price,
+       CASE
+           WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
+           WHEN end_date < current_timestamp THEN 2
+           WHEN start_date > current_timestamp THEN 0
+           END AS Status
+FROM auction a
+INNER JOIN product p on a.product_id = p.id
+INNER JOIN category c2 on p.category_id = c2.id;
 
+
+CREATE VIEW auction_done AS
+SELECT b.user_id,sum(b.amount) amount
+FROM bid b
+JOIN (
+    SELECT auction_id, MAX(amount) max_amount
+    FROM bid
+    GROUP BY auction_id
+) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount GROUP BY b.user_id;
+
+CREATE VIEW deposit_done AS
+SELECT user_id,SUM(amount) amount FROM account_deposit WHERE approved=true GROUP BY user_id;
+
+CREATE VIEW balance AS
+SELECT d.user_id,CASE WHEN d.amount-a.amount IS NULL THEN d.amount ELSE d.amount-a.amount END amount FROM deposit_done d LEFT JOIN auction_done a ON d.user_id=a.user_id;
