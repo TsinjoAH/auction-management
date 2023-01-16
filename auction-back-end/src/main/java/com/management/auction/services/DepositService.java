@@ -17,13 +17,13 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
     }
     public Deposit validate(Long id){
         Deposit obj=this.findById(id);
-        obj.setApproved(true);
+        obj.setStatus(20);
         obj.setApprovalDate(Date.valueOf(LocalDate.now()));
         return this.repo.save(obj);
     }
 
     public List<Deposit> notValidated () {
-        return this.repo.findByApprovedIsFalse();
+        return this.repo.findByStatus(0);
     }
 
     @Override

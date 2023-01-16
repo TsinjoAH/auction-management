@@ -74,14 +74,26 @@ create table auction_pic
     pic_path   varchar(255) not null
 );
 
+
+create table deposit_status
+(
+    status      integer     not null primary key ,
+    description varchar(40) not null
+);
+
+insert into deposit_status values (0, 'Non evalue'),
+                                  (10, 'Rejete'),
+                                  (20, 'approuve');
+
 create table account_deposit
 (
     id            serial primary key,
     user_id       integer          not null references "user" (id),
     amount        double precision not null check ( amount > 0 ),
-    approved      boolean          not null default false,
+    status        integer          not null default 0 references deposit_status(status),
     approval_date timestamp
 );
+
 
 create table bid
 (
@@ -203,12 +215,21 @@ values (1, 5000, true, '2023-01-24'),
 
 CREATE OR REPLACE VIEW v_auction
 AS
-SELECT auction.id,title,description,user_id,start_date,end_date,duration,product_id,start_price,commission,
-CASE
-    WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
-    WHEN end_date < current_timestamp THEN 2
-    WHEN start_date > current_timestamp THEN 3
-END AS status
+SELECT auction.id,
+       title,
+       description,
+       user_id,
+       start_date,
+       end_date,
+       duration,
+       product_id,
+       start_price,
+       commission,
+       CASE
+           WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
+           WHEN end_date < current_timestamp THEN 2
+           WHEN start_date > current_timestamp THEN 3
+           END AS status
 FROM auction;
 
 

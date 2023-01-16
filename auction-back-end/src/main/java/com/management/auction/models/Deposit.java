@@ -1,6 +1,7 @@
 
 package com.management.auction.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import custom.springutils.exception.CustomException;
 import custom.springutils.model.HasFK;
 import jakarta.persistence.*;
@@ -20,7 +21,8 @@ public class Deposit extends HasFK<User> {
     double amount;
 
     @Column
-    boolean approved=false;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Integer status = 0;
 
     @Column
     Date approvalDate;
@@ -52,12 +54,12 @@ public class Deposit extends HasFK<User> {
         this.amount = amount;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getApprovalDate() {

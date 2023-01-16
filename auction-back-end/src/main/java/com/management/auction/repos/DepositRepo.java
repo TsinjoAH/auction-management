@@ -8,5 +8,5 @@ import java.util.List;
 public interface DepositRepo extends JpaRepository<Deposit,Long> {
     List<Deposit> findByUserId(Long id);
 
-    List<Deposit> findByApprovedIsFalse();
+    List<Deposit> findByStatus(Integer status);
 }
