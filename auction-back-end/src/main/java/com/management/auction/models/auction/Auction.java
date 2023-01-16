@@ -1,10 +1,8 @@
 package com.management.auction.models.auction;
 
 import com.management.auction.models.Bid;
-import custom.springutils.exception.CustomException;
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 

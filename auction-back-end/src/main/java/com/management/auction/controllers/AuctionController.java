@@ -14,8 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-
 
 @RestController
 @RequestMapping("/users/{fkId}/auctions")
@@ -27,13 +25,13 @@ public class AuctionController{
     //No Update
     @GetMapping({"/{id}"})
     public ResponseEntity<SuccessResponse> findById(@PathVariable("id") Long id) {
-        return ControllerUtil.returnSuccess(this.service.findById(id), HttpStatus.OK);
+        return ControllerUtil.returnSuccess(this.service.findByIdView(id), HttpStatus.OK);
     }
 
     @GetMapping({""})
     public ResponseEntity<SuccessResponse> findAll(@PathVariable Long fkId) {
         User fk = this.userService.findById(fkId);
-        return ControllerUtil.returnSuccess(this.service.findForFK(fk), HttpStatus.OK);
+        return ControllerUtil.returnSuccess(this.service.findForFKView(fk), HttpStatus.OK);
     }
 
     @PostMapping("")

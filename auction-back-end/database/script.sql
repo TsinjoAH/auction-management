@@ -203,14 +203,12 @@ values (1, 5000, true, '2023-01-24'),
 
 CREATE OR REPLACE VIEW v_auction
 AS
-SELECT auction.id,title,description,u.name as "user",start_date,end_date,duration,p.name as product,start_price,commission,
+SELECT auction.id,title,description,user_id,start_date,end_date,duration,product_id,start_price,commission,
 CASE
-    WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 'In progress'
-    WHEN end_date < current_timestamp THEN 'Completed'
-    WHEN start_date > current_timestamp THEN 'Not yet started'
-END AS Status
-FROM auction
-INNER JOIN "user" u on u.id = auction.user_id
-INNER JOIN product p on p.id = auction.product_id;
+    WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
+    WHEN end_date < current_timestamp THEN 2
+    WHEN start_date > current_timestamp THEN 3
+END AS status
+FROM auction;
 
 
