@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Commission} from "../../../shared/shared.interfaces";
 import {CommissionService} from "../../service/commission/commission.service";
-import Swal, {SweetAlertIcon} from "sweetalert2";
 import {MatDialog} from "@angular/material/dialog";
 import {CommissionFormComponent} from "./commission-form/commission-form.component";
 
@@ -43,5 +42,5 @@ export class CommissionComponent implements OnInit {
       }
     })
   }
-  
+
 }
