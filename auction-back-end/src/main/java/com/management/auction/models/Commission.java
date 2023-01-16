@@ -4,7 +4,9 @@ import custom.springutils.model.HasId;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Commission extends HasId {
@@ -12,7 +14,8 @@ public class Commission extends HasId {
     double rate;
 
     @Column
-    Date setDate=Date.valueOf(LocalDate.now());
+    Timestamp setDate=Timestamp.valueOf(LocalDateTime.now());
+
     public double getRate() {
         return rate;
     }
@@ -21,11 +24,11 @@ public class Commission extends HasId {
         this.rate = rate;
     }
 
-    public Date getSetDate() {
+    public Timestamp getSetDate() {
         return setDate;
     }
 
-    public void setSetDate(Date setDate) {
+    public void setSetDate(Timestamp setDate) {
         this.setDate = setDate;
     }
 }

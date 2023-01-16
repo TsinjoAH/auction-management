@@ -21,6 +21,11 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
         obj.setApprovalDate(Date.valueOf(LocalDate.now()));
         return this.repo.save(obj);
     }
+
+    public List<Deposit> notValidated () {
+        return this.repo.findByApprovedIsFalse();
+    }
+
     @Override
     public List<Deposit> findForFK(User user) {
         return this.repo.findByUserId(user.getId());

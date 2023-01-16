@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import Swal, {SweetAlertIcon} from "sweetalert2";
+import {DepositService} from "../../../service/deposit/deposit.service";
 
 interface PopupData {
   name: string;
@@ -17,35 +18,7 @@ interface PopupData {
   styleUrls: ['./deposit-list.component.scss']
 })
 export class DepositListComponent implements OnInit {
-  deposits: Deposit[] = [
-    {
-      id: 1,
-      amount: 100,
-      date: new Date(),
-      user: {
-        id: 1,
-        name: 'John Doe'
-      }
-    },
-    {
-      id: 2,
-      amount: 200,
-      date: new Date(),
-      user: {
-        id: 2,
-        name: 'Jane Doe'
-      }
-    },
-    {
-      id: 3,
-      amount: 300,
-      date: new Date(),
-      user: {
-        id: 3,
-        name: 'John Patrick'
-      }
-    }
-  ];
+  deposits!: Deposit[];
 
   displayedColumns: string[] = ["id", "user", "date", "amount", "actions"];
 
@@ -53,10 +26,11 @@ export class DepositListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator !: MatPaginator;
   @ViewChild(MatSort) sort !: MatSort;
 
+  constructor(private service: DepositService) {
+  }
+
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Deposit>(this.deposits);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.fetchToEvaluate();
   }
 
 
@@ -85,11 +59,39 @@ export class DepositListComponent implements OnInit {
   validate(element: Deposit) {
     this.popup({name: 'Validation', action: 'Valider', deposit: element}).then(
       (result) => {
+        if (result.isConfirmed) {
+          this.service.validate(element.id).subscribe({
+            next: res => {
+              Swal.fire({
+                title: "Validation effectue",
+                icon: 'success' as SweetAlertIcon,
+                confirmButtonText: 'Ok',
+                allowOutsideClick: true,
+                showCancelButton: true
+              }).then(() => {
+                this.fetchToEvaluate();
+              })
+            },
+            error: err => {}
+          })
+        }
       });
   }
 
   disapprove(element: Deposit) {
     this.popup({name: 'Rejet', action: 'Rejeter', deposit: element}).then((result) => {})
+  }
+
+  private fetchToEvaluate() {
+    this.service.fetchToEvaluate().subscribe({
+      next: res => {
+        this.deposits = res.data;
+        this.dataSource = new MatTableDataSource<Deposit>(this.deposits);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: err => {}
+    })
   }
 
 }

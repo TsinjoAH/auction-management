@@ -6,18 +6,35 @@ import custom.springutils.model.HasFK;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "account_deposit")
 public class Deposit extends HasFK<User> {
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+
     @Column
     double amount;
+
     @Column
     boolean approved=false;
+
     @Column
     Date approvalDate;
+
+    @Column
+    Timestamp date;
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
 
     public User getUser() {
         return user;

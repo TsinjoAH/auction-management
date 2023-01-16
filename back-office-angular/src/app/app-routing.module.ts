@@ -6,6 +6,7 @@ import {LoginComponent} from "./views/login/login.component";
 import {CategoryComponent} from "./views/crud/category/category.component";
 import {ProductComponent} from "./views/crud/product/product.component";
 import {DepositListComponent} from "./views/deposit/deposit-list/deposit-list.component";
+import {CommissionComponent} from "./views/commission/commission.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
       {
         path: 'deposits',
         component: DepositListComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'commission',
+        component: CommissionComponent,
         pathMatch: 'full'
       }
     ]

@@ -1,0 +1,19 @@
+<div mat-dialog-title>
+  Nouvelle commission
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <c-row>
+      <c-col class="mt-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Commission</mat-label>
+          <input type="number" step="0.01" formControlName="rate" matInput>
+        </mat-form-field>
+      </c-col>
+    </c-row>
+    <div class="d-flex justify-content-between" >
+      <button mat-stroked-button color="light" (click)="cancel()" >Annuler</button>
+      <button mat-raised-button color="primary" (click)="changeCommission()" >Ajouter</button>
+    </div>
+  </form>
+</div>
