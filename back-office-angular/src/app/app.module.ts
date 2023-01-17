@@ -55,6 +55,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import { CommissionFormComponent } from './views/commission/commission-form/commission-form.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import {DashboardModule} from "./views/dashboard/dashboard.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -101,7 +103,8 @@ const APP_CONTAINERS = [
         HttpClientModule,
         MatButtonModule,
         MatInputModule,
-        MatDialogModule
+        MatDialogModule,
+        DashboardModule
     ],
   providers: [
     {

@@ -7,6 +7,7 @@ import {CategoryComponent} from "./views/crud/category/category.component";
 import {ProductComponent} from "./views/crud/product/product.component";
 import {DepositListComponent} from "./views/deposit/deposit-list/deposit-list.component";
 import {CommissionComponent} from "./views/commission/commission.component";
+import {DashboardComponent} from "./views/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
       {
         path: 'commission',
         component: CommissionComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
         pathMatch: 'full'
       }
     ]
