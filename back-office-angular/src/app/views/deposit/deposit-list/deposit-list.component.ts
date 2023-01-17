@@ -56,19 +56,22 @@ export class DepositListComponent implements OnInit {
     )
   }
 
+  async showResultPopup (title: string) {
+    return Swal.fire({
+      title: `${title} effectue`,
+      icon: 'success' as SweetAlertIcon,
+      confirmButtonText: 'Ok',
+      allowOutsideClick: true
+    });
+  }
+
   validate(element: Deposit) {
     this.popup({name: 'Validation', action: 'Valider', deposit: element}).then(
       (result) => {
         if (result.isConfirmed) {
           this.service.validate(element.id).subscribe({
             next: res => {
-              Swal.fire({
-                title: "Validation effectue",
-                icon: 'success' as SweetAlertIcon,
-                confirmButtonText: 'Ok',
-                allowOutsideClick: true,
-                showCancelButton: true
-              }).then(() => {
+              this.showResultPopup("Validation").then(() => {
                 this.fetchToEvaluate();
               })
             },
@@ -79,7 +82,18 @@ export class DepositListComponent implements OnInit {
   }
 
   disapprove(element: Deposit) {
-    this.popup({name: 'Rejet', action: 'Rejeter', deposit: element}).then((result) => {})
+    this.popup({name: 'Rejet', action: 'Rejeter', deposit: element}).then((result) => {
+      if (result.isConfirmed) {
+        this.service.reject(element.id).subscribe({
+          next: res => {
+            this.showResultPopup("Rejet").then(() => {
+              this.fetchToEvaluate();
+            })
+          },
+          error: err => {}
+        })
+      }
+    })
   }
 
   private fetchToEvaluate() {

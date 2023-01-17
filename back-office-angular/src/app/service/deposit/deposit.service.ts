@@ -18,4 +18,7 @@ export class DepositService {
     return this.http.put(baseUrl(`deposits/${id}/validate`), {});
   }
 
+  reject(id: number) {
+    return this.http.put(baseUrl(`deposits/${id}/reject`), {});
+  }
 }
