@@ -3,6 +3,8 @@ create table marque (
     nom_marque varchar(40)
 );
 
+
+
 insert into marque (nom_marque)
 values ('APPLE'),
        ('GOOGLE'),
