@@ -188,17 +188,17 @@ values ('Steven', 'Steven@exemple.com', '602260addce6b6f6f7a3b3bd8f55d95241dd0c5
 insert into commission(rate, set_date)
 values (0.5, '2023-01-28');
 
-insert into account_deposit(user_id, amount, approved, approval_date)
-values (1, 5000, true, '2023-01-24'),
-       (2, 8000, true, '2023-01-23'),
-       (3, 7000, true, '2023-01-22'),
-       (4, 6000, true, '2023-01-21'),
-       (5, 9000, true, '2023-01-20'),
-       (6, 10000, true, '2023-01-19'),
-       (7, 2000, true, '2023-01-18'),
-       (8, 3000, true, '2023-01-17'),
-       (9, 5000, true, '2023-01-16'),
-       (10, 8500, true, '2023-01-15');
+insert into account_deposit(user_id, amount, status, approval_date)
+values (1, 5000, 20, '2023-01-24'),
+       (2, 8000, 20, '2023-01-23'),
+       (3, 7000, 20, '2023-01-22'),
+       (4, 6000, 20, '2023-01-21'),
+       (5, 9000, 20, '2023-01-20'),
+       (6, 10000, 20, '2023-01-19'),
+       (7, 2000, 20, '2023-01-18'),
+       (8, 3000, 20, '2023-01-17'),
+       (9, 5000, 20, '2023-01-16'),
+       (10, 8500, 20, '2023-01-15');
 
 
 CREATE OR REPLACE VIEW v_auction
@@ -236,7 +236,7 @@ JOIN (
 ) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount GROUP BY b.user_id;
 
 CREATE VIEW deposit_done AS
-SELECT user_id,SUM(amount) amount FROM account_deposit WHERE approved=true GROUP BY user_id;
+SELECT user_id,SUM(amount) amount FROM account_deposit WHERE status=20 GROUP BY user_id;
 
 CREATE VIEW balance AS
 SELECT d.user_id,CASE WHEN d.amount-a.amount IS NULL THEN d.amount ELSE d.amount-a.amount END amount FROM deposit_done d LEFT JOIN auction_done a ON d.user_id=a.user_id;

@@ -5,10 +5,6 @@ import com.management.auction.models.User;
 import com.management.auction.services.DepositService;
 import com.management.auction.services.user.UserService;
 import custom.springutils.controller.CrudWithFK;
-import custom.springutils.util.ControllerUtil;
-import custom.springutils.util.SuccessResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

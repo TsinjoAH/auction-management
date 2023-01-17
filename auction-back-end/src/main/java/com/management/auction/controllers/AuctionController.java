@@ -44,7 +44,7 @@ public class AuctionController{
         return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
     }
     @PostMapping("/filter")
-    public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria) throws CustomException{
+    public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria, @PathVariable String fkId) throws CustomException{
         return ControllerUtil.returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);
     }
 }
