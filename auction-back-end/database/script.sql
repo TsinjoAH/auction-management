@@ -12,7 +12,7 @@ create table admin_token
 (
     token           varchar(40) primary key,
     expiration_date timestamp not null,
-    validity        boolean   not null default 20,
+    validity        boolean   not null default true,
     admin_id        integer   not null references admin (id)
 );
 
@@ -42,7 +42,7 @@ create table user_token
 (
     token           varchar(40) primary key,
     expiration_date timestamp not null,
-    validity        boolean   not null default 20,
+    validity        boolean   not null default true,
     user_id         integer   not null references "user" (id)
 );
 
