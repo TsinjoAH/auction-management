@@ -1,0 +1,84 @@
+// nombre enchere par jour entre deux dates
+{
+    count: number,
+    date: Date
+}
+
+// total des enchères depuis le début avec taux d'augmentation du dernier mois
+{
+    totalCount: number,
+    increaseRate: number
+}
+
+// total des commissions par jour entre deux dates
+{
+    commission: number,
+    date: Date
+}
+
+// total des commissions depuis le début avec le % d'augmentation du dernier mois
+{
+    userCount: number,
+    increaseRate: number
+}
+
+// total des commissions depuis le début avec le % d'augmentation du dernier mois
+{
+    totalCommission: number,
+    increaseRate: number
+}
+
+// 10 personnes avec le plus d'enchères effectué
+[
+    {
+        user: User,
+        auctionCount: number
+    },
+    ...
+]
+
+// 10 personnes avec le plus de ventes effectuées avec la commission qu'on a récolté
+[
+    {
+        user: User,
+        sales: number,
+        commission: number
+    },
+    ...
+]
+
+// 10 produits / catégories les plus vendues
+[
+    {
+        product/category: Product/Category,
+        salesCount: number
+    },
+    ...
+]
+
+// 10 produits / catégories qui rapportent le plus
+[
+    {
+        product/category: Product/Category,
+        sales: number,
+        commission: number
+    },
+    ...
+]
+
+// evolution du ratio ( prix vente / prix  départ ) par produit
+[
+    {
+        ration: number,
+        date: Date
+    },
+    ...
+]
+
+// 10 produits / catégories avec le plus de proposition faites
+[
+    {
+        product/category: Product/Category,
+        bidCount: number
+    }
+]

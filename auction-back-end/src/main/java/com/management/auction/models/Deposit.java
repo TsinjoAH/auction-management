@@ -1,23 +1,42 @@
 
 package com.management.auction.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import custom.springutils.exception.CustomException;
 import custom.springutils.model.HasFK;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 @Entity
 @Table(name = "account_deposit")
 public class Deposit extends HasFK<User> {
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+
     @Column
     double amount;
+
     @Column
-    boolean approved=false;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    Integer status = 0;
+
     @Column
-    Date approvalDate;
+    Timestamp statusChangeDate;
+
+    @Column
+    Timestamp date;
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
 
     public User getUser() {
         return user;
@@ -35,20 +54,20 @@ public class Deposit extends HasFK<User> {
         this.amount = amount;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public Date getApprovalDate() {
-        return approvalDate;
+    public Timestamp getStatusChangeDate() {
+        return statusChangeDate;
     }
 
-    public void setApprovalDate(Date approvalDate) {
-        this.approvalDate = approvalDate;
+    public void setStatusChangeDate(Timestamp statusChangeDate) {
+        this.statusChangeDate = statusChangeDate;
     }
 
     @Override

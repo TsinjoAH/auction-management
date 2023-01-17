@@ -1,6 +1,8 @@
 package com.management.auction.controllers;
 
 import com.management.auction.models.Bid;
+import com.management.auction.models.Criteria;
+import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.auction.AuctionReceiver;
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/users/{fkId}/auctions")
 public class AuctionController {
+
     @Autowired
     AuctionService service;
     @Autowired
     UserService userService;
+
     @Autowired
     BidService bidService;
 
@@ -47,4 +51,9 @@ public class AuctionController {
         return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
     }
 
+    @PostMapping("/filter")
+    public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria) throws CustomException{
+        return ControllerUtil.returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);
+    }
 }
+

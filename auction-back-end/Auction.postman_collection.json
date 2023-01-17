@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c7eee5bc-bcce-4b32-ad2e-6abea71083e6",
+		"_postman_id": "10d2fc59-02aa-4443-8bf7-fc70ab00125e",
 		"name": "Auction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -409,6 +409,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "filter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"keyword\": \"watch\",\n\"category\": {\n\"id\": 1,\n\"name\": \"Luxe\"\n}\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/1/auctions/filter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"1",
+								"auctions",
+								"filter"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -571,21 +602,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/products/search?name=rol",
+							"raw": "http://localhost:8080/search/Laine",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"products",
-								"search"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "rol"
-								}
+								"search",
+								"Laine"
 							]
 						}
 					},
