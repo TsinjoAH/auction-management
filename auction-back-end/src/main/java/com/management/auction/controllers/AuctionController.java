@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users/{fkId}/auctions")
-public class AuctionController{
+public class AuctionController {
+
     @Autowired
     AuctionService service;
     @Autowired
     UserService userService;
+
     //No Update
     @GetMapping({"/{id}"})
     public ResponseEntity<SuccessResponse> findById(@PathVariable("id") Long id) {
@@ -41,6 +43,7 @@ public class AuctionController{
         auctionReceiver.getAuction().setFK(fk);
         return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
     }
+
     @PostMapping("/filter")
     public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria) throws CustomException{
         return ControllerUtil.returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);

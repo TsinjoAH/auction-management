@@ -91,8 +91,9 @@ create table account_deposit
     user_id       integer          not null references "user" (id),
     amount        double precision not null check ( amount > 0 ),
     status        integer          not null default 0 references deposit_status(status),
-    approval_date timestamp
+    status_change_date timestamp
 );
+
 
 
 create table bid
@@ -200,7 +201,7 @@ values ('Steven', 'Steven@exemple.com', '602260addce6b6f6f7a3b3bd8f55d95241dd0c5
 insert into commission(rate, set_date)
 values (0.5, '2023-01-28');
 
-insert into account_deposit(user_id, amount, approved, approval_date)
+insert into account_deposit(user_id, amount, approved, status_change_date)
 values (1, 5000, true, '2023-01-24'),
        (2, 8000, true, '2023-01-23'),
        (3, 7000, true, '2023-01-22'),

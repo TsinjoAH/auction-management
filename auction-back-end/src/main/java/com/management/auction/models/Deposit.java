@@ -25,7 +25,7 @@ public class Deposit extends HasFK<User> {
     Integer status = 0;
 
     @Column
-    Date approvalDate;
+    Timestamp statusChangeDate;
 
     @Column
     Timestamp date;
@@ -62,12 +62,12 @@ public class Deposit extends HasFK<User> {
         this.status = status;
     }
 
-    public Date getApprovalDate() {
-        return approvalDate;
+    public Timestamp getStatusChangeDate() {
+        return statusChangeDate;
     }
 
-    public void setApprovalDate(Date approvalDate) {
-        this.approvalDate = approvalDate;
+    public void setStatusChangeDate(Timestamp statusChangeDate) {
+        this.statusChangeDate = statusChangeDate;
     }
 
     @Override
