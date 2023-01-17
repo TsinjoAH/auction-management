@@ -1,0 +1,16 @@
+<c-card>
+  <c-card-header>
+    Commission
+  </c-card-header>
+  <c-card-body>
+    <c-row class="mb-2">
+      <c-col  *ngIf="rate">
+        <h3>
+          Commission Actuelle: {{rate.rate * 100}}% <br>
+          Date: {{rate.setDate | date}} {{rate.setDate | date:'HH:mm:ss'}}
+        </h3>
+        <button mat-stroked-button color="primary" (click)="openModal()" > Ajouter une nouvelle commission</button>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

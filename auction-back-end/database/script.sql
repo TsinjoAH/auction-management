@@ -74,14 +74,26 @@ create table auction_pic
     pic_path   varchar(255) not null
 );
 
+
+create table deposit_status
+(
+    status      integer     not null primary key ,
+    description varchar(40) not null
+);
+
+insert into deposit_status values (0, 'Non evalue'),
+                                  (10, 'Rejete'),
+                                  (20, 'approuve');
+
 create table account_deposit
 (
     id            serial primary key,
     user_id       integer          not null references "user" (id),
     amount        double precision not null check ( amount > 0 ),
-    approved      boolean          not null default false,
+    status        integer          not null default 0 references deposit_status(status),
     approval_date timestamp
 );
+
 
 create table bid
 (

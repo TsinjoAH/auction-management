@@ -3,13 +3,10 @@ import {Category, Product} from "../../../../shared/shared.interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-import {
-  CategoryFormData,
-  CategoryFormModalComponent
-} from "../category/category-form-modal/category-form-modal.component";
 import Swal, {SweetAlertIcon} from "sweetalert2";
 import {ProductFormData, ProductFormModalComponent} from "./product-form-modal/product-form-modal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {ProductService} from "../../../service/product/product.service";
 
 @Component({
   selector: 'app-product',
@@ -17,26 +14,7 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent {
-  products : Product[] = [
-    {
-      id: 1,
-      name: 'Akondro',
-      category: {
-        id: 1,
-        name: 'Sakafo'
-      }
-    },
-    {
-      id: 2,
-      name: 'Akondro be',
-      category: {
-        id: 1,
-        name: 'Sakafo'
-      }
-    }
-  ];
-
-
+  products !: Product[];
   displayedColumns: string[] = ["id", "name", "category", "actions"];
 
   dataSource!: MatTableDataSource<Product>;
@@ -44,14 +22,25 @@ export class ProductComponent {
   @ViewChild(MatSort) sort !: MatSort;
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private service: ProductService
   ) {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Product>(this.products);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.fetchProducts()
+  }
+
+  fetchProducts() {
+    this.service.fetchAll().subscribe({
+      next: res => {
+        this.products = res.data;
+        this.dataSource = new MatTableDataSource<Product>(this.products);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: err => {}
+    })
   }
 
   filter(event: KeyboardEvent) {
