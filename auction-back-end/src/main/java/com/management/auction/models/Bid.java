@@ -11,22 +11,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 public class Bid extends HasFK<Auction> {
-
     @Column
-    private Integer auctionId;
+    private Long auctionId;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @Column
     private Double amount;
     @Column
-    private Timestamp bidDate;
+    private Timestamp bidDate = Timestamp.valueOf(LocalDateTime.now());
     @Override
-    public void setFK(Auction auction) {
+    public void setFK(Auction auction) throws CustomException {
+        if(auction!=null){
+            this.auctionId=auction.getId();
+        }else {
+            throw new CustomException("Auction not found");
+        }
     }
 }
