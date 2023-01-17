@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 /*
 VIEW full_v_criteria
+
  */
 @Component
 public class Criteria {

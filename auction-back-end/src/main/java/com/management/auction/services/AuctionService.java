@@ -27,8 +27,6 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private final AuctionPicRepo auctionPicRepository;
     @Autowired
     private BidRepo bidRepo;
-    @Autowired
-    private EntityManager em;
     public AuctionService(AuctionRepo repo,
                           AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository) {
         super(repo);

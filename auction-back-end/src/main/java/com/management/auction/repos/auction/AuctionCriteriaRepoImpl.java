@@ -22,8 +22,7 @@ public class AuctionCriteriaRepoImpl implements AuctionCriteriaRepo{
                 sql=String.format(sql,tmp,tmp,tmp,tmp);
             }
             if(criteria.getCategory()!=null){
-                sql+=" AND category_id=%d";
-                sql=String.format(sql,criteria.getCategory().getId());
+                sql+=" AND category_id="+criteria.getCategory().getId().toString();
             }
             if(criteria.getPrix()!=null){
                 sql+=" AND start_price="+criteria.getPrix().toString();
