@@ -256,7 +256,7 @@ JOIN (
 ) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount GROUP BY b.user_id;
 
 CREATE VIEW deposit_done AS
-SELECT user_id,SUM(amount) amount FROM account_deposit WHERE approved=true GROUP BY user_id;
+SELECT user_id,SUM(amount) amount FROM account_deposit WHERE status=20 GROUP BY user_id;
 
 CREATE VIEW balance AS
 SELECT d.user_id,CASE WHEN d.amount-a.amount IS NULL THEN d.amount ELSE d.amount-a.amount END amount FROM deposit_done d LEFT JOIN auction_done a ON d.user_id=a.user_id;
