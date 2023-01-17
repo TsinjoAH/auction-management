@@ -48,6 +48,13 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import {LoginComponent} from "./views/login/login.component";
 import {ToastSampleComponent} from "./views/login/toast-sample/toast-sample.component";
 import {CrudModule} from "./views/crud/crud.module";
+import {DepositModule} from "./views/deposit/deposit.module";
+import {HttpClientModule} from "@angular/common/http";
+import { CommissionComponent } from './views/commission/commission.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import { CommissionFormComponent } from './views/commission/commission-form/commission-form.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -60,37 +67,42 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, LoginComponent, ToastSampleComponent],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    AvatarModule,
-    BreadcrumbModule,
-    FooterModule,
-    DropdownModule,
-    GridModule,
-    HeaderModule,
-    SidebarModule,
-    IconModule,
-    PerfectScrollbarModule,
-    NavModule,
-    ButtonModule,
-    FormModule,
-    UtilitiesModule,
-    ButtonGroupModule,
-    ReactiveFormsModule,
-    SidebarModule,
-    SharedModule,
-    TabsModule,
-    ListGroupModule,
-    ProgressModule,
-    BadgeModule,
-    ListGroupModule,
-    CardModule,
-    ToastModule,
-    CrudModule
-  ],
+  declarations: [AppComponent, ...APP_CONTAINERS, LoginComponent, ToastSampleComponent, CommissionComponent, CommissionFormComponent],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        AvatarModule,
+        BreadcrumbModule,
+        FooterModule,
+        DropdownModule,
+        GridModule,
+        HeaderModule,
+        SidebarModule,
+        IconModule,
+        PerfectScrollbarModule,
+        NavModule,
+        ButtonModule,
+        FormModule,
+        UtilitiesModule,
+        ButtonGroupModule,
+        ReactiveFormsModule,
+        SidebarModule,
+        SharedModule,
+        TabsModule,
+        ListGroupModule,
+        ProgressModule,
+        BadgeModule,
+        ListGroupModule,
+        CardModule,
+        ToastModule,
+        CrudModule,
+        DepositModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule
+    ],
   providers: [
     {
       provide: LocationStrategy,

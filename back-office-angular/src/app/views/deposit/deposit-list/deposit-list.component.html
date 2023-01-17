@@ -1,7 +1,7 @@
 <br>
 <c-card>
   <c-card-header>
-    Liste des categories
+    Depot en attente de validation
   </c-card-header>
   <c-card-body>
     <mat-form-field appearance="outline">
@@ -18,24 +18,29 @@
           <td *matCellDef="let element" mat-cell> {{element.id}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell> NAME</th>
-          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        <ng-container matColumnDef="date">
+          <th *matHeaderCellDef mat-header-cell> DATE</th>
+          <td *matCellDef="let element" mat-cell> {{element.date | date}} {{element.date | date:'HH:mm'}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="category">
-          <th *matHeaderCellDef mat-header-cell> CATEGORIE</th>
-          <td *matCellDef="let element" mat-cell> {{element.category.name}} </td>
+        <ng-container matColumnDef="user">
+          <th *matHeaderCellDef mat-header-cell> UTILISATEUR</th>
+          <td *matCellDef="let element" mat-cell> {{element.user.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th *matHeaderCellDef mat-header-cell> VALEUR</th>
+          <td *matCellDef="let element" mat-cell> {{element.amount}} </td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef mat-header-cell> ACTIONS</th>
           <td *matCellDef="let element" mat-cell>
-            <span (click)="modify(element)" class="m-r action">
-              <mat-icon>edit</mat-icon>
+            <span (click)="validate(element)" class="m-r action text-success">
+              <mat-icon>check</mat-icon>
             </span>
-            <span (click)="delete(element)" class="action">
-              <mat-icon>delete</mat-icon>
+            <span (click)="disapprove(element)" class="action text-danger">
+              <mat-icon>clear</mat-icon>
             </span>
           </td>
         </ng-container>
@@ -47,8 +52,5 @@
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of periodic elements" showFirstLastButtons></mat-paginator>
     </div>
   </c-card-body>
-  <c-card-footer class="d-flex justify-content-end">
-    <button mat-raised-button color="primary" (click)="add()" >Ajouter</button>
-  </c-card-footer>
 </c-card>
 <br>

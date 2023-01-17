@@ -1,12 +1,18 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Category} from "../../../../shared/shared.interfaces";
+import {Category, ErrorData} from "../../../../shared/shared.interfaces";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoryFormData, CategoryFormModalComponent} from "./category-form-modal/category-form-modal.component";
-import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
 import Swal, {SweetAlertIcon} from "sweetalert2";
+import {CategoryService} from "../../../service/category/category.service";
+
+export interface CrudPopUpData {
+  name: string;
+  text: string;
+  icon: string;
+}
 
 @Component({
   selector: 'app-category',
@@ -17,20 +23,12 @@ export class CategoryComponent implements OnInit {
 
 
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private service: CategoryService
   ) {
   }
 
-  categories: Category[] = [
-    {
-      id: 1,
-      name: "Chaussures"
-    },
-    {
-      id: 2,
-      name: "Sac a dos"
-    }
-  ];
+  categories!: Category[];
 
   displayedColumns: string[] = ["id", "name", "actions"];
 
@@ -39,9 +37,20 @@ export class CategoryComponent implements OnInit {
   @ViewChild(MatSort) sort !: MatSort;
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Category>(this.categories);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.fetchCategories()
+  }
+
+
+  fetchCategories () {
+    this.service.fetchAll().subscribe({
+      next: res => {
+        this.categories = res.data;
+        this.dataSource = new MatTableDataSource<Category>(this.categories);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      },
+      error: res => {}
+    })
   }
 
   filter(event: KeyboardEvent) {
@@ -64,15 +73,73 @@ export class CategoryComponent implements OnInit {
       }
     });
 
-    ref.afterClosed().subscribe(result => {});
+    return ref;
   }
 
   modify(category: Category) {
-    this.openDialog('Modifier categorie', 'Modifier', category);
+    const ref = this.openDialog('Modifier categorie', 'Modifier', category);
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.update(category.id, result).subscribe({
+          next: res => {
+            this.popup({
+              name: 'Success',
+              text: 'La categorie a ete mis a jour',
+              icon: 'success'
+            }).then(() => {
+              this.fetchCategories();
+            })
+          },
+          error: err => {
+            let error = err as ErrorData;
+            this.popup({
+              name: 'Erreur',
+              text: error.message,
+              icon: 'danger'
+            });
+          }
+        })
+      }
+    });
+  }
+
+  async popup({name, text, icon}: CrudPopUpData) {
+    return Swal.fire(
+      {
+        title: name,
+        text: text,
+        icon: icon as SweetAlertIcon,
+        confirmButtonText: 'Ok',
+        allowOutsideClick: true
+      }
+    )
   }
 
   add () {
-    this.openDialog('Ajouter categorie', 'Ajouter');
+    const ref = this.openDialog('Ajouter categorie', 'Ajouter');
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.create(result).subscribe({
+          next: res => {
+            this.popup({
+              name: 'Success',
+              text: 'La categorie a ete ajoute',
+              icon: 'success'
+            }).then(() => {
+              this.fetchCategories();
+            })
+          },
+          error: err => {
+            let error = err as ErrorData;
+            this.popup({
+              name: 'Erreur',
+              text: error.message,
+              icon: 'danger'
+            });
+          }
+        })
+      }
+    });
   }
 
   delete(category: Category) {

@@ -32,12 +32,12 @@ export class CategoryFormModalComponent implements OnInit {
   }
 
   cancel() {
-    this.dialogRef.close('canceled');
+    this.dialogRef.close(false);
   }
 
   add() {
     if (this.categoryForm.valid) {
-      alert(JSON.stringify(this.categoryForm.value, null, 2));
+      this.dialogRef.close(this.categoryForm.value)
     }
   }
 

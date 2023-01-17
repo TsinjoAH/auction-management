@@ -6,5 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DepositRepo extends JpaRepository<Deposit,Long> {
-    public List<Deposit> findByUserId(Long id);
+    List<Deposit> findByUserId(Long id);
+
+    List<Deposit> findByStatus(Integer status);
 }
