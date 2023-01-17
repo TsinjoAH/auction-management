@@ -5,6 +5,7 @@ import custom.springutils.LoginEntity;
 import jakarta.persistence.*;
 import custom.springutils.model.HasId;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.annotations.Formula;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -31,7 +32,8 @@ public class User extends HasId implements LoginEntity {
 
     @Column
     Timestamp signupDate = Timestamp.valueOf(LocalDateTime.now());
-
+    @Formula("(SELECT balance.amount FROM balance WHERE balance.user_id=id)")
+    Double balance;
     public String getName() {
         return name;
     }
@@ -62,5 +64,13 @@ public class User extends HasId implements LoginEntity {
 
     public void setSignupDate(Timestamp signupDate) {
         this.signupDate = signupDate;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

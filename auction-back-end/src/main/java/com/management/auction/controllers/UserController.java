@@ -18,7 +18,6 @@ import static custom.springutils.util.ControllerUtil.returnSuccess;
 @RestController
 @RequestMapping("/users")
 public class UserController extends LoginController<User, UserLoginService> {
-
     @Autowired
     UserService userService;
 

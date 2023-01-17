@@ -1,5 +1,6 @@
 package com.management.auction.services;
 
+import com.management.auction.models.Criteria;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.AuctionPic;
@@ -9,6 +10,7 @@ import com.management.auction.repos.auction.AuctionRepo;
 import com.management.auction.repos.BidRepo;
 import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,8 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private final AuctionPicRepo auctionPicRepository;
     @Autowired
     private BidRepo bidRepo;
+    @Autowired
+    private EntityManager em;
     public AuctionService(AuctionRepo repo,
                           AuctionPicRepo auctionPicRepository) {
         super(repo);
@@ -48,5 +52,8 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         List<AuctionPic> auctionPics = auctionReceiver.getAuctionPics();
         auctionPicRepository.saveAll(auctionPics);
         return auction;
+    }
+    public List<Auction> findByCriteria(Criteria criteria) throws CustomException{
+        return this.repo.findAllById(this.repo.getByCriteria(criteria));
     }
 }

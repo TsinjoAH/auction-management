@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AuctionRepo extends JpaRepository<Auction, Long> {
+public interface AuctionRepo extends JpaRepository<Auction, Long> ,AuctionCriteriaRepo{
     List<Auction> findByUserId(Long id);
 
 }
