@@ -16,7 +16,7 @@
     date: Date
 }
 
-// total des commissions depuis le début avec le % d'augmentation du dernier mois
+// total des nombres d'utilisateur depuis le début avec le % d'augmentation du dernier mois
 {
     userCount: number,
     increaseRate: number
@@ -32,7 +32,8 @@
 [
     {
         user: User,
-        auctionCount: number
+        auctionCount: number,
+        rate: number
     },
     ...
 ]
@@ -42,7 +43,8 @@
     {
         user: User,
         sales: number,
-        commission: number
+        commission: number,
+        rate: number
     },
     ...
 ]
@@ -51,7 +53,8 @@
 [
     {
         product/category: Product/Category,
-        salesCount: number
+        salesCount: number,
+        rate: number
     },
     ...
 ]
@@ -62,6 +65,7 @@
         product/category: Product/Category,
         sales: number,
         commission: number
+        rate: number
     },
     ...
 ]

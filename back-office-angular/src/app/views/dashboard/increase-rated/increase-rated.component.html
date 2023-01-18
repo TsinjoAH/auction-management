@@ -1,0 +1,17 @@
+<c-row>
+  <c-col *ngFor="let d of data" lg="3" md="6" xs="12">
+    <c-widget-stat-b
+      #widgetStatB1inv="cWidgetStatB"
+      title="Nombre total d'enchere"
+      class="mb-4"
+      color="primary"
+      inverse
+      [text]="'Augmentation des encheres de '+d.getRate()+'%'"
+      value="{{d.getTotal() | number}}"
+    >
+      <c-progress [white]="widgetStatB1inv.inverse" class="my-2" thin>
+        <c-progress-bar [value]="d.getRate()"></c-progress-bar>
+      </c-progress>
+    </c-widget-stat-b>
+  </c-col>
+</c-row>

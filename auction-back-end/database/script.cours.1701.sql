@@ -1,5 +1,8 @@
+drop table produit;
+drop table marque;
+
 create table marque (
-    id serial,
+    id serial primary key ,
     nom_marque varchar(40)
 );
 
@@ -15,7 +18,7 @@ create table produit (
     id serial,
     nom varchar(40),
     prix double precision,
-    marque_id integer
+    marque_id integer references marque(id) on delete cascade
 );
 
 insert into produit (nom, prix, marque_id)
@@ -30,3 +33,5 @@ values
     ('GP 3', 3000, 2),
     ('GP 3 XL', 4000, 2),
     ('GP 4 XL', 5000, 2);
+
+select avg(prix) from produit;

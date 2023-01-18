@@ -35,3 +35,22 @@ export interface Commission extends HasId {
   rate: number;
   setDate: Date
 }
+
+export interface IChartProps {
+  data?: any;
+  labels?: any;
+  options?: any;
+  colors?: any;
+  type?: any;
+  legend?: any;
+
+  [propName: string]: any;
+}
+
+
+export interface StatData {
+  data: number[];
+  labels: string[];
+  start: Date;
+  end: Date;
+}

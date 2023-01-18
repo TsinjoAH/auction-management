@@ -1,0 +1,35 @@
+<c-card class="mb-4">
+  <c-card-header>
+    <h4 class="card-title mb-0" id="traffic">Nombre des encheres</h4>
+  </c-card-header>
+  <c-card-body>
+    <c-row>
+      <c-col sm="12">
+        <c-row>
+          <c-col md="8" >
+              <c-row>
+                <c-col md="6" >
+                  <mat-form-field appearance="outline">
+                    <mat-label>Produit</mat-label>
+                    <mat-select>
+                      <mat-option value="Day" >Product 1</mat-option>
+                      <mat-option value="Month" >Product 2</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </c-col>
+              </c-row>
+          </c-col>
+        </c-row>
+      </c-col>
+    </c-row>
+    <c-chart
+      [data]="data"
+      [height]="300"
+      [ngStyle]="{ 'marginTop.px': 40 }"
+      [options]="options"
+      type="line"
+    >
+      Main chart
+    </c-chart>
+  </c-card-body>
+</c-card>
