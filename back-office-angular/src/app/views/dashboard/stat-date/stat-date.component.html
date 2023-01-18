@@ -1,0 +1,59 @@
+<c-card class="mb-4">
+  <c-card-header>
+    <h4 class="card-title mb-0" id="traffic">Nombre des encheres</h4>
+  </c-card-header>
+  <c-card-body>
+    <c-row>
+      <c-col sm="12">
+        <c-row>
+          <c-col md="8" >
+            <form [formGroup]="auctionInterval">
+              <c-row>
+                <c-col md="6" >
+                  <mat-form-field appearance="outline">
+                    <mat-label>Debut</mat-label>
+                    <input matInput formControlName="start" [matDatepicker]="pickerStart">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                  </mat-form-field>
+                </c-col>
+                <c-col md="6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fin</mat-label>
+                    <input matInput formControlName="end" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </c-col>
+              </c-row>
+              <button mat-raised-button class="d-none" #validateForm ></button>
+            </form>
+          </c-col>
+          <c-col md="4">
+            <form [formGroup]="auctionCountForm" class="w-100">
+              <mat-form-field appearance="outline">
+                <mat-label>Frequence</mat-label>
+                <mat-select formControlName="option" (selectionChange)="setTrafficPeriod(this.auctionCountForm.value?.option)" >
+                  <mat-option value="Day" >Jour</mat-option>
+                  <mat-option value="Month" >Mois</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+          </c-col>
+          <c-col md="4" >
+            <button mat-raised-button color="primary" (click)="filter()" >Filter</button>
+          </c-col>
+        </c-row>
+      </c-col>
+    </c-row>
+    <c-chart
+      [data]="this.selected"
+      [height]="300"
+      [ngStyle]="{ 'marginTop.px': 40 }"
+      [options]="options"
+      type="line"
+    >
+      Main chart
+    </c-chart>
+  </c-card-body>
+</c-card>

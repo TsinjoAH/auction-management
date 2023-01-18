@@ -16,7 +16,7 @@
     date: Date
 }
 
-// total des commissions depuis le début avec le % d'augmentation du dernier mois
+// total des nombres d'utilisateur depuis le début avec le % d'augmentation du dernier mois
 {
     userCount: number,
     increaseRate: number
