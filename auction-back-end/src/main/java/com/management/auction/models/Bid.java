@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -33,8 +34,15 @@ public class Bid extends HasFK<Auction> {
     @Override
     public void setFK(Auction auction) throws CustomException {
         if(auction!=null){
-            if  (auction.getEndDate().compareTo(getBidDate()) < 0 )
+            if  (auction.getEndDate().compareTo(getBidDate()) < 0 ) {
                 throw new CustomException("The auction already ended");
+            }
+            if (getUser() == null ) {
+                throw new CustomException("invalid user");
+            }
+            if (Objects.equals(getUser().getId(), auction.getUser().getId())) {
+                throw new CustomException("you cannot bid on your own auction");
+            }
             this.auctionId=auction.getId();
         }
         else {
