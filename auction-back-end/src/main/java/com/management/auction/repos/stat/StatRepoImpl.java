@@ -34,6 +34,95 @@ public class StatRepoImpl implements StatRepo{
         return listOfTupleToMap(query.getResultList(),"commission","date");
     }
 
+    @Override
+    public HashMap<String, Object> getTotalAndIncrease() {
+        String sql="SELECT * FROM rating_month";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return this.tupleToMap((Tuple) query.getSingleResult(),"total","increaserate");
+    }
+
+    @Override
+    public HashMap<String, Object> getUserTotalAndIncrease() {
+        String sql="SELECT * FROM rating_user";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return this.tupleToMap((Tuple) query.getSingleResult(),"usercount","increaserate");
+    }
+
+    @Override
+    public HashMap<String, Object> getCommissionTotalAndIncrease() {
+        String sql="SELECT * FROM rating_commisison";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return this.tupleToMap((Tuple) query.getSingleResult(),"totalcommission","increaserate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getUserAuctionCount() {
+        String sql="SELECT auctioncount,user_id user,rate FROM rating_user_auction";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"auctioncount","user","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getUserSalesCount() {
+
+        String sql=" SELECT * FROM rating_user_sale";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"user","sales","commission","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getProductCountRating() {
+
+        String sql=" SELECT * FROM count_rating_product";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"salescount","product","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getCategoryCountRating() {
+        String sql=" SELECT * FROM count_rating_category";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"salescount","category","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getProductCommission() {
+
+        String sql=" SELECT * FROM product_commission";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"sales","product","commission","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getCategoryCommission() {
+
+        String sql=" SELECT * FROM category_commission";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"sales","category","commission","rate");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getProductRatio(Long product) {
+        String sql=" SELECT * FROM product_ratio WHERE product = ?";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        query.setParameter(1,product);
+        return listOfTupleToMap(query.getResultList(),"date","ratio");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getProductBid() {
+        String sql=" SELECT * FROM product_bid_count";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"bidcount","product");
+    }
+
+    @Override
+    public List<HashMap<String, Object>> getCategoryBid() {
+        String sql=" SELECT * FROM category_bid_count";
+        Query query=manager.createNativeQuery(sql, Tuple.class);
+        return listOfTupleToMap(query.getResultList(),"bidcount","category");
+    }
+
     private HashMap<String,Object> tupleToMap(Tuple tuple,String... keys){
         HashMap<String,Object> result=new HashMap<>();
         for(String key:keys){

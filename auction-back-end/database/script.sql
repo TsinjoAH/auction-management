@@ -226,19 +226,38 @@ INNER JOIN category c2 on p.category_id = c2.id;
 
 
 CREATE VIEW auction_done AS
-SELECT b.user_id,sum(b.amount) amount,
+SELECT b.user_id,sum(b.amount) amount
 FROM bid b
 JOIN (
     SELECT auction_id, MAX(amount) max_amount
     FROM bid
-    GROUP BY auction_id
+    WHERE auction_id IN (SELECT id FROM v_auction WHERE status = 2) GROUP BY auction_id
 ) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount GROUP BY b.user_id;
+
+CREATE VIEW gain AS
+SELECT b.amount,b.auction_id,a.user_id,b.amount-(b.amount*commission) gain
+FROM bid b
+         JOIN (
+    SELECT auction_id, MAX(amount) max_amount
+    FROM bid
+    GROUP BY auction_id
+) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount JOIN auction a ON a.id=b.auction_id;
+
 
 CREATE VIEW deposit_done AS
 SELECT user_id,SUM(amount) amount FROM account_deposit WHERE status=20 GROUP BY user_id;
 
+CREATE VIEW full_balance AS
+SELECT d.user_id
+     ,CASE WHEN d.amount IS NULL THEN 0 ELSE d.amount END deposit
+     ,CASE WHEN a.amount IS NULL THEN 0 ELSE a.amount END auction_bid
+     ,CASE WHEN g.gain IS NULL THEN 0 ELSE g.gain END auction_gain
+      FROM deposit_done d
+          LEFT JOIN auction_done a ON d.user_id=a.user_id
+          LEFT JOIN gain g ON g.user_id=a.user_id;
+
 CREATE VIEW balance AS
-SELECT d.user_id,CASE WHEN d.amount-a.amount IS NULL THEN d.amount ELSE d.amount-a.amount END amount FROM deposit_done d LEFT JOIN auction_done a ON d.user_id=a.user_id;
+    SELECT user_id,deposit-auction_bid+auction_gain amount FROM full_balance;
 
 
 --user allmdp:'gemmedecristal'--
@@ -1453,3 +1472,106 @@ SELECT count(*),user_id FROM commission_per_auction GROUP BY user_id ORDER BY co
 CREATE VIEW commission_per_day AS
 SELECT SUM(m.max_amount*a.commission) commission,date(end_date) date FROM (SELECT b.auction_id,Max(b.amount) max_amount FROM bid b GROUP BY b.auction_id) m
 JOIN auction a ON m.auction_id=a.id GROUP BY date;
+
+CREATE VIEW rating AS
+SELECT count(*),extract("month" from start_date) as month,extract("year" from start_date) as year,(SELECT COUNT(*) FROM auction) total,(count(*)/(SELECT COUNT(*) FROM auction)) rate FROM auction GROUP BY month,year;
+
+
+CREATE VIEW tmp_rating_month AS
+select
+    total
+     ,case when (
+        select
+            count
+        from rating
+        where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
+        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
+    ,case when (
+        select
+            count
+        from rating
+        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
+        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
+            from rating;
+
+CREATE VIEW rating_month AS
+    SELECT total,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_month;
+
+CREATE VIEW user_month_year AS
+    SELECT (SELECT count(*) FROM "user") as total,count(*),extract("month" from signup_date) as month,extract("year" from signup_date) as year from "user" GROUP BY month,year;
+
+CREATE VIEW tmp_rating_user AS
+select
+    total
+     ,case when (
+                    select
+                        count
+                    from user_month_year
+                    where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
+    ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
+    ,case when (
+        select
+            count
+        from user_month_year
+        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
+        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
+            from user_month_year;
+
+CREATE VIEW rating_user AS
+SELECT total userCount,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_user;
+
+CREATE VIEW commission_per_month AS
+    SELECT (SELECT SUM(commission) FROM commission_per_day) total,SUM(commission) commission,extract("month" from date) as month,extract("year" from date) as year FROM commission_per_day GROUP BY month,year;
+
+CREATE VIEW tmp_rating_commission AS
+select
+    total
+     ,case when (
+                    select
+                        commission
+                    from commission_per_month
+                    where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
+    ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
+    ,case when (
+        select
+            commission
+        from commission_per_month
+        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
+        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
+            from commission_per_month;
+
+CREATE VIEW rating_commission AS
+SELECT total totalcommission,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_commission;
+
+CREATE VIEW rating_user_auction AS
+SELECT count(*) auctionCount,user_id,count(*)/(SELECT count(*) from v_auction where status=2)*100 rate from v_auction where status =2 GROUP BY user_id ORDER BY auctioncount DESC LIMIT 10;
+
+CREATE VIEW rating_user_sale AS
+SELECT user_id user, count(*) sales,(SUM(amount)-SUM(gain)) commission,(count(*)/(SELECT count(*) from gain))*100 rate FROM gain GROUP BY user_id ORDER BY sales DESC LIMIT 10;
+
+CREATE VIEW count_rating_product AS
+SELECT COUNT(*) as salesCount,a.product_id product,COUNT(*)/(SELECT COUNT(*) FROM gain)*100 rate FROM gain g JOIN auction a ON a.id=g.auction_id GROUP BY product_id ORDER BY salesCount DESC LIMIT 10;
+
+CREATE VIEW count_rating_category AS
+SELECT COUNT(*) as salesCount,p.category_id category,COUNT(*)/(SELECT COUNT(*) FROM gain)*100 rate FROM gain g JOIN auction a ON a.id=g.auction_id JOIN product p ON a.product_id=p.id GROUP BY p.category_id ORDER BY salesCount DESC LIMIT 10;
+
+CREATE VIEW product_commission AS
+SELECT COUNT(*) as sales,a.product_id product,SUM(g.amount)-SUM(g.gain) commission,(SUM(g.amount)-SUM(g.gain))/(SELECT SUM(amount-gain) FROM gain)*100 rate FROM gain g JOIN auction a ON a.id=g.auction_id GROUP BY product_id ORDER BY commission DESC LIMIT 10;
+
+CREATE VIEW category_commission AS
+SELECT COUNT(*) as sales,p.category_id category,SUM(g.amount)-SUM(g.gain) commission,(SUM(g.amount)-SUM(g.gain))/(SELECT SUM(amount-gain) FROM gain)*100 rate FROM gain g JOIN auction a ON a.id=g.auction_id JOIN product p ON a.product_id=p.id GROUP BY p.category_id ORDER BY commission DESC LIMIT 10;
+
+CREATE VIEW product_ratio AS
+SELECT a.product_id product,bid_date date,a.start_price/amount ratio
+FROM bid b
+         JOIN (
+    SELECT auction_id, MAX(amount) max_amount
+    FROM bid
+    GROUP BY auction_id
+) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount JOIN auction a ON a.id=b.auction_id;
+
+CREATE VIEW product_bid_count AS
+select count(*) bidcount,a.product_id product from bid JOIN auction a ON bid.auction_id=a.id GROUP BY product ORDER BY bidcount DESC LIMIT 10;
+
+CREATE VIEW category_bid_count AS
+select count(*) bidcount,p.category_id category from bid JOIN auction a ON bid.auction_id=a.id JOIN product p ON a.product_id=p.id GROUP BY category ORDER BY bidcount DESC LIMIT 10;
