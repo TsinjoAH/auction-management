@@ -27,8 +27,8 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private final AuctionPicRepo auctionPicRepository;
     @Autowired
     private BidRepo bidRepo;
-    public AuctionService(AuctionRepo repo,
-                          AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository) {
+
+    public AuctionService(AuctionRepo repo, AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository) {
         super(repo);
         this.auctionViewRepo = auctionViewRepo;
         this.auctionPicRepository = auctionPicRepository;
@@ -47,7 +47,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     @Override
     public Auction findById(Long id) {
         Auction auction = super.findById(id);
-        if(auction == null){
+        if (auction == null) {
             return null;
         }
         auction.setBids(bidRepo.findByAuctionId(id));
@@ -67,7 +67,8 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         auctionPicRepository.saveAll(auctionPics);
         return auction;
     }
-    public List<Auction> findByCriteria(Criteria criteria) throws CustomException{
+
+    public List<Auction> findByCriteria(Criteria criteria) throws CustomException {
         return this.repo.findAllById(this.repo.getByCriteria(criteria));
     }
 }

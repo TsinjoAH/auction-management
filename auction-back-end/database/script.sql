@@ -207,7 +207,7 @@ SELECT auction.id,
        CASE
            WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
            WHEN end_date < current_timestamp THEN 2
-           WHEN start_date > current_timestamp THEN 3
+           WHEN start_date > current_timestamp THEN 0
            END AS status
 FROM auction;
 

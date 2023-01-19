@@ -19,18 +19,25 @@ import java.time.LocalDateTime;
 public class Bid extends HasFK<Auction> {
     @Column
     private Long auctionId;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @Column
     private Double amount;
+
     @Column
     private Timestamp bidDate = Timestamp.valueOf(LocalDateTime.now());
+
     @Override
     public void setFK(Auction auction) throws CustomException {
         if(auction!=null){
+            if  (auction.getEndDate().compareTo(getBidDate()) < 0 )
+                throw new CustomException("The auction already ended");
             this.auctionId=auction.getId();
-        }else {
+        }
+        else {
             throw new CustomException("Auction not found");
         }
     }
