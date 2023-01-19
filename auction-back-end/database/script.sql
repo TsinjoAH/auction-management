@@ -90,6 +90,7 @@ create table account_deposit
     id            serial primary key,
     user_id       integer          not null references "user" (id),
     amount        double precision not null check ( amount > 0 ),
+    date          timestamp        not null default current_timestamp,
     status        integer          not null default 0 references deposit_status(status),
     status_change_date timestamp
 );
@@ -213,7 +214,7 @@ FROM auction;
 
 CREATE OR REPLACE VIEW full_v_auction
 AS
-SELECT a.id,a.title,a.description,start_date,end_date,duration,p.name,c2.name category,c2.id category_id,start_price,
+SELECT a.id,a.title,a.description,start_date,end_date,duration,p.name product,p.id product_id,c2.name category,c2.id category_id,start_price,
        CASE
            WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
            WHEN end_date < current_timestamp THEN 2
@@ -225,7 +226,7 @@ INNER JOIN category c2 on p.category_id = c2.id;
 
 
 CREATE VIEW auction_done AS
-SELECT b.user_id,sum(b.amount) amount
+SELECT b.user_id,sum(b.amount) amount,
 FROM bid b
 JOIN (
     SELECT auction_id, MAX(amount) max_amount
@@ -1439,3 +1440,16 @@ insert into auction (title,description,user_id,start_date,end_date,duration,prod
                                                                                                                     ('Decade Art_16','The best of the best',1,'2023-01-16 02:00','2023-01-16 19:00',17,1,250,0.5);
 
 
+CREATE VIEW auctionPerDay AS
+SELECT count(*),date(start_date) date from auction group by date;
+
+CREATE VIEW commission_per_auction AS
+    SELECT m.max_amount*a.commission commission,date(a.end_date),m.auction_id,a.user_id FROM (SELECT b.auction_id,Max(b.amount) max_amount FROM bid b GROUP BY b.auction_id) m
+        JOIN auction a ON m.auction_id=a.id;
+
+CREATE VIEW auction_number_user AS
+SELECT count(*),user_id FROM commission_per_auction GROUP BY user_id ORDER BY count;
+
+CREATE VIEW commission_per_day AS
+SELECT SUM(m.max_amount*a.commission) commission,date(end_date) date FROM (SELECT b.auction_id,Max(b.amount) max_amount FROM bid b GROUP BY b.auction_id) m
+JOIN auction a ON m.auction_id=a.id GROUP BY date;
