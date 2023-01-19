@@ -54,7 +54,7 @@ public class AuctionController {
         return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
     }
 
-    @PostMapping("/filter")
+    @GetMapping("/filter")
     public ResponseEntity<SuccessResponse> filter(@RequestParam(required = false)String keyword, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp startMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp startMaxDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMaxDate,@RequestParam(required = false)Long product,@RequestParam(required = false)Long category,@RequestParam(required = false)Double price,@RequestParam(required = false)Integer status) throws CustomException{
         Criteria criteria=new Criteria();
         criteria.setKeyword(keyword);

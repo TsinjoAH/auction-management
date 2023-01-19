@@ -248,7 +248,7 @@ INNER JOIN category c2 on p.category_id = c2.id;
 
 
 CREATE VIEW auction_done AS
-SELECT b.user_id,sum(b.amount) amount
+SELECT b.user_id,sum(b.amount) amount,
 FROM bid b
 JOIN (
     SELECT auction_id, MAX(amount) max_amount
@@ -261,3 +261,17 @@ SELECT user_id,SUM(amount) amount FROM account_deposit WHERE status=20 GROUP BY 
 
 CREATE VIEW balance AS
 SELECT d.user_id,CASE WHEN d.amount-a.amount IS NULL THEN d.amount ELSE d.amount-a.amount END amount FROM deposit_done d LEFT JOIN auction_done a ON d.user_id=a.user_id;
+
+CREATE VIEW auctionPerDay AS
+SELECT count(*),date(start_date) date from auction group by date;
+
+CREATE VIEW commission_per_auction AS
+    SELECT m.max_amount*a.commission commission,date(a.end_date),m.auction_id,a.user_id FROM (SELECT b.auction_id,Max(b.amount) max_amount FROM bid b GROUP BY b.auction_id) m
+        JOIN auction a ON m.auction_id=a.id;
+
+CREATE VIEW auction_number_user AS
+SELECT count(*),user_id FROM commission_per_auction GROUP BY user_id ORDER BY count;
+
+CREATE VIEW commission_per_day AS
+SELECT SUM(m.max_amount*a.commission) commission,date(end_date) date FROM (SELECT b.auction_id,Max(b.amount) max_amount FROM bid b GROUP BY b.auction_id) m
+JOIN auction a ON m.auction_id=a.id GROUP BY date;
