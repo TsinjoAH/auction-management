@@ -12,11 +12,14 @@ VIEW full_v_criteria
 @Component
 public class Criteria {
     String keyword;
-    Timestamp minTime;
-    Timestamp maxTime;
-    Category category;
-    Integer state;
-    Double prix;
+    Timestamp startMinDate;
+    Timestamp startMaxDate;
+    Timestamp endMinDate;
+    Timestamp endMaxDate;
+    Long product;
+    Long category;
+    Double price;
+    Integer status;
 
     public String getKeyword() {
         return keyword;
@@ -26,43 +29,67 @@ public class Criteria {
         this.keyword = keyword;
     }
 
-    public Timestamp getMinTime() {
-        return minTime;
+    public Timestamp getStartMinDate() {
+        return startMinDate;
     }
 
-    public void setMinTime(Timestamp minTime) {
-        this.minTime = minTime;
+    public void setStartMinDate(Timestamp startMinDate) {
+        this.startMinDate = startMinDate;
     }
 
-    public Timestamp getMaxTime() {
-        return maxTime;
+    public Timestamp getStartMaxDate() {
+        return startMaxDate;
     }
 
-    public void setMaxTime(Timestamp maxTime) {
-        this.maxTime = maxTime;
+    public void setStartMaxDate(Timestamp startMaxDate) {
+        this.startMaxDate = startMaxDate;
     }
 
-    public Category getCategory() {
+    public Timestamp getEndMinDate() {
+        return endMinDate;
+    }
+
+    public void setEndMinDate(Timestamp endMinDate) {
+        this.endMinDate = endMinDate;
+    }
+
+    public Timestamp getEndMaxDate() {
+        return endMaxDate;
+    }
+
+    public void setEndMaxDate(Timestamp endMaxDate) {
+        this.endMaxDate = endMaxDate;
+    }
+
+    public Long getProduct() {
+        return product;
+    }
+
+    public void setProduct(Long product) {
+        this.product = product;
+    }
+
+    public Long getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(Long category) {
         this.category = category;
     }
 
-    public Integer getState() {
-        return state;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public Double getPrix() {
-        return prix;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setPrix(Double prix) {
-        this.prix = prix;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

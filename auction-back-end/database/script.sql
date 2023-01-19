@@ -90,6 +90,7 @@ create table account_deposit
     id            serial primary key,
     user_id       integer          not null references "user" (id),
     amount        double precision not null check ( amount > 0 ),
+    date          timestamp        not null default current_timestamp,
     status        integer          not null default 0 references deposit_status(status),
     status_change_date timestamp
 );
@@ -235,7 +236,7 @@ FROM auction;
 
 CREATE OR REPLACE VIEW full_v_auction
 AS
-SELECT a.id,a.title,a.description,start_date,end_date,duration,p.name,c2.name category,c2.id category_id,start_price,
+SELECT a.id,a.title,a.description,start_date,end_date,duration,p.name product,p.id product_id,c2.name category,c2.id category_id,start_price,
        CASE
            WHEN start_date <= current_timestamp AND current_timestamp < end_date THEN 1
            WHEN end_date < current_timestamp THEN 2
