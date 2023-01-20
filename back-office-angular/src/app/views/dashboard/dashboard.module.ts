@@ -22,7 +22,6 @@ import {MatButtonModule} from "@angular/material/button";
 import { StatDateComponent } from './stat-date/stat-date.component';
 import { IncreaseRatedComponent } from './increase-rated/increase-rated.component';
 import { TopF10Component } from './top-f10/top-f10.component';
-import { ProductEvolutionComponent } from './product-evolution/product-evolution.component';
 
 
 
@@ -31,8 +30,7 @@ import { ProductEvolutionComponent } from './product-evolution/product-evolution
     DashboardComponent,
     StatDateComponent,
     IncreaseRatedComponent,
-    TopF10Component,
-    ProductEvolutionComponent
+    TopF10Component
   ],
     imports: [
         CommonModule,

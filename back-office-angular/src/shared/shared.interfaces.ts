@@ -1,4 +1,4 @@
-interface HasId {
+export interface HasId {
   id: number
 }
 

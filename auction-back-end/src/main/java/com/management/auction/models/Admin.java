@@ -1,5 +1,6 @@
 package com.management.auction.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import custom.springutils.LoginEntity;
 import custom.springutils.model.HasName;
 import jakarta.persistence.Column;
@@ -12,8 +13,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class Admin extends HasName implements LoginEntity {
     @Column
     String name;
+
     @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     String password;
+
     @Column
     String email;
 

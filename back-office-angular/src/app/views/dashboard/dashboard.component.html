@@ -7,29 +7,16 @@
   [statInfo]="auctionStatInfo"
   (dateParams)="loadAuctionCountData($event)"
 ></app-stat-date>
-
 <app-stat-date
   title="Commission selon un intervalle"
   [statInfo]="commissionStatInfo"
   (dateParams)="loadCommissionDayData($event)"
 ></app-stat-date>
 
-<app-top-f10
-  title="Top des utilisateurs createurs"
-  [data]="userTopAuction"
-></app-top-f10>
-<app-top-f10
-  title="Top Vendeur"
-  [data]="userTopCommission" >
-</app-top-f10>
-<app-top-f10
-  title="Analyse sur les produits"
-  [data]="productTopAuction"
-  [ratePresent]="false"
-></app-top-f10>
-<app-top-f10
-  title = "Analyse des categories"
-  [data]="categoryTopAuction"
-  [ratePresent]="false"
-></app-top-f10>
-
+<ng-container *ngFor="let table of top10()" >
+  <app-top-f10
+    title="{{table.title}}"
+    [data]="table.data"
+    [ratePresent]="table.ratePresent"
+  ></app-top-f10>
+</ng-container>

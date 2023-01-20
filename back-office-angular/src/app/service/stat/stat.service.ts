@@ -57,11 +57,12 @@ export class StatService {
   }
 
   fetchTotalCommission () {
-    return this.http.get<Response<any>>(baseUrl("stats/"))
+    return this.http.get<Response<any>>(baseUrl("stats/commissiontotalIncrease"))
   }
 
-
-
+  fetchUserCount () {
+    return this.http.get<Response<any>>(baseUrl("stats/usertotalIncrease"));
+  }
 
   getDateList (d1: Date, d2: Date) {
     let dateList:Date[] = [d1];

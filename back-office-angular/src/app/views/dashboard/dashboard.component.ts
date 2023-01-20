@@ -20,42 +20,28 @@ export class DashboardComponent implements OnInit {
   auctionStatInfo!: StatWithDateData;
   commissionStatInfo!: StatWithDateData;
 
-
-  auctionTotal: any = {
-    totalCount: 1569,
-    increaseRate: 12.5
-  }
-
-  userTotal: any = {
-    userCount: 152,
-    increaseRate: 30
-  }
+  auctionTotal!: any;
+  userTotal!: any;
+  commissionTotal!: any;
 
 
   auctionTotalData: IncreaseRateData = {
     title: "Total des encheres",
     data: this.auctionTotal,
-    getTotal: () => this.auctionTotal.total,
-    getRate: () => Math.round(this.auctionTotal.increaserate * 10000)/100
+    getTotal: () => this.auctionTotal?.total,
+    getRate: () => Math.round(this.auctionTotal?.increaserate * 10000)/100
   }
-
-  commissionTotal = {
-    totalCommission: 125000000,
-    increaseRate: 25.78
-  }
-
   userTotalData: IncreaseRateData = {
     title: "Utilisateurs",
     data: this.userTotal,
-    getTotal: () => this.userTotal.userCount,
-    getRate: () => this.userTotal.increaseRate
+    getTotal: () => this.userTotal?.usercount,
+    getRate: () => (this.userTotal?.increaserate * 10000) / 100
   }
-
   commission: IncreaseRateData = {
     title: "Commission",
     data: this.commissionTotal,
-    getTotal: () => this.commissionTotal.totalCommission,
-    getRate: () => this.commissionTotal.increaseRate
+    getTotal: () => this.commissionTotal?.totalcommission,
+    getRate: () => (this.commissionTotal?.increaserate * 10000) / 100
   }
 
   totalData = [
@@ -69,6 +55,29 @@ export class DashboardComponent implements OnInit {
   productTopAuction!: Top10Data;
   categoryTopAuction!: Top10Data;
 
+  top10 = () => [
+    {
+      title: "Top des utilisateurs createurs",
+      data: this.userTopAuction,
+      ratePresent: true
+    },
+    {
+      title:"Top Vendeur",
+      data: this.userTopCommission,
+      ratePresent: true
+    },
+    {
+      title:"Analyse sur les produits",
+      data: this.productTopAuction,
+      ratePresent: false
+    },
+    {
+      title:"Analyse des categories",
+      data: this.categoryTopAuction,
+      ratePresent: false
+    }
+  ]
+
 
   ngOnInit(): void {
     this.loadAuctionCountData({
@@ -76,7 +85,7 @@ export class DashboardComponent implements OnInit {
       max: "2023-01-01"
     });
     this.fetchIncreaseRated();
-    this.fetchTop10();
+    this.fetchTables();
   }
 
   loadAuctionCountData(data: IntervalParam) {
@@ -116,10 +125,22 @@ export class DashboardComponent implements OnInit {
         this.auctionTotal = res.data;
       },
       error: err => console.log(err)
+    });
+    this.service.fetchUserCount().subscribe({
+      next: res => {
+        this.userTotal = res.data;
+      },
+      error: err => console.log(err)
+    });
+    this.service.fetchTotalCommission().subscribe({
+      next: res=> {
+        this.commissionTotal = res.data;
+      },
+      error: err => console.log(err)
     })
   }
 
-  private fetchTop10() {
+  private fetchTables() {
     this.service.fetchTopCreator().subscribe({
       next: res => {
         this.userTopAuction = {

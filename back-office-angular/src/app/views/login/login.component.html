@@ -1,52 +1,46 @@
 <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
-    <c-container>
-        <c-row class="justify-content-center">
-            <c-col md="5">
-                <c-card-group>
-                    <c-card class="p-4">
-                        <c-card-body>
-                            <form [formGroup]="loginForm" cForm>
-                                <h1>Se connecter</h1>
-                                <p class="text-medium-emphasis">Veuillez vous identifier</p>
-                                <c-input-group class="mb-3">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col md="5">
+        <c-card-group>
+          <c-card class="p-4">
+            <c-card-body>
+              <form [formGroup]="loginForm" cForm>
+                <h1>Se connecter</h1>
+                <p class="text-medium-emphasis">Veuillez vous identifier</p>
+                <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                                    <input autoComplete="username" cFormControl formControlName="email"
-                                           placeholder="Email"/>
-                                </c-input-group>
-                                <c-input-group class="mb-4">
+                  <input autoComplete="username" cFormControl formControlName="email"
+                         placeholder="Email"/>
+                </c-input-group>
+                <c-input-group class="mb-4">
                   <span cInputGroupText>
                     <svg cIcon name="cilLockLocked"></svg>
                   </span>
-                                    <input
-                                            autoComplete="current-password"
-                                            cFormControl
-                                            formControlName="password"
-                                            placeholder="Mot de passe"
-                                            type="password"
-                                    />
-                                </c-input-group>
-                                <c-row>
-                                    <c-col xs="6">
-                                        <button (click)="onSubmit()" cButton class="px-4" color="primary">
-                                            Valider
-                                        </button>
-                                    </c-col>
-                                </c-row>
-                            </form>
-                        </c-card-body>
-                    </c-card>
-                </c-card-group>
-            </c-col>
-        </c-row>
-    </c-container>
+                  <input
+                    autoComplete="current-password"
+                    cFormControl
+                    formControlName="password"
+                    placeholder="Mot de passe"
+                    type="password"
+                  />
+                </c-input-group>
+                <c-row>
+                  <c-col xs="6">
+                    <button (click)="onSubmit()" [disabled]="clicked" cButton class="px-4" color="primary">
+                      Valider
+                    </button>
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
 </div>
-<!--<swal-->
-<!--    #connectionSwal-->
-<!--    title="La connexion a échoué"-->
-<!--    text="Veuillez vérifier vos identifiants"-->
-<!--    icon="error"-->
-<!--&gt;-->
-<!--</swal>-->
-<c-toaster [placement]="placement" class="p-3" position="fixed"></c-toaster>
+
+

@@ -1,15 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToasterComponent, ToasterPlacement} from "@coreui/angular";
-import {ToastSampleComponent} from "./toast-sample/toast-sample.component";
-
-// export class LoginData {
-//     constructor(
-//         public title: string,
-//         public callBack: (service: LoginService, data: any) => any
-//     ) {
-//     }
-// }
+import {LoginService} from "../../service/login/login.service";
+import Swal, {SweetAlertIcon} from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -20,11 +14,15 @@ export class LoginComponent implements OnInit {
 
     placement = ToasterPlacement.MiddleCenter;
     @ViewChild(ToasterComponent) toaster !: ToasterComponent;
-    // @ViewChild('connectionSwal') swal!: SwalComponent
     loginForm !: FormGroup;
 
-    constructor(private formBuilder: FormBuilder) {
-    }
+    clicked = false;
+
+    constructor(
+      private formBuilder: FormBuilder,
+      private service: LoginService,
+      private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.loginForm = this.formBuilder.group({
@@ -34,29 +32,29 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
+      this.clicked = true;
         if (this.loginForm.valid) {
-          console.log(this.loginForm.value);
-            // this.consume.callBack(this.loginService, this.loginForm.value).subscribe({
-            //     next: (data: {data: any}) => this.successData.emit(data.data),
-            //     error: (e: any) => {
-            //         let err = e.error as { code: number, message: string };
-            //         this.invokeToast("Erreur", "danger", err.message);
-            //     }
-            // });
-        }
-    }
 
-    invokeToast(title: any, color: any, message: any) {
-        // this.swal.fire();
-        const options = {
-            placement: this.placement,
-            delay: 2000,
-            color: color,
-            title: title,
-            autohide: true,
-            message: message
-        };
-        const toastRef = this.toaster.addToast(ToastSampleComponent, {...options});
+          this.service.login(this.loginForm.value).subscribe({
+            next: res => {
+              sessionStorage.setItem("admin", JSON.stringify(res.data.entity));
+              sessionStorage.setItem("admin_token", res.data.token);
+              this.router.navigate(["dashboard"]);
+            },
+            error: err => {
+              Swal.fire({
+                title: "Erreur",
+                icon: 'error' as SweetAlertIcon,
+                text: err.error.message,
+                showCloseButton: true
+              });
+            }
+          })
+
+        }
+        else {
+          this.clicked = false;
+        }
     }
 
 }

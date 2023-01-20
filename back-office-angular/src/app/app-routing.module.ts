@@ -8,11 +8,18 @@ import {ProductComponent} from "./views/crud/product/product.component";
 import {DepositListComponent} from "./views/deposit/deposit-list/deposit-list.component";
 import {CommissionComponent} from "./views/commission/commission.component";
 import {DashboardComponent} from "./views/dashboard/dashboard.component";
+import {AdminGuard} from "./guard/admin.guard";
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/dashboard',
+    pathMatch: "full"
+  },
+  {
+    path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AdminGuard],
     children: [
       {
         path: 'categories',

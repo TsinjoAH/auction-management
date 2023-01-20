@@ -41,6 +41,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>custom.springutils</groupId>
             <artifactId>SpringUtils</artifactId>
@@ -48,6 +49,7 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/spring-utils.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
