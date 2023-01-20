@@ -1,5 +1,6 @@
 package com.management.auction.services;
 
+import com.management.auction.models.Commission;
 import com.management.auction.models.Criteria;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
@@ -28,6 +29,10 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private final UserRepo userRepo;
     private final AuctionViewRepo auctionViewRepo;
     private final AuctionPicRepo auctionPicRepository;
+
+    @Autowired
+    private CommissionService commissionService;
+
     @Autowired
     private BidRepo bidRepo;
 
@@ -71,6 +76,8 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
 
     @Transactional
     public Auction create(AuctionReceiver auctionReceiver) throws CustomException, IOException {
+        Commission commission = this.commissionService.getLatest();
+        auctionReceiver.getAuction().setCommission(commission.getRate());
         Auction auction = super.create(auctionReceiver.getAuction());
         List<AuctionPic> auctionPics = auctionReceiver.getAuctionPics();
         auctionPicRepository.saveAll(auctionPics);
