@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
     getTotal: () => this.userTotal?.usercount,
     getRate: () => (this.userTotal?.increaserate * 10000) / 100
   }
+
   commission: IncreaseRateData = {
     title: "Commission",
     data: this.commissionTotal,
@@ -106,7 +107,6 @@ export class DashboardComponent implements OnInit {
   loadCommissionDayData(data: IntervalParam) {
     this.service.fetchCommissionByDate(data).subscribe({
       next: (res)=> {
-        console.log(res);
         this.commissionStatInfo = {
           data: res.data,
           getCount: (elt: any) => elt.commission,

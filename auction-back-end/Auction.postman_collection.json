@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "10d2fc59-02aa-4443-8bf7-fc70ab00125e",
+		"_postman_id": "5d7889ea-1cd6-48ab-8b9b-9bdc1d344511",
 		"name": "Auction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"amount\": 2000\n}",
+							"raw": "{\n    \"amount\": 2000,\n    \"date\": \"2023-01-16T14:53:00.0+03:00\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,17 +63,56 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/users/1/deposits/1/validate",
+							"raw": "localhost:8080/deposits/1/validate",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"users",
-								"1",
 								"deposits",
 								"1",
 								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "to validate list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deposits/not-validated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deposits",
+								"not-validated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject deposit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/deposits/15/reject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deposits",
+								"15",
+								"reject"
 							]
 						}
 					},
@@ -336,7 +375,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1/auctions",
+							"raw": "http://localhost:8080/users/2/auctions",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -344,7 +383,7 @@
 							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"2",
 								"auctions"
 							]
 						}
@@ -364,7 +403,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/1/auctions/1",
+							"raw": "http://localhost:8080/users/1/auctions/32",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -374,7 +413,7 @@
 								"users",
 								"1",
 								"auctions",
-								"1"
+								"32"
 							]
 						}
 					},
@@ -411,21 +450,12 @@
 					"response": []
 				},
 				{
-					"name": "filter",
+					"name": "user history",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"keyword\": \"watch\",\n\"category\": {\n\"id\": 1,\n\"name\": \"Luxe\"\n}\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "http://localhost:8080/users/1/auctions/filter",
+							"raw": "http://localhost:8080/users/1/auctions/history",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -435,7 +465,7 @@
 								"users",
 								"1",
 								"auctions",
-								"filter"
+								"history"
 							]
 						}
 					},
@@ -453,7 +483,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@example.com\",\r\n    \"password\":\"admin\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -461,14 +491,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/Admin/login",
+							"raw": "http://localhost:8080/admin/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"Admin",
+								"admin",
 								"login"
 							]
 						}
@@ -602,15 +632,362 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/search/Laine",
+							"raw": "http://localhost:8080/products/search?name=rol",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"search",
-								"Laine"
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "rol"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bid",
+			"item": [
+				{
+					"name": "make bid",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"id\": 2\n    },\n    \"amount\": 10000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auctions/32/bids",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auctions",
+								"32",
+								"bids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stat",
+			"item": [
+				{
+					"name": "auctions per day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/perday?min=2020-01-01&max=2023-01-01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"perday"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "max",
+									"value": "2023-01-01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "commission per day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/commissionperday?min=2020-01-01&max=2023-01-20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"commissionperday"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "max",
+									"value": "2023-01-20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "totalIncrease",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/totalIncrease",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"totalIncrease"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user total Increase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/usertotalIncrease",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"usertotalIncrease"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total commission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/commissiontotalIncrease",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"commissiontotalIncrease"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "top auction count user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/userauction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"userauction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user sale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/usersale",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"usersale"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product rating",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/productRating",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"productRating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category rating",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/categoryRating",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"categoryRating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product commission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/productCommission",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"productCommission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category commission",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/categoryCommission",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"categoryCommission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product ratio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/productRatio/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"productRatio",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product bid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/productbid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"productbid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category bid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stats/categorybid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stats",
+								"categorybid"
 							]
 						}
 					},
