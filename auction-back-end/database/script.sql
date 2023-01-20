@@ -1484,9 +1484,8 @@ SELECT count(*),extract("month" from start_date) as month,extract("year" from st
 
 CREATE or replace VIEW rating_month AS
 select
-    case when total is null then 0 else total end
-     ,case when rate is null then 0 else rate end increaserate
-from rating WHERE month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month');
+    (select total from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) total
+     ,case when (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) is null then 0 else (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) end increaserate;
 
 CREATE VIEW user_month_year AS
 SELECT (SELECT count(*) FROM "user") as total,count(*),extract("month" from signup_date) as month,extract("year" from signup_date) as year from "user" GROUP BY month,year;
