@@ -1,6 +1,6 @@
 <c-card class="mb-4">
   <c-card-header>
-    <h4 class="card-title mb-0" id="traffic">Nombre des encheres</h4>
+    <h4 class="card-title mb-0" id="traffic">{{title}}</h4>
   </c-card-header>
   <c-card-body>
     <c-row>
@@ -12,7 +12,7 @@
                 <c-col md="6" >
                   <mat-form-field appearance="outline">
                     <mat-label>Debut</mat-label>
-                    <input matInput formControlName="start" [matDatepicker]="pickerStart">
+                    <input matInput formControlName="min" [matDatepicker]="pickerStart">
                     <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
                     <mat-datepicker #pickerStart></mat-datepicker>
                   </mat-form-field>
@@ -20,7 +20,7 @@
                 <c-col md="6">
                   <mat-form-field appearance="outline">
                     <mat-label>Fin</mat-label>
-                    <input matInput formControlName="end" [matDatepicker]="picker">
+                    <input matInput formControlName="max" [matDatepicker]="picker">
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
