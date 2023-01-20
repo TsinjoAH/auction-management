@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {getStyle, hexToRgba} from "@coreui/utils/src";
 import {StatData} from "../../../../shared/shared.interfaces";
 import {StatService, StatWithDateData} from "../../../service/stat/stat.service";
@@ -17,22 +17,35 @@ export class StatDateComponent {
 
   private _statInfo!: StatWithDateData;
 
+  @Input() title!: string;
+
   @Input() set statInfo (data: StatWithDateData) {
-    this._statInfo = data;
-    let infoDates = this.service.valuesByDates(this.statInfo);
-    let infoMonths = this.service.valuesByMonths(this.statInfo);
-    this.dayData = this.data(infoDates);
-    this.monthData = this.data(infoMonths);
-    this.selected = this.dayData;
+    if (data) {
+      this._statInfo = data;
+      let infoDates = this.service.valuesByDates(this.statInfo);
+      let infoMonths = this.service.valuesByMonths(this.statInfo);
+      this.dayData = this.data(infoDates);
+      this.monthData = this.data(infoMonths);
+      let val = this.auctionCountForm?.value?.option === 'Day' ? this.dayData : this.monthData;
+      this.select(val);
+    }
   }
+
+  selected: any;
+
+  select (val: any){
+    let max: number = Math.max(...val.datasets[0]?.data);
+    this.options = getOptions(max * 1.2);
+    this.selected = val;
+  }
+
+  @Output() dateParams: EventEmitter<any> = new EventEmitter<any>();
 
   get statInfo () {
     return this._statInfo;
   }
 
-  data({data, labels, start, end}: StatData) {
-    let max: number = Math.max(...data);
-    this.options.scales.y.max = max * 1.2;
+  data({data, labels}: StatData) {
     return {
       datasets: [
         {
@@ -42,14 +55,14 @@ export class StatDateComponent {
           pointHoverBackgroundColor: brandInfo,
           borderWidth: 2,
           fill: true,
-          label: `Entre ${this.pipe.transform(start)} et ${this.pipe.transform(end)}`
+          label: `Nombre total des encheres`
         }
       ],
       labels: labels
     }
   }
 
-  options = getOptions();
+  options !: any;
 
   constructor(
     private service: StatService,
@@ -62,7 +75,6 @@ export class StatDateComponent {
 
   dayData !: any;
   monthData !: any;
-  selected!: any;
 
   @ViewChild("validateForm") btn !: MatButton;
 
@@ -71,22 +83,27 @@ export class StatDateComponent {
       option: ['Day', Validators.required]
     });
     this.auctionInterval = this.formBuilder.group({
-      start: ['', Validators.required],
-      end: ['', Validators.required]
+      min: ['2020-01-01', Validators.required],
+      max: ['2023-01-20', Validators.required]
     })
   }
 
   setTrafficPeriod(value: string): void {
     if (value === 'Day') {
-      this.selected = this.dayData;
+      if (this.dayData)
+        this.select(this.dayData);
     }
     else {
-      this.selected = this.monthData;
+      if (this.monthData)
+        this.select(this.monthData);
     }
   }
 
   filter() {
     this.btn._elementRef.nativeElement.click();
+    if (this.auctionInterval.valid) {
+      this.dateParams.emit(this.auctionInterval.value);
+    }
   }
 
 }

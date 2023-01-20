@@ -106,6 +106,7 @@ create table bid
     bid_date   timestamp        not null default current_timestamp
 );
 
+
 --mdp:admin--
 insert into admin(name, email, password)
 values ('admin', 'admin@example.com', 'd033e22ae348aeb5660fc2140aec35850c4da997');
@@ -329,65 +330,6 @@ values (1, 5000, 20, '2023-01-24'),
        (9, 5000, 20, '2023-01-16'),
        (10, 8500, 20, '2023-01-15');
 
-insert into auction (title,description,user_id,start_date,end_date,duration,product_id,start_price,commission) values('Mozart Art_1','The best of the best_1',1,'2020-01-01 02:00','2020-01-01 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_2','The best of the best',1,'2020-01-02 02:00','2020-01-02 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_3','The best of the best',1,'2020-01-03 02:00','2020-01-03 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_4','The best of the best',1,'2020-01-04 02:00','2020-01-04 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_5','The best of the best',1,'2020-01-05 02:00','2020-01-05 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_6','The best of the best',1,'2020-01-06 02:00','2020-01-06 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_7','The best of the best',1,'2020-01-07 02:00','2020-01-07 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_8','The best of the best',1,'2020-01-08 02:00','2020-01-08 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_9','The best of the best',1,'2020-01-09 02:00','2020-01-09 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_10','The best of the best',1,'2020-01-10 02:00','2020-01-10 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_11','The best of the best',1,'2020-01-11 02:00','2020-01-11 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_12','The best of the best',1,'2020-01-12 02:00','2020-01-12 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_13','The best of the best',1,'2020-01-13 02:00','2020-01-13 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_14','The best of the best',1,'2020-01-14 02:00','2020-01-14 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_15','The best of the best',1,'2020-01-15 02:00','2020-01-15 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_16','The best of the best',1,'2020-01-16 02:00','2020-01-16 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_17','The best of the best',1,'2020-01-17 02:00','2020-01-17 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_18','The best of the best',1,'2020-01-18 02:00','2020-01-18 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_19','The best of the best',1,'2020-01-19 02:00','2020-01-19 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_20','The best of the best',1,'2020-01-20 02:00','2020-01-20 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_21','The best of the best',1,'2020-01-21 02:00','2020-01-21 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_22','The best of the best',1,'2020-01-22 02:00','2020-01-22 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_23','The best of the best',1,'2020-01-23 02:00','2020-01-23 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_24','The best of the best',1,'2020-01-24 02:00','2020-01-24 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_25','The best of the best',1,'2020-01-25 02:00','2020-01-25 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_26','The best of the best',1,'2020-01-26 02:00','2020-01-26 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_27','The best of the best',1,'2020-01-27 02:00','2020-01-27 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_28','The best of the best',1,'2020-01-28 02:00','2020-01-28 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_29','The best of the best',1,'2020-01-29 02:00','2020-01-29 19:00',17,1,250,0.5),
-                                                                                                                    ('Mozart Art_30','The best of the best',1,'2020-01-30 02:00','2020-01-30 19:00',17,1,250,0.5),
-
-                                                                                                                  ('Mozart Art_31','The best of the best',2,'2020-02-01 02:00','2020-02-01 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_32','The best of the best',2,'2020-02-02 02:00','2020-02-02 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_33','The best of the best',2,'2020-02-03 02:00','2020-02-03 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_34','The best of the best',2,'2020-02-04 02:00','2020-02-04 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_35','The best of the best',2,'2020-02-05 02:00','2020-02-05 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_36','The best of the best',2,'2020-02-06 02:00','2020-02-06 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_37','The best of the best',2,'2020-02-07 02:00','2020-02-07 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_38','The best of the best',2,'2020-02-08 02:00','2020-02-08 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_39','The best of the best',2,'2020-02-09 02:00','2020-02-09 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_40','The best of the best',2,'2020-02-10 02:00','2020-02-10 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_41','The best of the best',2,'2020-02-11 02:00','2020-02-11 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_42','The best of the best',2,'2020-02-12 02:00','2020-02-12 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_43','The best of the best',2,'2020-02-13 02:00','2020-02-13 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_44','The best of the best',2,'2020-02-14 02:00','2020-02-14 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_45','The best of the best',2,'2020-02-15 02:00','2020-02-15 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_46','The best of the best',2,'2020-02-16 02:00','2020-02-16 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_47','The best of the best',2,'2020-02-17 02:00','2020-02-17 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_48','The best of the best',2,'2020-02-18 02:00','2020-02-18 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_49','The best of the best',2,'2020-02-19 02:00','2020-02-19 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_50','The best of the best',2,'2020-02-20 02:00','2020-02-20 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_51','The best of the best',2,'2020-02-21 02:00','2020-02-21 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_52','The best of the best',2,'2020-02-22 02:00','2020-02-22 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_53','The best of the best',2,'2020-02-23 02:00','2020-02-23 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_54','The best of the best',2,'2020-02-24 02:00','2020-02-24 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_55','The best of the best',2,'2020-02-25 02:00','2020-02-25 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_56','The best of the best',2,'2020-02-26 02:00','2020-02-26 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_57','The best of the best',2,'2020-02-27 02:00','2020-02-27 19:00',17,2,250,0.5),
-                                                                                                                    ('Mozart Art_58','The best of the best',2,'2020-02-28 02:00','2020-02-28 19:00',17,2,250,0.5);
 
 CREATE VIEW auctionPerDay AS
 SELECT count(*),date(start_date) date from auction group by date;
@@ -463,3 +405,49 @@ SELECT
     CASE WHEN (SELECT AVG(ratio) FROM product_ratio JOIN product pr ON product=pr.id WHERE category_id=c.id) IS NULL THEN 0 ELSE (SELECT AVG(ratio) FROM product_ratio JOIN product pr ON product=pr.id WHERE category_id=c.id) END ratio
     FROM
     category c;
+    
+CREATE VIEW category_bid_count AS
+select count(*) bidcount,p.category_id category from bid JOIN auction a ON bid.auction_id=a.id JOIN product p ON a.product_id=p.id GROUP BY category ORDER BY bidcount DESC LIMIT 10;
+
+
+
+
+
+--------------------------------generate 10 donne de test par jour de auction(you can change all string days in mounth if you want per mounth)-------------------------------------
+WITH start_dates AS (
+    SELECT date_trunc('days', TIMESTAMP '2020-01-01' + (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))) + 
+    (random() * (date_trunc('days', TIMESTAMP '2020-01-01' +
+    (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))) +
+    INTERVAL '1 days' - date_trunc('days', TIMESTAMP '2020-01-01' + (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))))) as start_date
+    FROM generate_series(1, 10) i
+)
+INSERT INTO auction (title, description, user_id, start_date, end_date, duration, product_id, start_price, commission)
+SELECT 
+    'auction' || row_number() OVER (ORDER BY start_date), 
+    'description' || row_number() OVER (ORDER BY start_date), 
+    (SELECT id FROM "user" ORDER BY random() LIMIT 1 offset floor(random()* (SELECT COUNT(*) FROM "user"))), 
+    start_dates.start_date,
+    start_dates.start_date + (floor(random()*1440) || ' minutes')::interval,
+    floor(random()*1440),
+  (SELECT id FROM product ORDER BY random() LIMIT 1 offset floor(random()* (SELECT COUNT(*) FROM product))),
+    (random() * 100),
+    0.5
+FROM start_dates;
+
+----------------------------------generate 10 donne de test pour bid------------------------------------------
+
+DO $$
+DECLARE 
+  auction_id INT;
+  user_id INT;
+BEGIN
+  FOR i IN 1..10 LOOP
+    SELECT id INTO auction_id FROM auction ORDER BY random() LIMIT 1;
+    SELECT id INTO user_id FROM "user" ORDER BY random() LIMIT 1;
+    INSERT INTO bid (auction_id, user_id, amount, bid_date)
+    VALUES (auction_id, user_id, (SELECT start_price+10 FROM auction WHERE id = auction_id), (SELECT end_date FROM auction WHERE id = auction_id));
+  END LOOP;
+END $$;
+
+--------Don't change generate_series(1,1) because if you will do that example generate_series(1,2) this will inset the same value 2times,i check now how to deal with but----------
+-----NB:i recommand you to use pgAdmin to apply those request ;)-----

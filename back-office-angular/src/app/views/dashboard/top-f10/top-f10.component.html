@@ -1,8 +1,8 @@
 
-<c-row>
+<c-row *ngIf="data">
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Users</c-card-header>
+      <c-card-header>{{title}}</c-card-header>
       <c-card-body>
         <table
           [hover]="true"
@@ -15,12 +15,13 @@
           <thead cTableColor="light">
           <tr>
             <th *ngFor="let header of data.headers" >{{header}}</th>
+            <th *ngIf="ratePresent" >Taux</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let elt of data.data; index as i">
-            <td *ngFor="let key of data.columns" >{{elt[key]}}</td>
-            <td>
+            <td *ngFor="let key of data.columns" >{{key(elt)}}</td>
+            <td *ngIf="ratePresent">
               <div class="d-flex">
                 <div class="float-start">
                   <strong>{{ data.getRate(elt) }}%</strong>
