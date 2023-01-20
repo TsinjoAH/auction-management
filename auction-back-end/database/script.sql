@@ -408,7 +408,7 @@ SELECT count(*),extract("month" from start_date) as month,extract("year" from st
 
 CREATE or replace VIEW rating_month AS
 select
-    (select total from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) total
+    (select count(*) from auction) total
      ,case when (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) is null then 0 else (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) end increaserate;
 
 CREATE VIEW user_month_year AS
