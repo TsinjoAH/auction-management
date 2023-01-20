@@ -1,9 +1,6 @@
 package com.management.auction.repos.stat;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.persistence.Tuple;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
@@ -38,7 +35,14 @@ public class StatRepoImpl implements StatRepo{
     public HashMap<String, Object> getTotalAndIncrease() {
         String sql="SELECT * FROM rating_month";
         Query query=manager.createNativeQuery(sql, Tuple.class);
-        return this.tupleToMap((Tuple) query.getSingleResult(),"total","increaserate");
+        try {
+            return this.tupleToMap((Tuple) query.getSingleResult(),"total","increaserate");
+        }catch (NoResultException ex){
+            HashMap<String,Object> map=new HashMap<String,Object>();
+            map.put("total",0);
+            map.put("increaserate",0);
+            return map;
+        }
     }
 
     @Override
