@@ -433,18 +433,6 @@ SELECT count(*) auctionCount,user_id,count(*)::REAL/(SELECT count(*) from v_auct
 CREATE VIEW rating_user_sale AS
 SELECT user_id user, count(*) sales,(SUM(amount)-SUM(gain)) commission,(count(*)::REAL/(SELECT count(*) from gain)::REAL) rate FROM gain GROUP BY user_id ORDER BY sales DESC LIMIT 10;
 
-CREATE VIEW count_rating_product AS
-SELECT COUNT(*) as salesCount,a.product_id product,COUNT(*)::REAL/(SELECT COUNT(*)::REAL FROM gain) rate FROM gain g JOIN auction a ON a.id=g.auction_id GROUP BY product_id ORDER BY salesCount DESC LIMIT 10;
-
-CREATE VIEW count_rating_category AS
-SELECT COUNT(*) as salesCount,p.category_id category,COUNT(*)::REAL/(SELECT COUNT(*)::REAL FROM gain) rate FROM gain g JOIN auction a ON a.id=g.auction_id JOIN product p ON a.product_id=p.id GROUP BY p.category_id ORDER BY salesCount DESC LIMIT 10;
-
-CREATE VIEW product_commission AS
-SELECT COUNT(*) as sales,a.product_id product,SUM(g.amount)-SUM(g.gain) commission,(SUM(g.amount)-SUM(g.gain))::REAL/(SELECT SUM(amount-gain) FROM gain)::REAL rate FROM gain g JOIN auction a ON a.id=g.auction_id GROUP BY product_id ORDER BY commission DESC LIMIT 10;
-
-CREATE VIEW category_commission AS
-SELECT COUNT(*) as sales,p.category_id category,SUM(g.amount)-SUM(g.gain) commission,(SUM(g.amount)-SUM(g.gain))::REAL/(SELECT SUM(amount-gain) FROM gain)::REAL rate FROM gain g JOIN auction a ON a.id=g.auction_id JOIN product p ON a.product_id=p.id GROUP BY p.category_id ORDER BY commission DESC LIMIT 10;
-
 CREATE VIEW product_ratio AS
 SELECT a.product_id product,bid_date date,a.start_price::REAL/amount::REAL ratio
 FROM bid b
@@ -454,8 +442,24 @@ FROM bid b
     GROUP BY auction_id
 ) max_bids ON b.auction_id = max_bids.auction_id AND b.amount = max_bids.max_amount JOIN auction a ON a.id=b.auction_id;
 
-CREATE VIEW product_bid_count AS
-select count(*) bidcount,a.product_id product from bid JOIN auction a ON bid.auction_id=a.id GROUP BY product ORDER BY bidcount DESC LIMIT 10;
+CREATE OR REPLACE VIEW product_stat AS
+SELECT
+    p.*,
+    (SELECT COUNT(*) FROM full_v_auction WHERE product_id=p.id) auction,
+    (SELECT count(*) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE product_id=p.id) sold,
+    CASE WHEN (SELECT SUM(amount)-SUM(gain) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE product_id=p.id) IS NULL THEN 0 ELSE (SELECT SUM(amount)-SUM(gain) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE product_id=p.id) END commission,
+    ( SELECT COUNT(*) FROM bid b JOIN full_v_auction v ON b.auction_id=v.id WHERE product_id=p.id) bid,
+    CASE WHEN ( SELECT AVG(ratio) FROM product_ratio WHERE product=p.id) IS NULL THEN 0 ELSE ( SELECT AVG(ratio) FROM product_ratio WHERE product=p.id) END ratio
+    FROM
+    product p;
 
-CREATE VIEW category_bid_count AS
-select count(*) bidcount,p.category_id category from bid JOIN auction a ON bid.auction_id=a.id JOIN product p ON a.product_id=p.id GROUP BY category ORDER BY bidcount DESC LIMIT 10;
+CREATE OR REPLACE VIEW category_stat AS
+SELECT
+    c.*,
+    (SELECT COUNT(*) FROM full_v_auction WHERE category_id=c.id) auction,
+    (SELECT count(*) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE category_id=c.id) sold,
+    CASE WHEN (SELECT SUM(amount)-SUM(gain) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE category_id=c.id) IS NULL THEN 0 ELSE (SELECT SUM(amount)-SUM(gain) FROM gain g JOIN full_v_auction v ON g.auction_id=v.id WHERE category_id=c.id) END commission,
+    (SELECT COUNT(*) FROM bid b JOIN full_v_auction v ON b.auction_id=v.id WHERE category_id=c.id) bid,
+    CASE WHEN (SELECT AVG(ratio) FROM product_ratio JOIN product pr ON product=pr.id WHERE category_id=c.id) IS NULL THEN 0 ELSE (SELECT AVG(ratio) FROM product_ratio JOIN product pr ON product=pr.id WHERE category_id=c.id) END ratio
+    FROM
+    category c;
