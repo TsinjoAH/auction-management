@@ -426,14 +426,20 @@ SELECT
     0.5
 FROM start_dates;
 
-----------------------------------generate 1 donne de test pour bid------------------------------------------
+----------------------------------generate 10 donne de test pour bid------------------------------------------
 
-INSERT INTO Bid( auction_id ,user_id,amount,bid_date)
-    SELECT(SELECT id FROM auction ORDER BY random() LIMIT 1),
-          (SELECT id FROM "user" ORDER BY random() LIMIT 1),
-          (select (start_price+10) from auction where id=(SELECT id FROM auction ORDER BY random() LIMIT 1)),
-          (select end_date from auction where id=(SELECT id FROM auction ORDER BY random() LIMIT 1))
-from generate_series(1,1);
+DO $$
+DECLARE 
+  auction_id INT;
+  user_id INT;
+BEGIN
+  FOR i IN 1..10 LOOP
+    SELECT id INTO auction_id FROM auction ORDER BY random() LIMIT 1;
+    SELECT id INTO user_id FROM "user" ORDER BY random() LIMIT 1;
+    INSERT INTO bid (auction_id, user_id, amount, bid_date)
+    VALUES (auction_id, user_id, (SELECT start_price+10 FROM auction WHERE id = auction_id), (SELECT end_date FROM auction WHERE id = auction_id));
+  END LOOP;
+END $$;
 
 --------Don't change generate_series(1,1) because if you will do that example generate_series(1,2) this will inset the same value 2times,i check now how to deal with but----------
 -----NB:i recommand you to use pgAdmin to apply those request ;)-----
