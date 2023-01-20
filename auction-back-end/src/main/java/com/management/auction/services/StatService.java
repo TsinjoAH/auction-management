@@ -52,55 +52,10 @@ public class StatService {
         }
         return map;
     }
-    public List<HashMap<String,Object>> getProductCountRating(){
-        List<HashMap<String,Object>> map=this.repo.getProductCountRating();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("product",this.productrepo.findById(Long.valueOf((Integer) tmp.get("product"))));
-        }
-        return map;
+    public List<HashMap<String,Object>> getStatProduct(int page){
+        return this.repo.getProductStat(page);
     }
-    public List<HashMap<String,Object>> getCategoryCountRating(){
-        List<HashMap<String,Object>> map=this.repo.getCategoryCountRating();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("category",this.categoryRepo.findById(Long.valueOf((Integer) tmp.get("category"))));
-        }
-        return map;
-    }
-    public List<HashMap<String,Object>> getProductCommission(){
-        List<HashMap<String,Object>> map=this.repo.getProductCommission();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("product",this.productrepo.findById(Long.valueOf((Integer) tmp.get("product"))));
-        }
-        return map;
-    }
-    public List<HashMap<String,Object>> getCategoryCommission(){
-        List<HashMap<String,Object>> map=this.repo.getCategoryCommission();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("category",this.categoryRepo.findById(Long.valueOf((Integer) tmp.get("category"))));
-        }
-        return map;
-    }
-    public List<HashMap<String,Object>> getProductRatio(Long product){
-        return this.repo.getProductRatio(product);
-    }
-    public List<HashMap<String,Object>> getProductBid(){
-        List<HashMap<String,Object>> map=this.repo.getProductBid();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("product",this.productrepo.findById(Long.valueOf((Integer) tmp.get("product"))));
-        }
-        return map;
-    }
-    public List<HashMap<String,Object>> getCategoryBid(){
-        List<HashMap<String,Object>> map=this.repo.getCategoryBid();
-        for(int i=0;i<map.size();i++){
-            HashMap<String,Object> tmp=map.get(i);
-            tmp.replace("category",this.categoryRepo.findById(Long.valueOf((Integer) tmp.get("category"))));
-        }
-        return map;
+    public List<HashMap<String,Object>> getStatCategroy(int page){
+        return this.repo.getCategoryStat(page);
     }
 }

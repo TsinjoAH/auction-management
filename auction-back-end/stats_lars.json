@@ -9,7 +9,28 @@
 			"name": "per day",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/perday?min=2020-01-19&max=2023-11-20",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"perday"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "2020-01-19"
+						},
+						{
+							"key": "max",
+							"value": "2023-11-20"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -17,7 +38,28 @@
 			"name": "comission",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/commissionperday?min=2020-01-19&max=2024-01-20",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"commissionperday"
+					],
+					"query": [
+						{
+							"key": "min",
+							"value": "2020-01-19"
+						},
+						{
+							"key": "max",
+							"value": "2024-01-20"
+						}
+					]
+				}
 			},
 			"response": []
 		},
@@ -49,123 +91,97 @@
 			"response": []
 		},
 		{
-			"name": "productRating",
-			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "category rating",
+			"name": "user total increase",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stats/categoryRating",
+					"raw": "localhost:8080/stats/usertotalIncrease",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"stats",
-						"categoryRating"
+						"usertotalIncrease"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "product commission",
+			"name": "commission increase",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stats/productCommission",
+					"raw": "localhost:8080/stats/commissiontotalIncrease",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"stats",
-						"productCommission"
+						"commissiontotalIncrease"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "category commission",
+			"name": "user auction",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stats/categoryCommission",
+					"raw": "localhost:8080/stats/userauction",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"stats",
-						"categoryCommission"
+						"userauction"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "productRatio",
+			"name": "product",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stats/productRatio/1",
+					"raw": "localhost:8080/stats/product/0",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"stats",
-						"productRatio",
-						"1"
+						"product",
+						"0"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "productBid",
+			"name": "category",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stats/productbid",
+					"raw": "localhost:8080/stats/category/0",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"stats",
-						"productbid"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "categorybid",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8080/stats/categorybid",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"stats",
-						"categorybid"
+						"category",
+						"0"
 					]
 				}
 			},

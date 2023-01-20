@@ -44,32 +44,12 @@ public class StatController {
     public ResponseEntity<SuccessResponse> getUserSale(){
         return ControllerUtil.returnSuccess(service.getUserSalesCount(),HttpStatus.OK);
     }
-    @GetMapping("/productRating")
-    public ResponseEntity<SuccessResponse> getProductRating(){
-        return ControllerUtil.returnSuccess(service.getProductCountRating(),HttpStatus.OK);
+    @GetMapping("/product/{page}")
+    public ResponseEntity<SuccessResponse> getProductStat(@PathVariable int page){
+        return ControllerUtil.returnSuccess(service.getStatProduct(page),HttpStatus.OK);
     }
-    @GetMapping("/categoryRating")
-    public ResponseEntity<SuccessResponse> getCategoryRating(){
-        return ControllerUtil.returnSuccess(service.getCategoryCountRating(),HttpStatus.OK);
-    }
-    @GetMapping("/productCommission")
-    public ResponseEntity<SuccessResponse> getProductCommission(){
-        return ControllerUtil.returnSuccess(service.getProductCommission(),HttpStatus.OK);
-    }
-    @GetMapping("/categoryCommission")
-    public ResponseEntity<SuccessResponse> getCategoryCommission(){
-        return ControllerUtil.returnSuccess(service.getCategoryCommission(),HttpStatus.OK);
-    }
-    @GetMapping("/productRatio/{idProduct}")
-    public ResponseEntity<SuccessResponse> getProductRatio(@PathVariable Long idProduct){
-        return ControllerUtil.returnSuccess(service.getProductRatio(idProduct),HttpStatus.OK);
-    }
-    @GetMapping("/productbid")
-    public ResponseEntity<SuccessResponse> getProductBid(){
-        return ControllerUtil.returnSuccess(service.getProductBid(),HttpStatus.OK);
-    }
-    @GetMapping("/categorybid")
-    public ResponseEntity<SuccessResponse> getCategoryBid(){
-        return ControllerUtil.returnSuccess(service.getCategoryBid(),HttpStatus.OK);
+    @GetMapping("/category/{page}")
+    public ResponseEntity<SuccessResponse> getCategoryStat(@PathVariable int page){
+        return ControllerUtil.returnSuccess(service.getStatCategroy(page),HttpStatus.OK);
     }
 }
