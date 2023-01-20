@@ -20,4 +20,8 @@ public class ProductController extends CrudController<Product, ProductService> {
     public ResponseEntity<SuccessResponse> search(@RequestParam String name) {
         return ControllerUtil.returnSuccess(service.findByName(name), HttpStatus.OK);
     }
+    @GetMapping("/pages/{page}")
+    public ResponseEntity<SuccessResponse> page(@PathVariable(required = true) int page) {
+        return ControllerUtil.returnSuccess(service.get(page), HttpStatus.OK);
+    }
 }

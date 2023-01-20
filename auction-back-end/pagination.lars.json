@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "e1f0ed8c-6b84-401b-89f5-df39a3031701",
+		"name": "pages",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/auctions/0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auctions",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auction fkid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1/auctions/pages/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"auctions",
+						"pages",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/pages/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"pages",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

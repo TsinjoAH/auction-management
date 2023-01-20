@@ -46,6 +46,11 @@ public class AuctionController {
         User fk = this.userService.findById(fkId);
         return returnSuccess(this.service.findForFKView(fk), HttpStatus.OK);
     }
+    @GetMapping({"/pages/{page}"})
+    public ResponseEntity<SuccessResponse> findAllBypage(@PathVariable Long fkId,@PathVariable(required = true) int page) {
+        User fk = this.userService.findById(fkId);
+        return returnSuccess(this.service.findforFk(fkId,page),HttpStatus.OK);
+    }
 
 
     @PostMapping("")
@@ -64,21 +69,6 @@ public class AuctionController {
     public ResponseEntity<?> history (@PathVariable Long fkId) throws CustomException {
         User user = this.userService.findById(fkId);
         return returnSuccess(this.service.history(user), HttpStatus.OK);
-    }
-
-    @GetMapping("/filter")
-    public ResponseEntity<SuccessResponse> filter(@RequestParam(required = false)String keyword, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp startMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp startMaxDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMaxDate,@RequestParam(required = false)Long product,@RequestParam(required = false)Long category,@RequestParam(required = false)Double price,@RequestParam(required = false)Integer status) throws CustomException{
-        Criteria criteria=new Criteria();
-        criteria.setKeyword(keyword);
-        criteria.setStartMinDate(startMinDate);
-        criteria.setStartMaxDate(startMaxDate);
-        criteria.setEndMinDate(endMinDate);
-        criteria.setEndMaxDate(endMaxDate);
-        criteria.setProduct(product);
-        criteria.setCategory(category);
-        criteria.setPrice(price);
-        criteria.setStatus(status);
-        return ControllerUtil.returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);
     }
 }
 
