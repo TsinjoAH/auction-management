@@ -15,6 +15,7 @@ import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,5 +86,11 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
             throw new CustomException("user not found");
         }
         return auctionViewRepo.findAllById(repo.history(user.getId()));
+    }
+    public List<Auction> finAll(int page){
+        return this.repo.findAll(PageRequest.of(page,25)).toList();
+    }
+    public List<Auction> findforFk(Long id,int page){
+        return this.repo.findByUserId(id,PageRequest.of(page,25)).toList();
     }
 }
