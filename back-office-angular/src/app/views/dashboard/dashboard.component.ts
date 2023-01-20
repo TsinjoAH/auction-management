@@ -181,30 +181,33 @@ export class DashboardComponent implements OnInit {
       "Moyenne ratio"
     ];
 
-    this.service.fetchProductData().subscribe({
+    let columns = [
+        (elt: any) => elt.name,
+        (elt: any) => elt.auction,
+        (elt: any) => elt.sold,
+        (elt: any) => elt.commission,
+        (elt: any) => elt.bid,
+        (elt: any) => elt.ratio
+      ];
+
+    this.service.fetchProductData(0).subscribe({
       next: res => {
         this.productTopAuction = {
           data: res.data,
           headers: headers("Produit"),
-          columns: [
-            (elt: any) => elt.product.name,
-            (elt: any) => elt.salescount
-          ],
+          columns: columns,
           getRate: (elt) => ((elt.rate * 10000)/100)
         }
       },
       error: err => console.log(err)
     });
 
-    this.service.fetchCategoryData().subscribe({
+    this.service.fetchCategoryData(0).subscribe({
       next: (res) => {
         this.categoryTopAuction = {
           data: res.data,
           headers: headers("Categories"),
-          columns: [
-            (elt: any) => elt.category.name,
-            (elt: any) => elt.salescount
-          ],
+          columns: columns,
           getRate: (elt) => (elt.rate * 10000)/100
         };
       },

@@ -413,12 +413,12 @@ select count(*) bidcount,p.category_id category from bid JOIN auction a ON bid.a
 
 
 
---------------------------------generate 10 donne de test par jour de auction(you can change all string days in mounth if you want per mounth)-------------------------------------
+--------------------------------generate 10 donne de test par jour de auction(you can change all string month in mounth if you want per mounth)-------------------------------------
 WITH start_dates AS (
-    SELECT date_trunc('days', TIMESTAMP '2020-01-01' + (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))) + 
-    (random() * (date_trunc('days', TIMESTAMP '2020-01-01' +
-    (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))) +
-    INTERVAL '1 days' - date_trunc('days', TIMESTAMP '2020-01-01' + (random() * (TIMESTAMP '2023-01-16' - TIMESTAMP '2020-01-01'))))) as start_date
+    SELECT date_trunc('month', TIMESTAMP '2022-01-01' + (random() * (TIMESTAMP '2023-01-20' - TIMESTAMP '2022-01-01'))) +
+    (random() * (date_trunc('month', TIMESTAMP '2022-01-01' +
+    (random() * (TIMESTAMP '2023-01-20' - TIMESTAMP '2022-01-01'))) +
+    INTERVAL '1 month' - date_trunc('month', TIMESTAMP '2022-01-01' + (random() * (TIMESTAMP '2023-01-20' - TIMESTAMP '2022-01-01'))))) as start_date
     FROM generate_series(1, 10) i
 )
 INSERT INTO auction (title, description, user_id, start_date, end_date, duration, product_id, start_price, commission)

@@ -48,7 +48,7 @@ export class DepositListComponent implements OnInit {
       {
         title: name,
         text: `${action} le depot pour ${deposit.amount} AR de ${deposit.user.name}`,
-        icon: 'warning' as SweetAlertIcon,
+        icon: 'question' as SweetAlertIcon,
         confirmButtonText: 'Ok',
         allowOutsideClick: true,
         showCancelButton: true
