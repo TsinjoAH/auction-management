@@ -106,29 +106,6 @@ create table bid
     bid_date   timestamp        not null default current_timestamp
 );
 
-CREATE OR REPLACE FUNCTION insert_amount_bid() RETURNS TRIGGER AS $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM bid WHERE auction_id = NEW.auction_id) THEN
-        INSERT INTO bid (user_id, amount)
-        VALUES (NEW.user_id, NEW.amount);
-    -- ELSE 
-    --     UPDATE Stock SET quantiteStock = quantiteStock + NEW.quantiteProduit
-    --     WHERE idProduit = NEW.idProduit;
-    -- END IF;
-    -- RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-
-CREATE TRIGGER insert_bid
-BEFORE INSERT ON Bid
-FOR EACH ROW
-EXECUTE PROCEDURE insert_amount_bid();
-
-
-
-select account_deposit.amount from account_deposit,bid where account_deposit.user_id=bid.user_id;
-
 
 --mdp:admin--
 insert into admin(name, email, password)
