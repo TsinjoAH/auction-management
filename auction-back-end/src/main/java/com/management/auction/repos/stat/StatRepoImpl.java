@@ -61,7 +61,7 @@ public class StatRepoImpl implements StatRepo{
 
     @Override
     public List<HashMap<String, Object>> getUserAuctionCount() {
-        String sql="SELECT auctioncount,user_id user,rate FROM rating_user_auction";
+        String sql="SELECT auctioncount,user_id \"user\",rate FROM rating_user_auction";
         Query query=manager.createNativeQuery(sql, Tuple.class);
         return listOfTupleToMap(query.getResultList(),"auctioncount","user","rate");
     }

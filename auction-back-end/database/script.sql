@@ -372,8 +372,8 @@ SELECT
 CREATE VIEW rating_user_auction AS
 SELECT count(*) auctionCount,user_id,count(*)::REAL/(SELECT count(*) from v_auction where status=2)::REAL rate from v_auction where status =2 GROUP BY user_id ORDER BY auctioncount DESC LIMIT 10;
 
-CREATE VIEW rating_user_sale AS
-SELECT user_id user, count(*) sales,(SUM(amount)-SUM(gain)) commission,(count(*)::REAL/(SELECT count(*) from gain)::REAL) rate FROM gain GROUP BY user_id ORDER BY sales DESC LIMIT 10;
+CREATE OR REPLACE VIEW rating_user_sale AS
+SELECT user_id "user", count(*) sales,(SUM(amount)-SUM(gain)) commission,(count(*)::REAL/(SELECT count(*) from gain)::REAL) rate FROM gain GROUP BY user_id ORDER BY sales DESC LIMIT 10;
 
 CREATE VIEW product_ratio AS
 SELECT a.product_id product,bid_date date,a.start_price::REAL/amount::REAL ratio
