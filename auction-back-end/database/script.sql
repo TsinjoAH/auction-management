@@ -1487,7 +1487,7 @@ CREATE VIEW user_month_year AS
     SELECT (SELECT count(*) FROM "user") as total,count(*),extract("month" from signup_date) as month,extract("year" from signup_date) as year from "user" GROUP BY month,year;
 
 CREATE VIEW rating_user AS
-SELECT total userCount,count/total increaseRate from tmp_rating_user WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
+SELECT total userCount,count/total increaseRate from user_month_year WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
 
 CREATE VIEW commission_per_month AS
     SELECT (SELECT SUM(commission) FROM commission_per_day) total,SUM(commission) commission,extract("month" from date) as month,extract("year" from date) as year FROM commission_per_day GROUP BY month,year;
