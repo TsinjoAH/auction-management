@@ -84,7 +84,7 @@ export class StatDateComponent {
     });
     this.auctionInterval = this.formBuilder.group({
       min: ['2020-01-01', Validators.required],
-      max: ['2023-01-20', Validators.required]
+      max: ['2023-01-21', Validators.required]
     })
   }
 
