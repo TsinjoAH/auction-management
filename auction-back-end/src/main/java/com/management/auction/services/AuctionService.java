@@ -5,6 +5,7 @@ import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.AuctionPic;
 import com.management.auction.models.auction.AuctionView;
+import com.management.auction.repos.UserRepo;
 import com.management.auction.repos.auction.AuctionPicRepo;
 import com.management.auction.models.auction.AuctionReceiver;
 import com.management.auction.repos.auction.AuctionRepo;
@@ -23,15 +24,18 @@ import java.util.Optional;
 
 @Service
 public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo> {
+    private final UserRepo userRepo;
     private final AuctionViewRepo auctionViewRepo;
     private final AuctionPicRepo auctionPicRepository;
     @Autowired
     private BidRepo bidRepo;
 
-    public AuctionService(AuctionRepo repo, AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository) {
+    public AuctionService(AuctionRepo repo, AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository,
+                          UserRepo userRepo) {
         super(repo);
         this.auctionViewRepo = auctionViewRepo;
         this.auctionPicRepository = auctionPicRepository;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -55,8 +59,12 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     }
 
     public AuctionView findByIdView(Long id) {
-        Optional<AuctionView> auctionViewOptional = auctionViewRepo.findById(id);
-        return auctionViewOptional.get();
+        AuctionView auction = auctionViewRepo.findById(id).orElse(null);
+        if (auction == null) {
+            return null;
+        }
+        auction.setBids(bidRepo.findByAuctionId(id));
+        return auction;
     }
 
 
@@ -70,5 +78,12 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
 
     public List<Auction> findByCriteria(Criteria criteria) throws CustomException {
         return this.repo.findAllById(this.repo.getByCriteria(criteria));
+    }
+
+    public List<AuctionView> history (User user) throws CustomException {
+        if (user == null) {
+            throw new CustomException("user not found");
+        }
+        return auctionViewRepo.findAllById(repo.history(user.getId()));
     }
 }
