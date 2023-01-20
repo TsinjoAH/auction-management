@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Category, Product} from "../../../../../shared/shared.interfaces";
 import {map, Observable, startWith} from "rxjs";
+import {CategoryService} from "../../../../service/category/category.service";
 
 export interface ProductFormData {
   product?: Product;
@@ -20,24 +21,13 @@ export class ProductFormModalComponent {
   productForm!: FormGroup;
   categoryControl!: FormControl;
 
-  categories: Category[] = [
-    {
-      id: 1,
-      name: "Chaussures"
-    },
-    {
-      id: 2,
-      name: "Sac a dos"
-    }
-  ];
-
-  filteredOptions!: Observable<Category[]>;
-
+  categories!: Category[];
 
 
   constructor(
     public dialogRef: MatDialogRef<ProductFormModalComponent>,
     public formBuilder: FormBuilder,
+    private categoryService: CategoryService,
     @Inject(MAT_DIALOG_DATA) public data: {data: ProductFormData}
   ) {
   }
@@ -46,28 +36,27 @@ export class ProductFormModalComponent {
     this.productForm = this.formBuilder.group({
       name: [this.data.data.product?.name, Validators.required],
       category: this.formBuilder.group({
-        id: [this.data.data.product?.id, Validators.required]
+        id: [this.data.data.product?.category.id, Validators.required]
       })
     });
     this.categoryControl = (this.productForm.get("category") as FormGroup).get("id") as FormControl;
-    this.filteredOptions = this.categoryControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || ''))
-    );
+    this.categoryControl.setValue(this.data.data.product?.id);
+    this.categoryService.fetchAll().subscribe({
+      next: res => {
+        this.categories = res.data;
+      },
+      error: err => console.log(err)
+    })
   }
 
   cancel() {
-    this.dialogRef.close('canceled');
+    this.dialogRef.close(false);
   }
 
   add() {
     if (this.productForm.valid) {
-      alert(JSON.stringify(this.productForm.value, null, 2));
+      this.dialogRef.close(this.productForm.value)
     }
   }
 
-  private _filter (value: string): Category[] {
-    const val = value.toLowerCase();
-    return this.categories.filter(cat => cat.name.toLowerCase().includes(val));
-  }
 }

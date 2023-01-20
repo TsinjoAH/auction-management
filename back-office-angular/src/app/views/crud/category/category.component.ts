@@ -63,7 +63,7 @@ export class CategoryComponent implements OnInit {
   }
 
   openDialog(title: string, actionBtn: string, category?: Category) {
-    const ref = this.dialog.open(CategoryFormModalComponent, {
+    return this.dialog.open(CategoryFormModalComponent, {
       data: {
         data: {
           category: category,
@@ -72,8 +72,6 @@ export class CategoryComponent implements OnInit {
         } as CategoryFormData
       }
     });
-
-    return ref;
   }
 
   modify(category: Category) {

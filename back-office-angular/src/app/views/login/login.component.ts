@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
                 text: err.error.message,
                 showCloseButton: true
               });
+              this.clicked = false;
             }
           })
 

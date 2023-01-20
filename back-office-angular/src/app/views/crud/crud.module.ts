@@ -16,6 +16,8 @@ import {SweetAlert2Module} from "@sweetalert2/ngx-sweetalert2";
 import { ProductComponent } from './product/product.component';
 import { ProductFormModalComponent } from './product/product-form-modal/product-form-modal.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatSelectModule} from "@angular/material/select";
+import {MatSortModule} from "@angular/material/sort";
 
 
 
@@ -34,7 +36,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     CustomModule,
     MatTableModule,
     SweetAlert2Module,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatSortModule
   ]
 })
 export class CrudModule { }

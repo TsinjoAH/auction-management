@@ -7,6 +7,7 @@ import Swal, {SweetAlertIcon} from "sweetalert2";
 import {ProductFormData, ProductFormModalComponent} from "./product-form-modal/product-form-modal.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ProductService} from "../../../service/product/product.service";
+import {CategoryService} from "../../../service/category/category.service";
 
 @Component({
   selector: 'app-product',
@@ -53,7 +54,7 @@ export class ProductComponent {
   }
 
   openDialog(title: string, actionBtn: string, product?: Product) {
-    const ref = this.dialog.open(ProductFormModalComponent, {
+    return this.dialog.open(ProductFormModalComponent, {
       data: {
         data: {
           product: product,
@@ -62,16 +63,58 @@ export class ProductComponent {
         }
       }
     });
-
-    ref.afterClosed().subscribe(result => {});
   }
 
   modify(product: Product) {
-    this.openDialog('Modifier categorie', 'Modifier', product);
+    const ref = this.openDialog('Modifier categorie', 'Modifier', product);
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.update(product.id, result).subscribe({
+          next: res => {
+            Swal.fire({
+              title: "sucesss",
+              icon: "success" as SweetAlertIcon,
+              showCloseButton: true
+            });
+            this.fetchProducts();
+          },
+          error: err => {
+            Swal.fire({
+              title: "error",
+              icon: 'error' as SweetAlertIcon,
+              text: err.error.message,
+              showCloseButton: true
+            })
+          }
+        })
+      }
+    })
   }
 
   add () {
-    this.openDialog('Ajouter categorie', 'Ajouter');
+    const ref = this.openDialog('Ajouter categorie', 'Ajouter');
+    ref.afterClosed().subscribe(result => {
+      if (result) {
+        this.service.create(result).subscribe({
+          next: res => {
+            Swal.fire({
+              title: "sucesss",
+              icon: "success" as SweetAlertIcon,
+              showCloseButton: true
+            });
+            this.fetchProducts();
+          },
+          error: err => {
+            Swal.fire({
+              title: "error",
+              icon: 'error' as SweetAlertIcon,
+              text: err.error.message,
+              showCloseButton: true
+            })
+          }
+        })
+      }
+    })
   }
 
   delete(product: Product) {

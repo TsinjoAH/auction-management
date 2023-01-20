@@ -10,20 +10,14 @@
           <input formControlName="name" matInput>
         </mat-form-field>
       </c-col>
-      <c-col md="6" >
+      <c-col md="6" formGroupName="category" >
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Category</mat-label>
-          <input type="text"
-                 placeholder="Pick one"
-                 aria-label="Number"
-                 matInput
-                 [formControl]="categoryControl"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
+          <mat-select formControlName="id" >
+            <mat-option *ngFor="let option of categories" [value]="option.id">
               {{option.name}}
             </mat-option>
-          </mat-autocomplete>
+          </mat-select>
         </mat-form-field>
 
       </c-col>

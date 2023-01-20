@@ -7,6 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatButtonModule} from "@angular/material/button";
+import {MatSortModule} from "@angular/material/sort";
 
 
 
@@ -14,14 +15,15 @@ import {MatButtonModule} from "@angular/material/button";
   declarations: [
     DepositListComponent
   ],
-  imports: [
-    CommonModule,
-    CardModule,
-    MatInputModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatButtonModule
-  ]
+    imports: [
+        CommonModule,
+        CardModule,
+        MatInputModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatButtonModule,
+        MatSortModule
+    ]
 })
 export class DepositModule { }
