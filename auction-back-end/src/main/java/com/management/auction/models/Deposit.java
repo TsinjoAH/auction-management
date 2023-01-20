@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account_deposit")
@@ -28,7 +29,7 @@ public class Deposit extends HasFK<User> {
     Timestamp statusChangeDate;
 
     @Column
-    Timestamp date;
+    Timestamp date=Timestamp.valueOf(LocalDateTime.now());
 
     public Timestamp getDate() {
         return date;

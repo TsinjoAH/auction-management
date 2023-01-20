@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "143c4a3f-05ad-469c-9de6-0eb25d042b6d",
+		"name": "Statistique",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "per day",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "comission",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "total and increase",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "usersale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/usersale",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"usersale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productRating",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "category rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/categoryRating",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"categoryRating"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product commission",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/productCommission",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"productCommission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "category commission",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/categoryCommission",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"categoryCommission"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productRatio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/productRatio/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"productRatio",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productBid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/productbid",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"productbid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "categorybid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stats/categorybid",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stats",
+						"categorybid"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
