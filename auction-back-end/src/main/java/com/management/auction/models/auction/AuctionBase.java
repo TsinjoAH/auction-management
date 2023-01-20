@@ -36,7 +36,9 @@ public class AuctionBase extends HasFK<User> {
     private Product product;
     @Column
     private Double startPrice;
+    
     @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Double commission;
     @OneToMany(mappedBy = "auctionId")
     private List<AuctionPic> images;
