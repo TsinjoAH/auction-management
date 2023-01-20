@@ -20,7 +20,7 @@ const plugins = {
   }
 };
 
-export const getOptions = () => {
+export const getOptions = (yMax: number) => {
   return {
     maintainAspectRatio: false,
     ...plugins,
@@ -32,10 +32,10 @@ export const getOptions = () => {
       },
       y: {
         beginAtZero: true,
-        max: 50,
+        max: yMax,
         ticks: {
           maxTicksLimit: 5,
-          stepSize: Math.ceil(50 / 5)
+          stepSize: Math.ceil(yMax / 5)
         }
       }
     },

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 export interface IncreaseRateData {
+  title: string;
   data: any;
   getTotal: () => number;
   getRate: () => number;

@@ -1,10 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {StatService, StatWithDateData} from "../../service/stat/stat.service";
-import {getStyle, hexToRgba} from "@coreui/utils/src";
-import {StatData} from "../../../shared/shared.interfaces";
-import {DatePipe} from "@angular/common";
-import {MatButton} from "@angular/material/button";
+import {Component, OnInit} from '@angular/core';
+import {IntervalParam, StatService, StatWithDateData} from "../../service/stat/stat.service";
 import {IncreaseRateData} from "./increase-rated/increase-rated.component";
 import {Top10Data} from "./top-f10/top-f10.component";
 
@@ -20,56 +15,10 @@ interface Total {
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {}
+  constructor(private service: StatService) {}
 
-  auctionStatInfo: StatWithDateData = {
-    data: [
-      {
-        count: 7,
-        date: new Date(Date.parse("2023-01-15"))
-      },
-      {
-        count: 10,
-        date: new Date()
-      },
-      {
-        count: 15,
-        date: new Date()
-      },
-      {
-        count: 30,
-        date: new Date(new Date(Date.parse("2023-02-15")))
-      }
-    ],
-    getCount: (elt) => elt.count,
-    getDate: (elt) => elt.date,
-    start: new Date(Date.parse("2023-01-01")),
-    end: new Date(Date.parse("2023-02-28"))
-  };
-  commissionStatInfo: StatWithDateData = {
-    data: [
-      {
-        commission: 7000,
-        date: new Date(Date.parse("2022-10-15"))
-      },
-      {
-        commission: 1000,
-        date: new Date(Date.parse("2022-11-20"))
-      },
-      {
-        commission: 5400,
-        date: new Date(Date.parse("2022-12-01"))
-      },
-      {
-        commission: 30,
-        date: new Date(new Date(Date.parse("2023-02-15")))
-      }
-    ],
-    getCount: (elt) => elt.commission,
-    getDate: (elt) => elt.date,
-    start: new Date(Date.parse("2022-10-15")),
-    end: new Date(Date.parse("2023-02-28"))
-  }
+  auctionStatInfo!: StatWithDateData;
+  commissionStatInfo!: StatWithDateData;
 
 
   auctionTotal: any = {
@@ -84,9 +33,10 @@ export class DashboardComponent implements OnInit {
 
 
   auctionTotalData: IncreaseRateData = {
+    title: "Total des encheres",
     data: this.auctionTotal,
-    getTotal: () => this.auctionTotal.totalCount,
-    getRate: () => this.auctionTotal.increaseRate
+    getTotal: () => this.auctionTotal.total,
+    getRate: () => Math.round(this.auctionTotal.increaserate * 10000)/100
   }
 
   commissionTotal = {
@@ -95,12 +45,14 @@ export class DashboardComponent implements OnInit {
   }
 
   userTotalData: IncreaseRateData = {
+    title: "Utilisateurs",
     data: this.userTotal,
     getTotal: () => this.userTotal.userCount,
     getRate: () => this.userTotal.increaseRate
   }
 
   commission: IncreaseRateData = {
+    title: "Commission",
     data: this.commissionTotal,
     getTotal: () => this.commissionTotal.totalCommission,
     getRate: () => this.commissionTotal.increaseRate
@@ -112,187 +64,131 @@ export class DashboardComponent implements OnInit {
     this.commission
   ]
 
-  userTopAuction: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        auctionCount: 12
-      },
-      {
-        name: "Tsinjo",
-        auctionCount: 15
-      },
-      {
-        name: "Lars",
-        auctionCount: 13
-      },
-      {
-        name: "Lahatra",
-        auctionCount: 18
-      },
-      {
-        name: "Rova",
-        auctionCount: 11
-      }
-    ],
-    headers: ["Nom", "Enchere(s)", "Taux"],
-    columns: ["name", "auctionCount"],
-    getRate: (elt) => (elt.auctionCount/75)*100
-  };
-  userTopCommission: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        sales: 12000,
-        commission: 500
-      },
-      {
-        name: "Tsinjo",
-        sales: 15000,
-        commission: 100
-      },
-      {
-        name: "Lars",
-        sales: 13000,
-        commission: 350
-      },
-      {
-        name: "Lahatra",
-        sales: 18000,
-        commission: 1250
-      },
-      {
-        name: "Rova",
-        sales: 11000,
-        commission: 2350
-      }
-    ],
-    headers: ["Nom", "Ventes realisez", "commission recolte", "Taux"],
-    columns: ["name", "sales", "commission"],
-    getRate: (elt) => (elt.commission/12000)*100
-  };
-
-  productTopAuction: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        salesCount: 12
-      },
-      {
-        name: "Tsinjo",
-        salesCount: 15
-      },
-      {
-        name: "Lars",
-        salesCount: 13
-      },
-      {
-        name: "Lahatra",
-        salesCount: 18
-      },
-      {
-        name: "Rova",
-        salesCount: 11
-      }
-    ],
-    headers: ["Produit", "Quantite Encherie(s)", "Taux"],
-    columns: ["name", "salesCount"],
-    getRate: (elt) => (elt.salesCount/75)*100
-  };
-  productTopSales: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        sales: 12000,
-        commission: 110
-      },
-      {
-        name: "Tsinjo",
-        sales: 15000,
-        commission: 102
-      },
-      {
-        name: "Lars",
-        sales: 13000,
-        commission: 130
-      },
-      {
-        name: "Lahatra",
-        sales: 18000,
-        commission: 500
-      },
-      {
-        name: "Rova",
-        sales: 11000,
-        commission: 185
-      }
-    ],
-    headers: ["Produit", "Total vente", "total commission", "Taux"],
-    columns: ["name", "sales", "commission"],
-    getRate: (elt) => (elt.commission/100)*2.2
-  };
-  categoryTopAuction: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        salesCount: 12
-      },
-      {
-        name: "Tsinjo",
-        salesCount: 15
-      },
-      {
-        name: "Lars",
-        salesCount: 13
-      },
-      {
-        name: "Lahatra",
-        salesCount: 18
-      },
-      {
-        name: "Rova",
-        salesCount: 11
-      }
-    ],
-    headers: ["Categorie", "Quantite de produit Encherie(s)", "Taux"],
-    columns: ["name", "salesCount"],
-    getRate: (elt) => (elt.salesCount/75)*100
-  };
-  categoryTopSales: Top10Data = {
-    data: [
-      {
-        name: "Kenny",
-        sales: 12000,
-        commission: 110
-      },
-      {
-        name: "Tsinjo",
-        sales: 12000,
-        commission: 110
-      },
-      {
-        name: "Lars",
-        sales: 12000,
-        commission: 110
-      },
-      {
-        name: "Lahatra",
-        sales: 12000,
-        commission: 110
-      },
-      {
-        name: "Rova",
-        sales: 12000,
-        commission: 110
-      }
-    ],
-    headers: ["Category", "Total vente", "total commission", "Taux"],
-    columns: ["name", "sales", "commission"],
-    getRate: (elt) => (elt.commission/100)*2.2
-  };
+  userTopAuction!: Top10Data;
+  userTopCommission!: Top10Data;
+  productTopAuction!: Top10Data;
+  categoryTopAuction!: Top10Data;
 
 
   ngOnInit(): void {
+    this.loadAuctionCountData({
+      min: "2020-01-01",
+      max: "2023-01-01"
+    });
+    this.fetchIncreaseRated();
+    this.fetchTop10();
+  }
+
+  loadAuctionCountData(data: IntervalParam) {
+    this.service.fetchAuctionCount(data).subscribe({
+      next: (res)=> {
+        this.auctionStatInfo = {
+          data: res.data,
+          getCount: (elt: any) => elt.count,
+          getDate: (elt: any) => new Date(elt.date),
+          start: new Date(data.min),
+          end: new Date(data.max)
+        };
+      },
+      error: err => console.log(err)
+    });
+  }
+
+  loadCommissionDayData(data: IntervalParam) {
+    this.service.fetchCommissionByDate(data).subscribe({
+      next: (res)=> {
+        console.log(res);
+        this.commissionStatInfo = {
+          data: res.data,
+          getCount: (elt: any) => elt.commission,
+          getDate: (elt: any) => new Date(elt.date),
+          start: new Date(data.min),
+          end: new Date(data.max)
+        };
+      },
+      error: err => console.log(err)
+    });
+  }
+
+  private fetchIncreaseRated() {
+    this.service.fetchTotalAuction().subscribe({
+      next: res => {
+        this.auctionTotal = res.data;
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  private fetchTop10() {
+    this.service.fetchTopCreator().subscribe({
+      next: res => {
+        this.userTopAuction = {
+          data: res.data,
+          headers: ["Nom", "Enchere cree"],
+          columns: [
+            (elt:any) => elt.user.name,
+            (elt:any) => elt.auctioncount
+          ],
+          getRate: (elt) => (elt.rate * 10000)/100
+        }
+      },
+      error: err => console.log(err)
+    });
+
+    this.service.fetchTopSale().subscribe({
+      next: res => {
+        this.userTopCommission = {
+          data: res.data,
+          headers: ["Nom", "Vente reussi", "commission recolte"],
+          columns: [
+            (elt:any) => elt.user.name,
+            (elt:any) => elt.sales,
+            (elt:any) => elt.commission
+          ],
+          getRate: (elt) => (elt.rate*10000)/100
+        }
+      },
+      error: err => console.log(err)
+    });
+
+    let headers = (name: string) => [
+      name,
+      "Nombre encheries",
+      "Nombre vendues",
+      "TotalCommission",
+      "Nombre de proposition",
+      "Moyenne ratio"
+    ];
+
+    this.service.fetchProductData().subscribe({
+      next: res => {
+        this.productTopAuction = {
+          data: res.data,
+          headers: headers("Produit"),
+          columns: [
+            (elt: any) => elt.product.name,
+            (elt: any) => elt.salescount
+          ],
+          getRate: (elt) => ((elt.rate * 10000)/100)
+        }
+      },
+      error: err => console.log(err)
+    });
+
+    this.service.fetchCategoryData().subscribe({
+      next: (res) => {
+        this.categoryTopAuction = {
+          data: res.data,
+          headers: headers("Categories"),
+          columns: [
+            (elt: any) => elt.category.name,
+            (elt: any) => elt.salescount
+          ],
+          getRate: (elt) => (elt.rate * 10000)/100
+        };
+      },
+      error: (err) => console.log(err)
+    })
   }
 
 }

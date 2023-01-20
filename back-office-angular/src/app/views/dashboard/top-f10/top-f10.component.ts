@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 export interface Top10Data {
   data: any[]
   headers: string[];
-  columns: string[];
+  columns: any[];
   getRate: (elt: any) => number
 }
 
@@ -14,6 +14,9 @@ export interface Top10Data {
 export class TopF10Component {
 
   @Input() data!: Top10Data;
+  @Input() title !: string;
+
+  @Input() ratePresent = true;
 
   getColor(value: number ){
     let numbers: number[] = [0, 10, 10, 51, 68, 85, 100];

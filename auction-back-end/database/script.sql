@@ -373,21 +373,23 @@ SELECT count(*),extract("month" from start_date) as month,extract("year" from st
 
 CREATE or replace VIEW rating_month AS
 select
-    case when total is null then 0 else total end
-     ,case when rate is null then 0 else rate end increaserate
-from rating WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
+    (select count(*) from auction) total
+     ,case when (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) is null then 0 else (select rate from rating where month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) end increaserate;
 
 CREATE VIEW user_month_year AS
 SELECT (SELECT count(*) FROM "user") as total,count(*),extract("month" from signup_date) as month,extract("year" from signup_date) as year from "user" GROUP BY month,year;
 
 CREATE VIEW rating_user AS
-SELECT total userCount,count::REAL/total::REAL increaseRate from user_month_year WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
+SELECT CASE WHEN  (SELECT count(*) FROM "user") IS NULL THEN 0 ELSE (SELECT count(*) FROM "user") END userCount,
+       CASE WHEN  (SELECT count::REAL/(SELECT count(*) FROM "user")::REAL from user_month_year WHERE month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) IS NULL THEN 0 ELSE (SELECT count::REAL/(SELECT count(*) FROM "user")::REAL increaseRate from user_month_year WHERE month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) END increaseRate ;
 
 CREATE VIEW commission_per_month AS
 SELECT (SELECT SUM(commission) FROM commission_per_day) total,SUM(commission) commission,extract("month" from date) as month,extract("year" from date) as year FROM commission_per_day GROUP BY month,year;
 
 CREATE VIEW rating_commission AS
-SELECT total totalcommission,commission::REAL/total::REAL increaseRate from commission_per_month  WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
+SELECT
+    CASE WHEN (SELECT SUM(commission) FROM commission_per_day) IS NULL THEN 0 ELSE (SELECT SUM(commission) FROM commission_per_day) END totalcommission
+     ,CASE WHEN (SELECT commission::REAL/total::REAL from commission_per_month  WHERE month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) IS NULL THEN 0 ELSE (SELECT commission::REAL/total::REAL from commission_per_month  WHERE month=(extract("month" from current_date - interval '1 month')) AND year=extract("year" from current_date- interval '1 month')) END increaseRate;
 
 CREATE VIEW rating_user_auction AS
 SELECT count(*) auctionCount,user_id,count(*)::REAL/(SELECT count(*) from v_auction where status=2)::REAL rate from v_auction where status =2 GROUP BY user_id ORDER BY auctioncount DESC LIMIT 10;

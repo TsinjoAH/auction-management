@@ -7,7 +7,7 @@ import {brandInfo, brandInfoBg, getOptions} from "../chart.config";
   styleUrls: ['./product-evolution.component.scss']
 })
 export class ProductEvolutionComponent implements OnInit {
-  options = getOptions();
+  options = getOptions(10);
   data: any;
   ngOnInit () {
     this.options.scales.y.max = 65
