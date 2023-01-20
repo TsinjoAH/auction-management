@@ -249,12 +249,13 @@ SELECT user_id,SUM(amount) amount FROM account_deposit WHERE status=20 GROUP BY 
 
 CREATE OR REPLACE VIEW full_balance AS
 SELECT d.user_id
-     ,CASE WHEN d.amount IS NULL THEN 0 ELSE d.amount END deposit
-     ,CASE WHEN a.amount IS NULL THEN 0 ELSE a.amount END auction_bid
-     ,CASE WHEN g.gain IS NULL THEN 0 ELSE g.gain END auction_gain
+     ,CASE WHEN SUM(d.amount) IS NULL THEN 0 ELSE SUM(d.amount) END deposit
+     ,CASE WHEN SUM(a.amount) IS NULL THEN 0 ELSE SUM(a.amount) END auction_bid
+     ,CASE WHEN SUM(g.gain) IS NULL THEN 0 ELSE SUM(g.gain) END auction_gain
       FROM deposit_done d
           LEFT JOIN auction_done a ON d.user_id=a.user_id
-          LEFT JOIN gain g ON g.user_id=a.user_id;
+          LEFT JOIN gain g ON g.user_id=a.user_id
+        GROUP BY d.user_id;
 
 CREATE OR REPLACE VIEW balance AS
     SELECT user_id,deposit-auction_bid+auction_gain amount FROM full_balance;
