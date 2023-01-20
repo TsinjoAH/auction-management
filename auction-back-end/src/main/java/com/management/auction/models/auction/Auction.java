@@ -7,15 +7,6 @@ import java.util.List;
 
 
 @Entity
-public class Auction extends AuctionBase{
-    @Transient
-    private List<Bid> bids;
+public class Auction extends AuctionBase {
 
-    public List<Bid> getBids() {
-        return bids;
-    }
-
-    public void setBids(List<Bid> bids) {
-        this.bids = bids;
-    }
 }

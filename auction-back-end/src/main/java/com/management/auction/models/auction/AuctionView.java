@@ -12,10 +12,6 @@ import java.util.List;
 @Table(name = "v_auction")
 @Entity
 public class AuctionView extends AuctionBase{
-
-    @OneToMany(mappedBy = "auctionId")
-    List<Bid> bids;
-
     @Column
     private Integer status;
 
@@ -27,11 +23,4 @@ public class AuctionView extends AuctionBase{
         this.status = status;
     }
 
-    public List<Bid> getBids() {
-        return bids;
-    }
-
-    public void setBids(List<Bid> bids) {
-        this.bids = bids;
-    }
 }

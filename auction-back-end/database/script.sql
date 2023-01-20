@@ -259,6 +259,12 @@ SELECT d.user_id
 CREATE VIEW balance AS
     SELECT user_id,deposit-auction_bid+auction_gain amount FROM full_balance;
 
+create view v_user_auction as
+    select auction_id, user_id from bid group by auction_id, user_id;
+
+create view v_auction_bidder as
+select a.*, v.user_id bidder from v_auction a join v_user_auction v
+on a.id = v.auction_id;
 
 --user allmdp:'gemmedecristal'--
 insert into "user"(name, email, password, signup_date)

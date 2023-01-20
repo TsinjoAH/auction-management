@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static custom.springutils.util.ControllerUtil.returnSuccess;
 import java.sql.Timestamp;
 
 
@@ -37,13 +38,13 @@ public class AuctionController {
     //No Update
     @GetMapping({"/{id}"})
     public ResponseEntity<SuccessResponse> findById(@PathVariable("id") Long id) {
-        return ControllerUtil.returnSuccess(this.service.findByIdView(id), HttpStatus.OK);
+        return returnSuccess(this.service.findByIdView(id), HttpStatus.OK);
     }
 
     @GetMapping({""})
     public ResponseEntity<SuccessResponse> findAll(@PathVariable Long fkId) {
         User fk = this.userService.findById(fkId);
-        return ControllerUtil.returnSuccess(this.service.findForFKView(fk), HttpStatus.OK);
+        return returnSuccess(this.service.findForFKView(fk), HttpStatus.OK);
     }
 
 
@@ -51,7 +52,18 @@ public class AuctionController {
     public ResponseEntity<SuccessResponse> createAuction(@PathVariable Long fkId, @RequestBody AuctionReceiver auctionReceiver) throws Exception{
         User fk = this.userService.findById(fkId);
         auctionReceiver.getAuction().setFK(fk);
-        return ControllerUtil.returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
+        return returnSuccess(this.service.create(auctionReceiver), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<SuccessResponse> filter(@RequestBody Criteria criteria) throws CustomException{
+        return returnSuccess(this.service.findByCriteria(criteria),HttpStatus.OK);
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<?> history (@PathVariable Long fkId) throws CustomException {
+        User user = this.userService.findById(fkId);
+        return returnSuccess(this.service.history(user), HttpStatus.OK);
     }
 
     @GetMapping("/filter")

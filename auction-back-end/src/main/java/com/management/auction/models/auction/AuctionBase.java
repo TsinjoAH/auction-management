@@ -1,6 +1,7 @@
 package com.management.auction.models.auction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.management.auction.models.Bid;
 import com.management.auction.models.Product;
 import com.management.auction.models.User;
 import custom.springutils.exception.CustomException;
@@ -39,6 +40,17 @@ public class AuctionBase extends HasFK<User> {
     private Double commission;
     @OneToMany(mappedBy = "auctionId")
     private List<AuctionPic> images;
+
+    @Transient
+    private List<Bid> bids;
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
 
 
     @Override
