@@ -83,8 +83,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadAuctionCountData({
       min: "2020-01-01",
-      max: "2023-01-01"
+      max: "2023-01-20"
     });
+    this.loadCommissionDayData({
+      min: "2020-01-01",
+      max: "2023-01-20"
+    })
     this.fetchIncreaseRated();
     this.fetchTables();
   }
