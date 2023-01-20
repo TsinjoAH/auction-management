@@ -50,7 +50,7 @@ public class StatRepoImpl implements StatRepo{
 
     @Override
     public HashMap<String, Object> getCommissionTotalAndIncrease() {
-        String sql="SELECT * FROM rating_commisison";
+        String sql="SELECT * FROM rating_commission";
         Query query=manager.createNativeQuery(sql, Tuple.class);
         return this.tupleToMap((Tuple) query.getSingleResult(),"totalcommission","increaserate");
     }
