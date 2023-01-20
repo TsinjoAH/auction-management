@@ -1477,71 +1477,23 @@ CREATE VIEW rating AS
 SELECT count(*),extract("month" from start_date) as month,extract("year" from start_date) as year,(SELECT COUNT(*) FROM auction) total,(count(*)/(SELECT COUNT(*) FROM auction)) rate FROM auction GROUP BY month,year;
 
 
-CREATE VIEW tmp_rating_month AS
+CREATE VIEW rating_month AS
 select
     total
-     ,case when (
-        select
-            count
-        from rating
-        where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
-        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
-    ,case when (
-        select
-            count
-        from rating
-        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
-        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
-            from rating;
-
-CREATE VIEW rating_month AS
-    SELECT total,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_month;
+     ,rate increaserate
+    from rating WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
 
 CREATE VIEW user_month_year AS
     SELECT (SELECT count(*) FROM "user") as total,count(*),extract("month" from signup_date) as month,extract("year" from signup_date) as year from "user" GROUP BY month,year;
 
-CREATE VIEW tmp_rating_user AS
-select
-    total
-     ,case when (
-                    select
-                        count
-                    from user_month_year
-                    where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
-    ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
-    ,case when (
-        select
-            count
-        from user_month_year
-        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
-        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
-            from user_month_year;
-
 CREATE VIEW rating_user AS
-SELECT total userCount,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_user;
+SELECT total userCount,count/total increaseRate from tmp_rating_user WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
 
 CREATE VIEW commission_per_month AS
     SELECT (SELECT SUM(commission) FROM commission_per_day) total,SUM(commission) commission,extract("month" from date) as month,extract("year" from date) as year FROM commission_per_day GROUP BY month,year;
 
-CREATE VIEW tmp_rating_commission AS
-select
-    total
-     ,case when (
-                    select
-                        commission
-                    from commission_per_month
-                    where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)
-    ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_2
-    ,case when (
-        select
-            commission
-        from commission_per_month
-        where month=(extract("month" from current_date)-1) and year=extract("year" from current_date)
-        ) is null then 0 else (select count from rating where month=(extract("month" from current_date)-2) and year=extract("year" from current_date)) end last_1
-            from commission_per_month;
-
 CREATE VIEW rating_commission AS
-SELECT total totalcommission,case when last_2 = 0 then 0 else ((last_1-last_2)/last_2)*100 end increaseRate from tmp_rating_commission;
+SELECT total totalcommission,commission/total increaseRate from commission_per_month  WHERE month=(extract("month" from current_date)-1) AND year=extract("year" from current_date);
 
 CREATE VIEW rating_user_auction AS
 SELECT count(*) auctionCount,user_id,count(*)/(SELECT count(*) from v_auction where status=2)*100 rate from v_auction where status =2 GROUP BY user_id ORDER BY auctioncount DESC LIMIT 10;
