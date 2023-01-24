@@ -36,4 +36,8 @@ public class AuctionFilterController{
     public ResponseEntity<SuccessResponse> getByPage(@PathVariable(required = true) int page){
         return ControllerUtil.returnSuccess(this.service.finAll(page),HttpStatus.OK);
     }
+    @GetMapping("/auctionnotfinish")
+    public ResponseEntity<SuccessResponse>  AuctionNotFinish() {
+        return ControllerUtil.returnSuccess(this.service.AuctionNotFinish(), HttpStatus.OK);
+    }
 }

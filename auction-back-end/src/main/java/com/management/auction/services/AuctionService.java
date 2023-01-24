@@ -100,4 +100,9 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     public List<Auction> findforFk(Long id,int page){
         return this.repo.findByUserId(id,PageRequest.of(page,25)).toList();
     }
+    public List<Auction> AuctionNotFinish(){
+        String sql="SELECT id,title,description,user_id,start_date,end_date,duration,product_id,start_price,commission FROM v_auction WHERE status=1";
+        Query q=manager.createNativeQuery(sql);
+        return q.getResultList();
+    }
 }
