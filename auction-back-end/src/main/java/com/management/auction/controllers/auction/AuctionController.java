@@ -1,4 +1,4 @@
-package com.management.auction.controllers;
+package com.management.auction.controllers.auction;
 
 import com.management.auction.models.Bid;
 import com.management.auction.models.Criteria;

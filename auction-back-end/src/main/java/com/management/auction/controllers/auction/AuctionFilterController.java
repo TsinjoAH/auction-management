@@ -1,4 +1,4 @@
-package com.management.auction.controllers;
+package com.management.auction.controllers.auction;
 
 import com.management.auction.models.Criteria;
 import com.management.auction.services.AuctionService;
@@ -35,5 +35,9 @@ public class AuctionFilterController{
     @GetMapping("/{page}")
     public ResponseEntity<SuccessResponse> getByPage(@PathVariable(required = true) int page){
         return ControllerUtil.returnSuccess(this.service.finAll(page),HttpStatus.OK);
+    }
+    @GetMapping("/auctionnotfinish")
+    public ResponseEntity<SuccessResponse>  AuctionNotFinish() {
+        return ControllerUtil.returnSuccess(this.service.AuctionNotFinish(), HttpStatus.OK);
     }
 }
