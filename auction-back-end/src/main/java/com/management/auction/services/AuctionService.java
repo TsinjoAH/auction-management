@@ -15,6 +15,7 @@ import com.management.auction.repos.auction.AuctionViewRepo;
 import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ import java.util.Optional;
 @Service
 public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo> {
     private final UserRepo userRepo;
+    private EntityManager manager;
     private final AuctionViewRepo auctionViewRepo;
     private final AuctionPicRepo auctionPicRepository;
 
