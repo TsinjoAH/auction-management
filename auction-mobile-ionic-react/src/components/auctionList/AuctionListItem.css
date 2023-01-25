@@ -1,1 +1,5 @@
 /* iOS places the subtitle above the title */
+#timer {
+    font-weight: bold;
+    font-size: 1em;
+}
