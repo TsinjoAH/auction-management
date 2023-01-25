@@ -1,28 +1,76 @@
-import { IonBackButton, IonButton, IonButtons,
-    IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonPage, IonRouterLink,
-    IonRow, IonToolbar } from "@ionic/react";
+import { IonButton,
+    IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonPage, IonRouterLink,
+    IonRow } from "@ionic/react";
+import {Redirect} from "react-router-dom";
+
+import React, {useState} from "react";
+import axios from "axios";
+import {serverUrl} from "../../utils/serverUrl";
+
+
 
 const Register: React.FC = () => {
+
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [message, setMessage] = useState('');
+    const [redirect, setRedirect] = React.useState(false);
+
+    const handleUsername = (event:any)=>{
+        const name = event.target.value;
+        console.log(name);
+        setUsername(name);
+    }
+
+    const handleEmail = (event:any)=>{
+        const email = event.target.value;
+        console.log(email);
+        setEmail(email);
+    }
+
+    const handlePassword = (event:any)=>{
+        const password = event.target.value;
+        console.log(password);
+        setPwd(password);
+    }
+
+    const handleSubmit = async (event:any)=>{
+    event.preventDefault();
+    const userdata = { name : username, email: email, password: pwd };
+    await axios.post(serverUrl("users"),userdata)
+        .then(result=>{
+            setMessage(result.data.msg);
+            console.log(result.data);
+            setRedirect(true);
+        });
+    }
+
+
+
+
     return (
+        redirect ?
+        <Redirect to="/login" /> :
         <IonPage>
             <IonContent fullscreen>
                 <IonGrid className="content">
                     <IonRow>
                         <IonCol size="12">
-                <form className="ion-padding">
+                <form className="ion-padding" onSubmit={handleSubmit}>
                 <center><h3>Sign Up</h3></center>
                 <br/>
                     <IonItem>
                         <IonLabel position="floating">Username</IonLabel>
-                        <IonInput name="name"/>
+                        <IonInput name="name" onIonChange={(e)=>handleUsername(e)} required/>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="floating">Email</IonLabel>
-                        <IonInput name="email"/>
+                        <IonInput name="email" type="email" onIonChange={(e)=>handleEmail(e)} required/>
                     </IonItem>
                     <IonItem>
                         <IonLabel position="floating">Password</IonLabel>
-                        <IonInput name="password" type="password" />
+                        <IonInput name="password" type="password" onIonChange={(e)=>handlePassword(e)} required/>
                     </IonItem>
                     <br/>
                     <IonButton className="ion-margin-top" type="submit" expand="block">

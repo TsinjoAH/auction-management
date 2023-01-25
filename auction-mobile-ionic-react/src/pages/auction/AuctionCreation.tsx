@@ -1,5 +1,19 @@
-import { IonButton,IonCol,IonContent,IonGrid,IonInput, IonItem, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea } from "@ionic/react";
-import React from "react";
+import {
+    IonButton,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonPage,
+    IonRow,
+    IonSelect,
+    IonSelectOption,
+    IonTextarea,
+    useIonAlert
+} from "@ionic/react";
+import React, {useState} from "react";
 import Menu from "../../components/menu/Menu";
 
 function addField(){
@@ -11,6 +25,8 @@ function addField(){
     const field = document.createElement('input');
     field.setAttribute('type','file');
     field.setAttribute('name','photo');
+    field.setAttribute('className','d-none');
+    field.setAttribute('id','input-file');
     ionItem.appendChild(field);
     ionCol.appendChild(ionItem);
     ionRow.appendChild(ionCol);
@@ -18,6 +34,39 @@ function addField(){
 }
 
 const AuctionCreation: React.FC = () => {
+
+    const [preview, setPreview] = useState<any>();
+    const [presentAlert] = useIonAlert();
+
+
+    const setImage = (e: any) => {
+        let file = e.target.files![0];
+        let name = file.name;
+        let extensions = ['.jpg', '.jpeg', '.png'];
+        let accept = false;
+        for (let ext of extensions) {
+            if (name.endsWith(ext)) {
+                accept = true;
+                break;
+            }
+        }
+        if (!accept) {
+            presentAlert({
+                header: 'Veuillez selectionnez des images',
+                message: 'Les images doivent être au format .jpg, .jpeg ou .png',
+                buttons: ['OK']
+            }).then(() => {
+                setPreview(undefined);
+            });
+            return;
+        }
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            setPreview(reader.result);
+        }
+    }
+
     return (
     <Menu
         render={() => (
@@ -77,7 +126,9 @@ const AuctionCreation: React.FC = () => {
                         <IonRow>
                             <IonCol size="12">
                             <IonItem>
-                                <input type="file" name="img" />
+                                <input id="input-file" type="file" className="d-none" onChange={setImage} />
+                                <br/><br/>
+                                { preview ? <img className="img-preview" src={preview} width="35%" alt=""/>  : "" }
                             </IonItem>
                             <IonRow>
                             <IonCol size="1">
