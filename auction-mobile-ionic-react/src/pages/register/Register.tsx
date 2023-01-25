@@ -1,9 +1,14 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonPage, IonRouterLink, IonToolbar } from "@ionic/react";
+import { IonBackButton, IonButton, IonButtons,
+    IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonModal, IonPage, IonRouterLink,
+    IonRow, IonToolbar } from "@ionic/react";
 
 const Register: React.FC = () => {
     return (
         <IonPage>
             <IonContent fullscreen>
+                <IonGrid className="content">
+                    <IonRow>
+                        <IonCol size="12">
                 <form className="ion-padding">
                 <center><h3>Sign Up</h3></center>
                 <br/>
@@ -31,6 +36,9 @@ const Register: React.FC = () => {
                         </IonLabel>
                     </IonRouterLink>
                 </center>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
             </IonContent>
         </IonPage>
     );    

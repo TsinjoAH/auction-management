@@ -23,7 +23,9 @@ import './theme/variables.css';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import AuctionCreation from './pages/auction/AuctionCreation';
-import AuctionList from "./components/auctionList/AuctionList";
+import AuctionList from "./pages/auction/AuctionList";
+import AuctionHistoric from "./pages/auction/AuctionHistoric";
+import AccountRecharge from "./pages/account/AccountRecharge";
 
 setupIonicReact();
 
@@ -48,7 +50,12 @@ const App: React.FC = () => {
             <Route path="/auctions" exact={true}>
               <AuctionList />
             </Route>
-
+            <Route path="/auctions/historic" exact={true}>
+              <AuctionHistoric />
+            </Route>
+            <Route path="/account/recharge" exact={true}>
+              <AccountRecharge />
+            </Route>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

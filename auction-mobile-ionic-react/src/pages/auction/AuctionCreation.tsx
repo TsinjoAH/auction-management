@@ -1,6 +1,6 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonInput, IonItem, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea } from "@ionic/react";
+import { IonButton,IonCol,IonContent,IonGrid,IonInput, IonItem, IonLabel, IonPage, IonRow, IonSelect, IonSelectOption, IonTextarea } from "@ionic/react";
 import React from "react";
-import Menu from "../../components/Menu";
+import Menu from "../../components/menu/Menu";
 
 function addField(){
     const ionGrid = document.getElementById('grid');
@@ -19,10 +19,12 @@ function addField(){
 
 const AuctionCreation: React.FC = () => {
     return (
+    <Menu
+        render={() => (
+        <>
         <IonPage>
             <IonContent fullscreen>
                 <form className="ion-padding">
-                <center><h3>Create Auction</h3></center>
                 <br/>
                     <IonGrid id="grid">
                         <IonRow>
@@ -101,6 +103,10 @@ const AuctionCreation: React.FC = () => {
                 </form>
             </IonContent>
         </IonPage>
-    );    
+        </>
+        )}
+        title={"Create Auction"}
+    ></Menu>
+    );
 };
 export default AuctionCreation;
