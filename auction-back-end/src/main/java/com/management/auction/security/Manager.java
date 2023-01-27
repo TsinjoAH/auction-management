@@ -17,10 +17,12 @@ import java.util.List;
 
 @Component
 public class Manager implements AuthenticationManager {
-    @Autowired
     private AdminLoginService admin;
-    @Autowired
     private UserLoginService user;
+    public Manager(AdminLoginService admin,UserLoginService user){
+        this.admin=admin;
+        this.user=user;
+    }
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String token=authentication.getPrincipal().toString();
@@ -30,11 +32,11 @@ public class Manager implements AuthenticationManager {
                     List<GrantedAuthority> authorities=new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                     authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    authentication=new UsernamePasswordAuthenticationToken(token,authorities);
+                    authentication=new UsernamePasswordAuthenticationToken(token,null,authorities);
                 }else if(user.isConnected(token)){
                     List<GrantedAuthority> authorities=new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-                    authentication=new UsernamePasswordAuthenticationToken(token,authorities);
+                    authentication=new UsernamePasswordAuthenticationToken(token,null,authorities);
                 }
             } catch (CustomException e) {
                 return authentication;
