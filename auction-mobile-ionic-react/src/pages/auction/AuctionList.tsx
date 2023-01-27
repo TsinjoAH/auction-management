@@ -8,27 +8,25 @@ import React from "react";
 import Menu from "../../components/menu/Menu";
 import AuctionListItem from "../../components/auctionList/AuctionListItem";
 import './AuctionList.css'
+import Layout from "../../components/menu/Menu";
 const AuctionList: React.FC = () => {
     return (
-        <Menu
-        render={() => (
-        <>
-        <IonPage>
-            <IonContent className="content">
-                <IonGrid>
-                    <IonRow>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
-                    </IonRow>
-                </IonGrid>
-            </IonContent>
-        </IonPage>
-        </>
-        )}
-        title={"My Auctions"}
-        ></Menu>
+        <Layout title={"My Auctions"} >
+            <>
+                <IonPage>
+                    <IonContent className="content">
+                        <IonGrid>
+                            <IonRow>
+                                <AuctionListItem/>
+                                <AuctionListItem/>
+                                <AuctionListItem/>
+                                <AuctionListItem/>
+                            </IonRow>
+                        </IonGrid>
+                    </IonContent>
+                </IonPage>
+            </>
+        </Layout>
     );
 };
 export default AuctionList;

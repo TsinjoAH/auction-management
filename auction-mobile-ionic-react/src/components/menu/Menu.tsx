@@ -13,12 +13,12 @@ import {
 import {Menu, MenuItem} from "./MenuItem";
 import {menuItem} from "./Item";
 
-function Menuu(props: {
+function Layout(props: {
   title: string,
-  render: () => JSX.Element
+  children: any
 }): JSX.Element {
 
-  const {render, title} = props;
+  const {children, title} = props;
   return (
       <>
         <IonMenu contentId="main-content">
@@ -43,11 +43,11 @@ function Menuu(props: {
             </IonToolbar>
           </IonHeader>
           <IonContent className="ion-padding">
-            {render()}
+            {children}
           </IonContent>
         </IonPage>
       </>
   );
 }
 
-export default Menuu;
+export default Layout;

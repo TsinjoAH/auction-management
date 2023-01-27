@@ -1,5 +1,6 @@
 import axios, {AxiosError} from "axios";
 import {serverUrl} from "../utils/serverUrl";
+import {Deposit} from "../pages/deposit/DepositItem";
 
 const http = axios;
 
@@ -34,6 +35,9 @@ const isLoggedIn = (): boolean => {
 
 const getToken = () => sessionStorage.getItem("user_token")
 
+const id = () => user().id;
+
+const user = () => JSON.parse(sessionStorage.getItem("connected_user") ?? "")as User;
 const getHeaders = (): any => {user_token: getToken()};
 
-export {login, isLoggedIn, getHeaders};
+export {login, isLoggedIn, getHeaders, id, user};
