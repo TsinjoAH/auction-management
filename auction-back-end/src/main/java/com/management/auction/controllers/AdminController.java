@@ -16,6 +16,6 @@ public class AdminController extends LoginController<Admin, AdminLoginService> {
 
     @Override
     public String getRequestHeaderKey() {
-            return "admin_token";
+            return "tk";
     }
 }

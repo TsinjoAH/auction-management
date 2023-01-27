@@ -21,4 +21,8 @@ public class TokenBase {
 
     @Column
     private boolean validity = true;
+
+    public boolean getValidity() {
+        return validity;
+    }
 }
