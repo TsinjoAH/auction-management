@@ -31,7 +31,6 @@ public class Manager implements AuthenticationManager {
                 if(admin.isConnected(token)){
                     List<GrantedAuthority> authorities=new ArrayList<>();
                     authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
                     authentication=new UsernamePasswordAuthenticationToken(token,null,authorities);
                 }else if(user.isConnected(token)){
                     List<GrantedAuthority> authorities=new ArrayList<>();

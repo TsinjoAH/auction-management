@@ -67,7 +67,11 @@ public class User extends HasId implements LoginEntity {
     }
 
     public Double getBalance() {
-        return balance;
+        if(balance!=null){
+            return balance;
+        }else {
+            return Double.valueOf(0);
+        }
     }
 
     public void setBalance(Double balance) {
