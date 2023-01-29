@@ -1,32 +1,40 @@
 import {
+    IonButtons,
     IonContent,
-    IonPage, IonGrid, IonRow
+    IonGrid,
+    IonHeader,
+    IonMenuButton,
+    IonPage,
+    IonRow,
+    IonTitle,
+    IonToolbar
 } from "@ionic/react";
 import React from "react";
-
-
-import Menu from "../../components/menu/Menu";
 import AuctionListItem from "../../components/auctionList/AuctionListItem";
 import './AuctionList.css'
-import Layout from "../../components/menu/Menu";
+
 const AuctionList: React.FC = () => {
     return (
-        <Layout title={"My Auctions"} >
-            <>
-                <IonPage>
-                    <IonContent className="content">
-                        <IonGrid>
-                            <IonRow>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                            </IonRow>
-                        </IonGrid>
-                    </IonContent>
-                </IonPage>
-            </>
-        </Layout>
+        <IonPage id="main-content">
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton></IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Creer une enchere</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent className="content">
+                <IonGrid>
+                    <IonRow>
+                        <AuctionListItem/>
+                        <AuctionListItem/>
+                        <AuctionListItem/>
+                        <AuctionListItem/>
+                    </IonRow>
+                </IonGrid>
+            </IonContent>
+        </IonPage>
     );
 };
 export default AuctionList;

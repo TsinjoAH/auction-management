@@ -1,6 +1,6 @@
 import {
     IonContent,
-    IonPage, IonGrid, IonRow
+    IonPage, IonGrid, IonRow, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle
 } from "@ionic/react";
 import React from "react";
 
@@ -11,11 +11,15 @@ import './AuctionList.css'
 import Layout from "../../components/menu/Menu";
 const AuctionHistoric: React.FC = () => {
     return (
-        <Layout
-            title={"Historic"}
-        >
-        <>
-            <IonPage>
+        <IonPage id="main-content">
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton></IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Creer une enchere</IonTitle>
+                </IonToolbar>
+            </IonHeader>
                 <IonContent className="content">
                     <IonGrid>
                         <IonRow>
@@ -27,8 +31,6 @@ const AuctionHistoric: React.FC = () => {
                     </IonGrid>
                 </IonContent>
             </IonPage>
-        </>
-        </Layout>
     );
 };
 export default AuctionHistoric;

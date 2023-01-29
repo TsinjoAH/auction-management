@@ -3,18 +3,18 @@ import {Menu} from "./MenuItem";
 export const menuItem: Menu[] = [
     {
         title: 'Create Auction',
-        path: '/auction/new'
+        path: '/user/auction/new'
     },
     {
         title: 'My Auctions',
-        path: '/auctions'
+        path: '/user/auctions'
     },
     {
         title: 'Historic',
-        path: '/auctions/historic'
+        path: '/user/auctions/historic'
     },
     {
         title: 'Account Recharge',
-        path: '/account/recharge',
+        path: '/user/account/recharge',
     }
 ];

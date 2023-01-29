@@ -1,0 +1,29 @@
+.mt {
+    margin-top: 15px;
+}
+.no-border {
+    border: 0 !important;
+}
+.add-image {
+    transition: all ease-in-out 100ms;
+}
+.add-image div {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.add-image:active {
+    opacity: 0.6;
+}
+
+.add-image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.p-0 {
+    padding-left: 0;
+}

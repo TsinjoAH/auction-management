@@ -1,14 +1,14 @@
 import {
-    IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
+    IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
     IonCol,
     IonContent,
-    IonGrid,
+    IonGrid, IonHeader,
     IonInput,
     IonItem,
     IonLabel,
-    IonList,
+    IonList, IonMenuButton,
     IonPage,
-    IonRow, IonTitle, useIonAlert, useIonViewWillEnter,
+    IonRow, IonTitle, IonToolbar, useIonAlert, useIonViewWillEnter,
 } from "@ionic/react";
 import React, {useState} from "react";
 import Layout from "../../components/menu/Menu";
@@ -81,8 +81,15 @@ const AccountRecharge: React.FC = () => {
     }
 
     return (
-        <Layout title={"Demande de recharge"}>
-            <IonPage>
+        <IonPage id="main-content">
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton></IonMenuButton>
+                    </IonButtons>
+                    <IonTitle>Creer une enchere</IonTitle>
+                </IonToolbar>
+            </IonHeader>
                 <IonContent fullscreen>
                     <form className="ion-padding" onSubmit={handleSubmit} >
                         <IonItem>
@@ -105,8 +112,7 @@ const AccountRecharge: React.FC = () => {
                         </IonCardContent>
                     </IonCard>
                 </IonContent>
-            </IonPage>
-        </Layout>
+    </IonPage>
     );
 };
 

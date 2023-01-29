@@ -26,6 +26,7 @@ import AuctionList from "./pages/auction/AuctionList";
 import AuctionHistoric from "./pages/auction/AuctionHistoric";
 import AccountRecharge from "./pages/deposit/AccountRecharge";
 import {Login} from "./pages/login/Login";
+import Layout from "./components/menu/Menu";
 
 setupIonicReact();
 
@@ -36,7 +37,7 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/register"/>
+              <Redirect to="/user/auction/new"/>
             </Route>
             <Route path="/register" exact={true}>
               <Register />
@@ -44,17 +45,8 @@ const App: React.FC = () => {
             <Route path="/login" exact={true}>
               <Login />
             </Route>
-            <Route path="/auction/new" exact={true}>
-              <AuctionCreation />
-            </Route>
-            <Route path="/auctions" exact={true}>
-              <AuctionList />
-            </Route>
-            <Route path="/auctions/historic" exact={true}>
-              <AuctionHistoric />
-            </Route>
-            <Route path="/account/recharge" exact={true}>
-              <AccountRecharge />
+            <Route path="/user" >
+              <Layout></Layout>
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>
