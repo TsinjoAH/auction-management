@@ -25,11 +25,12 @@ public class UserLoginService extends LoginService<User, UserRepo> {
 
     @Override
     public boolean isConnected(String s) throws CustomException {
-        UserToken token = tokenRepo.findById(s).orElse(null);
+
+        UserToken token = tokenRepo.getByToken(s);
         if (token == null) return false;
         if (token.getValidity()) {
             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
-            if (now.compareTo(token.getExpirationDate()) < 0) {
+            if (now.compareTo(token.getExpirationDate()) > 0) {
                 logout(s);
                 return false;
             }

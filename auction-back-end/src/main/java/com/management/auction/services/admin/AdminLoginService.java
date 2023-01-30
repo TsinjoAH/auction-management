@@ -29,7 +29,7 @@ public class AdminLoginService  extends LoginService<Admin, AdminRepo> {
 
     @Override
     public boolean isConnected(String s) throws CustomException {
-        AdminToken token = tokenRepo.findById(s).orElse(null);
+        AdminToken token = tokenRepo.getByToken(s);
         if (token == null) return false;
         if (token.getValidity()) {
             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
