@@ -5,6 +5,7 @@ import com.management.auction.models.User;
 import com.management.auction.repos.DepositRepo;
 import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -46,5 +47,7 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
         this.update(deposit);
         return deposit;
     }
-
+    public List<Deposit> findForFkPageable(Long user,int page){
+        return this.repo.findByUserId(user, PageRequest.of(page,5)).toList();
+    }
 }

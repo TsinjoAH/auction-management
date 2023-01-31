@@ -7,13 +7,21 @@ import {
     IonPage,
     IonRow,
     IonTitle,
-    IonToolbar
+    IonToolbar, useIonViewWillEnter
 } from "@ionic/react";
-import React from "react";
+import React, {useState} from "react";
 import AuctionListItem from "../../components/auctionList/AuctionListItem";
 import './AuctionList.css'
+import {Auction, getAuctions} from "../../data/auctions.service";
 
 const AuctionList: React.FC = () => {
+
+    const [auctions, setAuctions] = useState<Auction[]>([]);
+
+    useIonViewWillEnter(() => {
+        getAuctions().then(setAuctions);
+    });
+
     return (
         <IonPage id="main-content">
             <IonHeader>
@@ -21,16 +29,15 @@ const AuctionList: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton></IonMenuButton>
                     </IonButtons>
-                    <IonTitle>Creer une enchere</IonTitle>
+                    <IonTitle>Liste de vos encheres</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent className="content">
                 <IonGrid>
                     <IonRow>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
-                        <AuctionListItem/>
+                        {auctions.map((auction, i) => {
+                            return ( <AuctionListItem key={i} auction={auction} /> )
+                        })}
                     </IonRow>
                 </IonGrid>
             </IonContent>

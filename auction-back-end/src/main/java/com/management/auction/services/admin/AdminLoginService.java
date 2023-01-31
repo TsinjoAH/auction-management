@@ -31,9 +31,9 @@ public class AdminLoginService  extends LoginService<Admin, AdminRepo> {
     public boolean isConnected(String s) throws CustomException {
         AdminToken token = tokenRepo.findById(s).orElse(null);
         if (token == null) return false;
-        if (token.isValidity()) {
+        if (token.getValidity()) {
             Timestamp now = Timestamp.valueOf(LocalDateTime.now());
-            if (now.compareTo(token.getExpirationDate()) < 0) {
+            if (now.compareTo(token.getExpirationDate()) > 0) {
                 logout(s);
                 return false;
             }

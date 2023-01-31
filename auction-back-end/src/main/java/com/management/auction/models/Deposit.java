@@ -52,7 +52,10 @@ public class Deposit extends HasFK<User> {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(double amount) throws CustomException {
+        if(amount<0){
+            throw new CustomException("Negative amount not accepted");
+        }
         this.amount = amount;
     }
 

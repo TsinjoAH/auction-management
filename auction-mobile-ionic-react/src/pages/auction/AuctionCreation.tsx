@@ -23,12 +23,37 @@ import {
 } from "@ionic/react";
 import React, {useRef, useState} from "react";
 import {Category, Product} from "../../utils/shared.interfaces";
-import {fetchCategory, fetchProducts} from "../../data/auctions.service";
+import {fetchCategory, fetchProducts, postAuction} from "../../data/auctions.service";
 import {Autocomplete, darken, lighten, styled, TextField} from "@mui/material";
 import './AuctionCreation.css';
 import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
 import {Crop} from "@ionic-native/crop";
 import {File} from "@ionic-native/file";
+import {Redirect} from "react-router-dom";
+
+const GroupHeader = styled('div')(({theme}) => ({
+    position: 'sticky',
+    top: '-8px',
+    padding: '4px 10px',
+    color: theme.palette.primary.main,
+    backgroundColor:
+        theme.palette.mode === 'light'
+            ? lighten(theme.palette.primary.light, 0.85)
+            : darken(theme.palette.primary.main, 0.8),
+}));
+
+const GroupItems = styled('ul')({
+    padding: 0,
+});
+
+const ProductModal: React.FC<{ isOpen: boolean, setOpen: (val: boolean) => void, data: (data: any) => void }> = ({isOpen,setOpen, data}) => {
+
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    const [product, setProduct] = useState<any>({
+        name: '',
+        category: ''
+    });
 
 
 const GroupHeader = styled('div')(({theme}) => ({
@@ -138,7 +163,6 @@ const buildImage = (format: string, base64: string, index: number) => {
     return img;
 }
 
-
 const ImageComponent : React.FC<{img: Image}> = ({img}) => {
     const {url, name} = img;
     return (
@@ -155,9 +179,12 @@ const AuctionCreation: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [isOpen, setOpen] = useState(false);
     const [auction, setAuction] = useState({
+        title: 'Rolex',
         product: null,
+        description: 'description',
         startDate: new Date(),
-        duration: 0
+        duration: 120,
+        startPrice: 125000
     });
 
     const [images, setImages] = useState<Image[]>([]);
@@ -165,7 +192,7 @@ const AuctionCreation: React.FC = () => {
     const [end, setEnd] = useState<Date>(new Date());
 
     useIonViewWillEnter(() => {
-        fetchProducts().then(setProducts);
+        fetchProducts().then(setProducts).catch((err) => alert(JSON.stringify(err, null, 2)));
     })
 
     const addOption = (data: any) => {
@@ -182,11 +209,35 @@ const AuctionCreation: React.FC = () => {
         setAuction(val);
     }
 
+    const [redirect, setRedirect] = useState(false);
+    const [clicked, setClicked] = useState(false);
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        setClicked(true);
+        if (images.length === 0) {
+            alert("Veuillez ajouter une image");
+            setClicked(false);
+        }
+        else {
+            let data = {
+                auction: auction,
+                images: images
+            };
+            postAuction(data).then((result) => {
+                setRedirect(true);
+                setClicked(false);
+            }).catch((err) => {
+                alert(err.response.data.message)
+                setClicked(false);
+            });
+        }
+    }
+
     const handleChange = (e: any) => {
         let name = e.target.name;
         let val = e.target.value;
         if (name === 'duration' || name === 'startDate') {
-            console.log(val);
             if (name === 'startDate') {
                 setEnd(new Date(new Date(val).getTime() + auction.duration * 60000));
             } else {
@@ -228,6 +279,7 @@ const AuctionCreation: React.FC = () => {
 
 
     return (
+        redirect ? <Redirect to="/user/auctions" /> :
         <IonPage id="main-content">
             <IonHeader>
                 <IonToolbar>
@@ -239,12 +291,12 @@ const AuctionCreation: React.FC = () => {
             </IonHeader>
             <IonContent fullscreen>
                 <ProductModal isOpen={isOpen} setOpen={setOpen} data={addOption}/>
-                <form className="ion-padding">
+                <form className="ion-padding" onSubmit={handleSubmit}>
                     <br/>
 
                     <IonItem fill="outline">
                         <IonLabel position="floating">Titre</IonLabel>
-                        <IonInput type="text"/>
+                        <IonInput name="title" value={auction.title}  onIonChange={handleChange} type="text" required />
                     </IonItem>
 
                     <Autocomplete
@@ -254,8 +306,7 @@ const AuctionCreation: React.FC = () => {
                         onChange={(e, v) => setProduct(v)}
                         value={auction.product}
                         groupBy={option => option.category.name}
-                        renderInput={params => <TextField {...params} label="choisissez un produit"
-                                                          variant="outlined"/>}
+                        renderInput={params => <TextField {...params} label="choisissez un produit" required variant="outlined" />}
                         renderGroup={params => (
                             <li key={params.key}>
                                 <GroupHeader>{params.group}</GroupHeader>
@@ -268,8 +319,11 @@ const AuctionCreation: React.FC = () => {
                     <IonItem fill="outline" className="mt">
                         <IonLabel position="floating">Description</IonLabel>
                         <IonTextarea
+                            name="description"
                             placeholder="Type something here"
                             autoGrow={true}
+                            value={auction.description}
+                            onIonChange={handleChange} required
                         ></IonTextarea>
                     </IonItem>
 
@@ -277,14 +331,13 @@ const AuctionCreation: React.FC = () => {
                         <IonLabel>Debut</IonLabel>
                         <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
                         <IonModal keepContentsMounted={true}>
-                            <IonDatetime name="startDate" onIonChange={handleChange} locale="EAT"
-                                         id="datetime"></IonDatetime>
+                            <IonDatetime name="startDate" onIonChange={handleChange} locale="EAT" id="datetime"></IonDatetime>
                         </IonModal>
                     </IonItem>
 
                     <IonItem fill="outline" className="mt">
                         <IonLabel position="floating">Duration (minutes) </IonLabel>
-                        <IonInput type="number" name="duration" onIonChange={handleChange}/>
+                        <IonInput type="number" name="duration" onIonChange={handleChange} required/>
                     </IonItem>
 
                     <IonItem className="mt" fill="outline">
@@ -294,7 +347,7 @@ const AuctionCreation: React.FC = () => {
 
                     <IonItem className="mt" fill="outline">
                         <IonLabel position="floating">Prix de depart</IonLabel>
-                        <IonInput type="number"/>
+                        <IonInput name="startPrice" value={auction.startPrice} type="number" onIonChange={handleChange} required/>
                     </IonItem>
 
                     <IonGrid className="p-0">
@@ -311,7 +364,7 @@ const AuctionCreation: React.FC = () => {
                     </IonGrid>
 
                     <br/>
-                    <IonButton className="ion-margin-top" type="submit" expand="block">
+                    <IonButton className="ion-margin-top" disabled={clicked} type="submit" expand="block">
                         Creer
                     </IonButton>
                 </form>
@@ -319,4 +372,5 @@ const AuctionCreation: React.FC = () => {
         </IonPage>
     );
 };
+
 export default AuctionCreation;
