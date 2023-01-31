@@ -80,6 +80,10 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     public Auction create(AuctionReceiver auctionReceiver) throws CustomException, IOException {
         Commission commission = this.commissionService.getLatest();
         auctionReceiver.getAuction().setCommission(commission.getRate());
+        Object[] images = auctionReceiver.getImages();
+        if ( images == null || images.length == 0) {
+            throw new CustomException("please add an image");
+        }
         Auction auction = super.create(auctionReceiver.getAuction());
         List<AuctionPic> auctionPics = auctionReceiver.getAuctionPics();
         auctionPicRepository.saveAll(auctionPics);
@@ -96,12 +100,15 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         }
         return auctionViewRepo.findAllById(repo.history(user.getId()));
     }
+
     public List<Auction> finAll(int page){
         return this.repo.findAll(PageRequest.of(page,25)).toList();
     }
+
     public List<Auction> findforFk(Long id,int page){
         return this.repo.findByUserId(id,PageRequest.of(page,25)).toList();
     }
+
     public List<Auction> AuctionNotFinish(){
         String sql="SELECT id,title,description,user_id,start_date,end_date,duration,product_id,start_price,commission FROM v_auction WHERE status=1";
         Query q=manager.createNativeQuery(sql);
