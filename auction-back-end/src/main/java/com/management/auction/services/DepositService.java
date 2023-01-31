@@ -48,6 +48,6 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
         return deposit;
     }
     public List<Deposit> findForFkPageable(Long user,int page){
-        return this.repo.findByUserId(user, PageRequest.of(page,5)).toList();
+        return this.repo.findByUserIdOrderByIdDesc(user, PageRequest.of(page,5)).toList();
     }
 }

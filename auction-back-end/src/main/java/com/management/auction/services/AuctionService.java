@@ -6,6 +6,7 @@ import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.AuctionPic;
 import com.management.auction.models.auction.AuctionView;
+import com.management.auction.repos.ProductRepo;
 import com.management.auction.repos.UserRepo;
 import com.management.auction.repos.auction.AuctionPicRepo;
 import com.management.auction.models.auction.AuctionReceiver;
@@ -31,6 +32,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private EntityManager manager;
     private final AuctionViewRepo auctionViewRepo;
     private final AuctionPicRepo auctionPicRepository;
+    private final ProductRepo productRepo;
 
     @Autowired
     private CommissionService commissionService;
@@ -39,11 +41,12 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     private BidRepo bidRepo;
 
     public AuctionService(AuctionRepo repo, AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository,
-                          UserRepo userRepo) {
+                          UserRepo userRepo,ProductRepo productRepo) {
         super(repo);
         this.auctionViewRepo = auctionViewRepo;
         this.auctionPicRepository = auctionPicRepository;
         this.userRepo = userRepo;
+        this.productRepo=productRepo;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         if (auction == null) {
             return null;
         }
-        auction.setBids(bidRepo.findByAuctionId(id));
+        auction.setBids(bidRepo.findByAuctionIdOrderByAmountDesc(id));
         return auction;
     }
 
@@ -71,7 +74,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         if (auction == null) {
             return null;
         }
-        auction.setBids(bidRepo.findByAuctionId(id));
+        auction.setBids(bidRepo.findByAuctionIdOrderByAmountDesc(id));
         return auction;
     }
 
@@ -80,7 +83,11 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     public Auction create(AuctionReceiver auctionReceiver) throws CustomException, IOException {
         Commission commission = this.commissionService.getLatest();
         auctionReceiver.getAuction().setCommission(commission.getRate());
-        Auction auction = super.create(auctionReceiver.getAuction());
+        Auction auction=auctionReceiver.getAuction();
+        if(auction.getProduct().getId()==null){
+            auction.setProduct(productRepo.save(auction.getProduct()));
+        }
+        auction = super.create(auctionReceiver.getAuction());
         List<AuctionPic> auctionPics = auctionReceiver.getAuctionPics();
         auctionPicRepository.saveAll(auctionPics);
         return auction;

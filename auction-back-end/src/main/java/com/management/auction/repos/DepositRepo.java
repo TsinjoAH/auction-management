@@ -13,5 +13,5 @@ public interface DepositRepo extends JpaRepository<Deposit,Long>, PagingAndSorti
     List<Deposit> findByUserId(Long id);
 
     List<Deposit> findByStatus(Integer status);
-    Page<Deposit> findByUserId(Long id, Pageable pageable);
+    Page<Deposit> findByUserIdOrderByIdDesc(Long id, Pageable pageable);
 }
