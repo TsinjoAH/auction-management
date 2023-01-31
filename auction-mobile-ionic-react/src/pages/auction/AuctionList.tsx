@@ -41,10 +41,6 @@ const AuctionList: React.FC = () => {
                 </IonGrid>
             </IonContent>
         </IonPage>
-        </>
-        )}
-        title={"My Auctions"}
-        ></Menu>
     );
 };
 export default AuctionList;
