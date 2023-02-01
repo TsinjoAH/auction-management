@@ -4,7 +4,7 @@ export default class Navbar extends Component{
         return(
             <header>
                 <div className="header-area">
-                    <div className="main-header ">
+                    <div className="main-header">
                         <div className="header-bottom  header-sticky">
                             <div className="container">
                                 <div className="row align-items-center">
@@ -17,11 +17,11 @@ export default class Navbar extends Component{
                                         <div className="main-menu f-right d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><a href="">Home</a></li>
+                                                    <li><a href="/home">Home</a></li>
                                                     <li><a href="">Auction</a>
                                                         <ul className="submenu">
-                                                            <li><a href="">List</a></li>
-                                                            <li><a href="">Historic</a></li>
+                                                            <li><a href="/auctions">List</a></li>
+                                                            <li><a href="/history">Historic</a></li>
                                                         </ul>
                                                     </li>
                                                     <li><a href="">Contact Us</a></li>

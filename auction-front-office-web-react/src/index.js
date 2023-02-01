@@ -8,7 +8,9 @@ import Home from './views/home/Home';
 
 import reportWebVitals from './reportWebVitals';import  {
   BrowserRouter,Routes,Route
-  } from "react-router-dom";  
+  } from "react-router-dom";
+import AuctionList from "./views/auction/AuctionList";
+import Historic from "./views/auction/Historic";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +20,8 @@ root.render(
     <Route path={'/'} element={<Login/>} ></Route>
     <Route path={'/register'} element={<Register/>} ></Route>
     <Route path={'/home'} element={<Home/>} ></Route>
+    <Route path={'/auctions'} element={<AuctionList/>} ></Route>
+    <Route path={'/history'} element={<Historic/>} ></Route>
     </Routes>
   </BrowserRouter>
 );

@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuctionListItem from "../../components/AuctionListItem";
 
-export default class AuctionList extends Component{
+export default class Historic extends Component{
     render(){
         return(
             <>
@@ -14,7 +14,7 @@ export default class AuctionList extends Component{
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="section-tittle text-center">
-                                        <span>Auctions that you have bid on</span>
+                                        <span>Historic</span>
                                         <h2>List of Auction</h2>
                                     </div>
                                 </div>
