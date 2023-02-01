@@ -2,7 +2,7 @@ import { Component } from "react";
 export default class Login extends Component{
     render(){
         return(
-            <div className="authincation h-100">
+            <div className="authincation h-100" style={{marginTop:150}}>
                 <div className="container-fluid h-100">
                     <div className="row justify-content-center h-100 align-items-center">
                         <div className="col-md-6">

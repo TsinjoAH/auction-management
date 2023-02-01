@@ -2,34 +2,34 @@ import { Component } from "react";
 export default class Register extends Component{
     render(){
         return(
-            <div class="authincation h-100">
-                <div class="container-fluid h-100">
-                    <div class="row justify-content-center h-100 align-items-center">
-                        <div class="col-md-6">
-                            <div class="authincation-content">
-                                <div class="row no-gutters">
-                                    <div class="col-xl-12">
-                                        <div class="auth-form">
-                                            <h4 class="text-center mb-4">Sign up your account</h4>
+            <div className="authincation h-100" style={{marginTop:150}}>
+                <div className="container-fluid h-100">
+                    <div className="row justify-content-center h-100 align-items-center">
+                        <div className="col-md-6">
+                            <div className="authincation-content">
+                                <div className="row no-gutters">
+                                    <div className="col-xl-12">
+                                        <div className="auth-form">
+                                            <h4 className="text-center mb-4">Sign up your account</h4>
                                             <form action="index.html">
-                                                <div class="form-group">
+                                                <div className="form-group">
                                                     <label><strong>Username</strong></label>
-                                                    <input type="text" class="form-control" placeholder="username"/>
+                                                    <input type="text" className="form-control" placeholder="username"/>
                                                 </div>
-                                                <div class="form-group">
+                                                <div className="form-group">
                                                     <label><strong>Email</strong></label>
-                                                    <input type="email" class="form-control" placeholder="hello@example.com"/>
+                                                    <input type="email" className="form-control" placeholder="hello@example.com"/>
                                                 </div>
-                                                <div class="form-group">
+                                                <div className="form-group">
                                                     <label><strong>Password</strong></label>
-                                                    <input type="password" class="form-control" value="Password"/>
+                                                    <input type="password" className="form-control" value="Password"/>
                                                 </div>
-                                                <div class="text-center mt-4">
-                                                    <button type="submit" class="btn btn-primary btn-block">Sign me up</button>
+                                                <div className="text-center mt-4">
+                                                    <button type="submit" className="btn btn-primary btn-block">Sign me up</button>
                                                 </div>
                                             </form>
-                                            <div class="new-account mt-3">
-                                                <p>Already have an account? <a class="text-primary" href="/">Sign in</a></p>
+                                            <div className="new-account mt-3">
+                                                <p>Already have an account? <a className="text-primary" href="/">Sign in</a></p>
                                             </div>
                                         </div>
                                     </div>
