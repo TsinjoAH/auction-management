@@ -11,11 +11,10 @@ import {
     IonRow, IonTitle, IonToolbar, useIonAlert, useIonViewWillEnter,
 } from "@ionic/react";
 import React, {useState} from "react";
-import Layout from "../../components/menu/Menu";
 import {Deposit, DepositItem} from "./DepositItem";
-import {login} from "../../data/user.service";
+import {getUser, login, User} from "../../data/user.service";
 import {fetchDepositHistory, makeDeposit} from "../../data/deposits.service";
-
+import './AuctionRecharge.css';
 
 const AccountRecharge: React.FC = () => {
 
@@ -26,8 +25,11 @@ const AccountRecharge: React.FC = () => {
     const [page, setPage] = useState(0);
     const [next, setNext] = useState(false);
 
+    const [user, setUser] = useState<User>();
+
     useIonViewWillEnter(() => {
         fetchNextPage();
+        getUser().then(setUser);
     })
 
     const fetchNextPage = () => {
@@ -87,31 +89,50 @@ const AccountRecharge: React.FC = () => {
                     <IonButtons slot="start">
                         <IonMenuButton></IonMenuButton>
                     </IonButtons>
-                    <IonTitle>Creer une enchere</IonTitle>
+                    <IonTitle>Votre compte</IonTitle>
                 </IonToolbar>
             </IonHeader>
-                <IonContent fullscreen>
-                    <form className="ion-padding" onSubmit={handleSubmit} >
-                        <IonItem>
-                            <IonLabel position="floating">Montant</IonLabel>
-                            <IonInput name="amount" value={value} type="number" min="0" onIonChange={handleChange}/>
-                        </IonItem>
-                        <IonButton disabled={clicked} className="ion-margin-top" type="submit" expand="block">
-                            Envoyer la demande
-                        </IonButton>
-                    </form>
-                    <IonCard>
-                        <IonCardHeader>
-                            <IonCardTitle>Historiques</IonCardTitle>
-                        </IonCardHeader>
-                        <IonCardContent>
-                            <IonList>
-                                {deposits.map((deposit, key) => <DepositItem deposit={deposit} key={key} /> )}
-                            </IonList>
-                            <IonButton disabled={next} fill="clear" expand="block" onClick={() => fetchNextPage()} >Voir plus</IonButton>
-                        </IonCardContent>
-                    </IonCard>
-                </IonContent>
+            <IonContent fullscreen>
+                <IonCard color="light" >
+                    <IonCardTitle className="ion-padding">
+                        {user?.name} <br/>
+                        <small>{user?.email}</small>
+                    </IonCardTitle>
+                </IonCard>
+                <IonCard color="success">
+                    <IonCardTitle className="ion-padding balance" >
+                        <span>Balance</span>
+                        <span>{user?.balance} Ar</span>
+                    </IonCardTitle>
+                </IonCard>
+                <IonCard>
+                    <IonCardTitle className="ion-padding pb-0" >
+                        Faire une recharge
+                    </IonCardTitle>
+                    <IonCardContent>
+                        <form onSubmit={handleSubmit} >
+                            <IonItem>
+                                <IonLabel position="floating">Montant</IonLabel>
+                                <IonInput name="amount" value={value} type="number" min="0" onIonChange={handleChange}/>
+                            </IonItem>
+                            <IonButton disabled={clicked} className="ion-margin-top" type="submit" expand="block">
+                                Envoyer la demande
+                            </IonButton>
+                        </form>
+                    </IonCardContent>
+                </IonCard>
+                <IonCard>
+                    <IonCardHeader>
+                        <IonCardTitle>Historiques depots</IonCardTitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <IonList>
+                            {deposits.map((deposit, key) => <DepositItem deposit={deposit} key={key} /> )}
+                        </IonList>
+                        <IonButton disabled={next} fill="clear" expand="block" onClick={() => fetchNextPage()} >Voir plus</IonButton>
+                    </IonCardContent>
+                </IonCard>
+            </IonContent>
     </IonPage>
     );
 };

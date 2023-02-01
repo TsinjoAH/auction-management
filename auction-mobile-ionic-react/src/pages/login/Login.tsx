@@ -39,7 +39,7 @@ export const Login: React.FC = () => {
         });
     }
 
-    return (redirect ? <Redirect to="/auctions"/> : <IonPage>
+    return (redirect ? <Redirect to="/user/auctions"/> : <IonPage>
         <IonContent>
             <IonGrid className="content">
                 <IonRow>
@@ -63,7 +63,7 @@ export const Login: React.FC = () => {
                         </form>
                         <center>
                             <br/>
-                            <IonBackButton text="Don't have an account ?" defaultHref="/"></IonBackButton>
+                            <IonBackButton text="Don't have an account ?" defaultHref="/register"></IonBackButton>
                         </center>
                     </IonCol>
                 </IonRow>
