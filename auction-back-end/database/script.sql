@@ -259,8 +259,59 @@ SELECT d.user_id
           LEFT JOIN gain g ON g.user_id=a.user_id
         GROUP BY d.user_id;
 
-CREATE OR REPLACE VIEW balance AS
-    SELECT user_id,deposit-auction_bid+auction_gain amount FROM full_balance;
+
+--- CORRECTION BALANCE
+--- BEGIN
+
+create view v_user_default as
+select id user_id, 0 as amount from "user";
+
+create view v_deposit as
+select user_id, amount from v_user_default
+union all
+select user_id, amount from account_deposit where status = 20;
+
+create view v_deposit_final as
+select user_id, sum(amount) as amount from v_deposit group by user_id;
+
+create view v_auction_user_bid as
+select auction_id, user_id, max(amount) amount from bid group by auction_id, user_id;
+
+create view v_user_bids as
+select user_id, sum(amount) amount from v_auction_user_bid group by user_id;
+
+create view v_bids as
+select user_id, amount from v_user_default
+union all
+select user_id, amount from v_user_bids;
+
+create view v_user_bids_final as
+select user_id, sum(amount) amount from v_bids group by user_id;
+
+create view v_auction_winner_amount as
+select v.id, max(amount) as amount
+from v_auction v join bid b on v.id = b.auction_id where status = 2
+group by v.id;
+
+create view v_owner_benefit as
+select user_id, amount * (1 - commission) as amount from auction a join v_auction_winner_amount v on a.id = v.id;
+
+create view v_user_benefit as
+select user_id, amount from v_user_default
+union all
+select user_id, amount from v_owner_benefit;
+
+create view v_user_benefit_final as
+select user_id, sum(amount) amount from v_user_benefit group by user_id;
+
+create or replace view balance as
+select v1.user_id, v1.amount + v2.amount - v3.amount amount from v_deposit_final v1
+    join v_user_benefit_final v2 on v1.user_id = v2.user_id
+    join v_user_bids_final v3 on v1.user_id = v3.user_id;
+
+-- CREATE OR REPLACE VIEW balance AS
+-- SELECT user_id,deposit-auction_bid+auction_gain amount FROM full_balance;
+-- END
 
 create view v_user_auction as
     select auction_id, user_id from bid group by auction_id, user_id;
