@@ -3,3 +3,27 @@
     font-weight: bold;
     font-size: 1em;
 }
+
+.title-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    position: relative;
+}
+
+.price {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.price h2 {
+    margin: 0;
+}
+
+.price {
+    position: absolute;
+    left: 100%;
+    transform: translate(-110%, 20%);
+}

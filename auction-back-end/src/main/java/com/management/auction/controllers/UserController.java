@@ -8,15 +8,13 @@ import custom.springutils.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static custom.springutils.util.ControllerUtil.returnSuccess;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController extends LoginController<User, UserLoginService> {
     @Autowired
     UserService userService;
@@ -34,4 +32,10 @@ public class UserController extends LoginController<User, UserLoginService> {
     public ResponseEntity<?> signup (@RequestBody User user) throws CustomException {
         return returnSuccess(this.userService.create(user), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById (@PathVariable Long id) {
+        return returnSuccess(this.userService.findById(id), HttpStatus.OK);
+    }
+
 }

@@ -46,6 +46,7 @@ public class AuctionController {
         User fk = this.userService.findById(fkId);
         return returnSuccess(this.service.findForFKView(fk), HttpStatus.OK);
     }
+
     @GetMapping({"/pages/{page}"})
     public ResponseEntity<SuccessResponse> findAllBypage(@PathVariable Long fkId,@PathVariable(required = true) int page) {
         User fk = this.userService.findById(fkId);
