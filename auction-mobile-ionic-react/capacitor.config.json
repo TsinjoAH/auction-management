@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "auction",
+	"appId": "com.management.auction",
+	"appName": "Auction",
 	"webDir": "build",
 	"bundledWebRuntime": false
 }
