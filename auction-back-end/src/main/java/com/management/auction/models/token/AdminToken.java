@@ -2,10 +2,10 @@ package com.management.auction.models.token;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "adminToken")
 public class AdminToken extends TokenBase{
-    @Column
     private Long adminId;
 
     public Long getAdminId() {

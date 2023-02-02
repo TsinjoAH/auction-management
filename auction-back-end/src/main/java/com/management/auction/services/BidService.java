@@ -24,7 +24,7 @@ public class BidService extends CrudServiceWithFK<Bid, Auction, BidRepo> {
 
     @Override
     public List<Bid> findForFK(Auction auction) {
-        return this.repo.findByAuctionId(auction.getId());
+        return this.repo.findByAuctionIdOrderByAmountDesc(auction.getId());
     }
 
     @Override

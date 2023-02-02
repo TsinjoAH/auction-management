@@ -1,12 +1,10 @@
 package com.management.auction.models.token;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "userToken")
 public class UserToken extends TokenBase{
 
-    @Column
     private Long userId;
 
     public Long getUserId() {

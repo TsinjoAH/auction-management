@@ -14,7 +14,7 @@ import java.util.List;
 public interface AuctionRepo extends JpaRepository<Auction, Long> ,AuctionCriteriaRepo, ListPagingAndSortingRepository<Auction,Long> {
     List<Auction> findByUserId(Long id);
 
-    @Query(nativeQuery = true, value = "select auction_id from v_user_auction where user_id = ?1")
+    @Query(nativeQuery = true, value = "select auction_id from v_user_auction where user_id = ?1 ORDER BY auction_id DESC")
     List<Long> history(Long userId);
     Page<Auction> findByUserId(Long id,Pageable pageable);
 

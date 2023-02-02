@@ -7,19 +7,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.util.Date;
 
 @Setter
 @Getter
-@MappedSuperclass
 public class TokenBase {
 
-    @Id
     private String token;
 
-    @Column
-    private Timestamp expirationDate;
-
-    @Column
+    private Date expirationDate;
     private boolean validity = true;
 
     public boolean getValidity() {
