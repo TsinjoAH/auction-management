@@ -24,6 +24,15 @@ const login = async (data: any) => {
     sessionStorage.setItem("connected_user", JSON.stringify(info.entity));
 }
 
+const registerDevice = async (token: string) => {
+    let result = await http.put(serverUrl(`users/${id()}/devices`), {
+        deviceToken: token
+    }, {
+        headers: getHeaders()
+    });
+    return result.data.data
+}
+
 const getUser = async () => {
     let result = await http.get(serverUrl("users/"+id()), {
         headers: getHeaders()
@@ -33,7 +42,7 @@ const getUser = async () => {
 
 
 export const signup = async (data: any) => {
-    let result = await axios.post(serverUrl("users"), data);
+    let result = await axios.post(serverUrl("users/signup"), data);
     return result.data.data;
 }
 
@@ -50,4 +59,4 @@ const getHeaders = (): any => {tk: getToken()};
 
 export const getRequestProps = () => {headers: getHeaders()}
 
-export {login, isLoggedIn, getHeaders, id, user, getUser};
+export {login, isLoggedIn, getHeaders, id, user, getUser, registerDevice};

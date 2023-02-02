@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1088907384362",
+    "project_id": "auction-clouding-project",
+    "storage_bucket": "auction-clouding-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088907384362:android:1bafbbb8a017fd20031553",
+        "android_client_info": {
+          "package_name": "com.management.auction"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088907384362-90ghn8moefs6i51pukieom9668ftgmig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaTIJVQUm4Ka7ZVwaXzVvbyrZpycRF08k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088907384362-90ghn8moefs6i51pukieom9668ftgmig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

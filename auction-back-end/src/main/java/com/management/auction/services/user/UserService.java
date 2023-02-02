@@ -6,6 +6,9 @@ import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService extends CrudService<User, UserRepo> {
     public UserService(UserRepo repo) {
@@ -14,8 +17,8 @@ public class UserService extends CrudService<User, UserRepo> {
 
     @Override
     public User create(User obj) throws CustomException {
-        User user = this.repo.findByEmail(obj.getEmail()).get(0);
-        if (user != null) throw new CustomException("Email is already used");
+        List<User> users = this.repo.findByEmail(obj.getEmail());
+        if (!users.isEmpty()) throw new CustomException("Email is already used");
         return super.create(obj);
     }
 }

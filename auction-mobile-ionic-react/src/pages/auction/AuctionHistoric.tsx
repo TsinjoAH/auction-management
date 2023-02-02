@@ -5,10 +5,10 @@ import {
 import React from "react";
 
 
-import Menu from "../../components/menu/Menu";
+import Menu from "../../components/menu/Layout";
 import AuctionHistoricItem from "../../components/auctionList/AuctionHistoricItem";
 import './AuctionList.css'
-import Layout from "../../components/menu/Menu";
+import Layout from "../../components/menu/Layout";
 const AuctionHistoric: React.FC = () => {
     return (
         <IonPage id="main-content">

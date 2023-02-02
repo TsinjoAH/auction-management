@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Auction</string>
+    <string name="title_activity_main">Auction</string>
+    <string name="package_name">com.management.auction</string>
+    <string name="custom_url_scheme">com.management.auction</string>
+</resources>
