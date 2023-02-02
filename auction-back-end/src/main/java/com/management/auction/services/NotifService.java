@@ -19,7 +19,7 @@ import java.util.*;
 @Service
 public class NotifService {
 
-    private String baseUrl = "http://192.168.88.221:8080/";
+    private String baseUrl = "https://auction-management-production-a966.up.railway.app/";
 
     @Autowired
     protected NotifRepo repo;
