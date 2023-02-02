@@ -10,11 +10,7 @@ export const menuItem: Menu[] = [
         path: '/user/auctions'
     },
     {
-        title: 'Historic',
-        path: '/user/auctions/historic'
-    },
-    {
-        title: 'Account Recharge',
+        title: 'My Account',
         path: '/user/account/recharge',
     }
 ];

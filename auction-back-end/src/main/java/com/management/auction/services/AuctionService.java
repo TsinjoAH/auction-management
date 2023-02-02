@@ -113,7 +113,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
     }
 
     public List<Auction> findforFk(Long id,int page){
-        return this.repo.findByUserId(id,PageRequest.of(page,25)).toList();
+        return this.repo.findByUserId(id,PageRequest.of(page,5)).toList();
     }
 
     public List<Auction> AuctionNotFinish(){
@@ -121,4 +121,5 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         Query q=manager.createNativeQuery(sql);
         return q.getResultList();
     }
+
 }

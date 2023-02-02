@@ -55,31 +55,6 @@ const ProductModal: React.FC<{ isOpen: boolean, setOpen: (val: boolean) => void,
         category: ''
     });
 
-
-const GroupHeader = styled('div')(({theme}) => ({
-    position: 'sticky',
-    top: '-8px',
-    padding: '4px 10px',
-    color: theme.palette.primary.main,
-    backgroundColor:
-        theme.palette.mode === 'light'
-            ? lighten(theme.palette.primary.light, 0.85)
-            : darken(theme.palette.primary.main, 0.8),
-}));
-
-const GroupItems = styled('ul')({
-    padding: 0,
-});
-
-const ProductModal: React.FC<{ isOpen: boolean, setOpen: (val: boolean) => void, data: (data: any) => void }> = ({isOpen,setOpen, data}) => {
-
-    const [categories, setCategories] = useState<Category[]>([]);
-
-    const [product, setProduct] = useState<any>({
-        name: '',
-        category: ''
-    });
-
     const getCategory = (id: number) => {
         return categories.find((cat) => cat.id === id);
     }

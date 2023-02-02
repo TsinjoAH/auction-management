@@ -1,0 +1,22 @@
+.time-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.time-elt {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.time-elt h3, .time-elt p {
+    text-align: center;
+    margin: 0;
+}
+
+.time-container {
+    margin: 0 auto;
+}
+
+.root {
+    width: 100%;
+}

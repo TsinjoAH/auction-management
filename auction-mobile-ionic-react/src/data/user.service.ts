@@ -6,6 +6,7 @@ const http = axios;
 
 export interface User {
     id: number,
+    name: string,
     email: string,
     signupDate: Date,
     balance: number
@@ -23,6 +24,13 @@ const login = async (data: any) => {
     sessionStorage.setItem("connected_user", JSON.stringify(info.entity));
 }
 
+const getUser = async () => {
+    let result = await http.get(serverUrl("users/"+id()), {
+        headers: getHeaders()
+    });
+    return result.data.data as User;
+}
+
 
 export const signup = async (data: any) => {
     let result = await axios.post(serverUrl("users"), data);
@@ -38,6 +46,8 @@ const getToken = () => sessionStorage.getItem("user_token")
 const id = () => user().id;
 
 const user = () => JSON.parse(sessionStorage.getItem("connected_user") ?? "")as User;
-const getHeaders = (): any => {user_token: getToken()};
+const getHeaders = (): any => {tk: getToken()};
 
-export {login, isLoggedIn, getHeaders, id, user};
+export const getRequestProps = () => {headers: getHeaders()}
+
+export {login, isLoggedIn, getHeaders, id, user, getUser};
