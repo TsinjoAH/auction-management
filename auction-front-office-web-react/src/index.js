@@ -13,6 +13,7 @@ import AuctionList from "./views/auction/AuctionList";
 import Historic from "./views/auction/Historic";
 import Bid from "./views/bid/Bid";
 import AuctionProfil from "./views/auction/AuctionProfil";
+import AboutUs from "./views/about/AboutUs";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,8 +25,9 @@ root.render(
         <Route path={'/home'} element={<Home/>} ></Route>
         <Route path={'/auctions'} element={<AuctionList/>} ></Route>
         <Route path={'/history'} element={<Historic/>} ></Route>
-        <Route path={'/auctions/profil'} element={<AuctionProfil/>} ></Route>
-        <Route path={'/auctions/profil/bid'} element={<Bid/>} ></Route>
+        <Route path={'/profil'} element={<AuctionProfil/>} ></Route>
+        <Route path={'/bid'} element={<Bid/>} ></Route>
+        <Route path={'/about'} element={<AboutUs/>} ></Route>
     </Routes>
   </BrowserRouter>
 );

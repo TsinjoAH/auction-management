@@ -24,7 +24,7 @@ export default class Navbar extends Component{
                                                             <li><a href="/history">Historic</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="">Contact Us</a></li>
+                                                    <li><a href="/about">About Us</a></li>
                                                 </ul>
                                             </nav>
                                         </div>
