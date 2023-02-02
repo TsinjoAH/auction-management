@@ -119,7 +119,7 @@ export class StatService {
     let i: number = 0;
     let j: number = 0;
     for (let d of dates) {
-      d = this.copyDate(d);
+      d = new Date(d);
       counts.push(0);
       for (; i < data.length;) {
         if (getDate(data[i]).getTime() === d.getTime()) {

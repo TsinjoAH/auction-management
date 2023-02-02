@@ -90,8 +90,14 @@ export class StatDateComponent {
 
   setTrafficPeriod(value: string): void {
     if (value === 'Day') {
-      if (this.dayData)
+      if (this.dayData) {
+        let sum = 0;
+        this.dayData.datasets[0].data.forEach((val: number, index: number) => {
+          sum += val;
+        });
+        console.log(sum);
         this.select(this.dayData);
+      }
     }
     else {
       if (this.monthData)

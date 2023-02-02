@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
     getTotal: () => this.auctionTotal?.total,
     getRate: () => Math.round(this.auctionTotal?.increaserate * 10000)/100
   }
+
   userTotalData: IncreaseRateData = {
     title: "Utilisateurs",
     data: this.userTotal,
@@ -96,6 +97,7 @@ export class DashboardComponent implements OnInit {
   loadAuctionCountData(data: IntervalParam) {
     this.service.fetchAuctionCount(data).subscribe({
       next: (res)=> {
+        console.log(res.data);
         this.auctionStatInfo = {
           data: res.data,
           getCount: (elt: any) => elt.count,
