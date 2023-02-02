@@ -6,6 +6,7 @@ import com.management.auction.models.auction.Auction;
 import com.management.auction.models.User;
 import com.management.auction.models.auction.AuctionPic;
 import com.management.auction.models.auction.AuctionView;
+import com.management.auction.models.notification.Notif;
 import com.management.auction.repos.ProductRepo;
 import com.management.auction.repos.UserRepo;
 import com.management.auction.repos.auction.AuctionPicRepo;
@@ -24,10 +25,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo> {
+
     private final UserRepo userRepo;
     private EntityManager manager;
     private final AuctionViewRepo auctionViewRepo;
@@ -39,6 +40,9 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
 
     @Autowired
     private BidRepo bidRepo;
+
+    @Autowired
+    private NotifService notifService;
 
     public AuctionService(AuctionRepo repo, AuctionViewRepo auctionViewRepo, AuctionPicRepo auctionPicRepository,
                           UserRepo userRepo,ProductRepo productRepo) {
@@ -94,8 +98,11 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         auction = super.create(auctionReceiver.getAuction());
         List<AuctionPic> auctionPics = auctionReceiver.getAuctionPics();
         auctionPicRepository.saveAll(auctionPics);
+        auction.setImages(auctionPics);
+        notifService.scheduleForAuction(auction);
         return auction;
     }
+
 
     public List<Auction> findByCriteria(Criteria criteria) throws CustomException {
         return this.repo.findAllById(this.repo.getByCriteria(criteria));

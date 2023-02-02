@@ -5,7 +5,7 @@ import {
     IonDatetime,
     IonDatetimeButton,
     IonGrid,
-    IonHeader, IonImg,
+    IonHeader, IonIcon, IonImg,
     IonInput,
     IonItem,
     IonLabel,
@@ -30,6 +30,8 @@ import {Camera, CameraResultType, CameraSource} from "@capacitor/camera";
 import {Crop} from "@ionic-native/crop";
 import {File} from "@ionic-native/file";
 import {Redirect} from "react-router-dom";
+import {notificationsSharp} from "ionicons/icons";
+import {PageHeader} from "../../components/PageHeader";
 
 const GroupHeader = styled('div')(({theme}) => ({
     position: 'sticky',
@@ -256,14 +258,7 @@ const AuctionCreation: React.FC = () => {
     return (
         redirect ? <Redirect to="/user/auctions" /> :
         <IonPage id="main-content">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
-                    </IonButtons>
-                    <IonTitle>Creer une enchere</IonTitle>
-                </IonToolbar>
-            </IonHeader>
+            <PageHeader title={"Créer une enchère"} />
             <IonContent fullscreen>
                 <ProductModal isOpen={isOpen} setOpen={setOpen} data={addOption}/>
                 <form className="ion-padding" onSubmit={handleSubmit}>

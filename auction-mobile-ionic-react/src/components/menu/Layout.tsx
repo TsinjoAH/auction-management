@@ -1,35 +1,50 @@
 import React, {useEffect} from 'react';
-import {IonContent, IonHeader, IonList, IonMenu, IonRouterOutlet, IonTitle, IonToolbar} from '@ionic/react';
+import {
+    IonContent,
+    IonHeader,
+    IonList,
+    IonMenu,
+    IonRouterOutlet,
+    IonTitle,
+    IonToolbar,
+    useIonRouter
+} from '@ionic/react';
 import {Menu, MenuItem} from "./MenuItem";
 import {menuItem} from "./Item";
 import {Route} from "react-router-dom";
 import AuctionCreation from "../../pages/auction/AuctionCreation";
 import AuctionList from "../../pages/auction/AuctionList";
-import AuctionHistoric from "../../pages/auction/AuctionHistoric";
 import AccountRecharge from "../../pages/deposit/AccountRecharge";
 import {ActionPerformed, PushNotifications, PushNotificationSchema, Token} from "@capacitor/push-notifications";
-import {registerDevice} from "../../data/user.service";
+import {registerDevice, registering} from "../../data/user.service";
+import {NotificationData} from "../../utils/shared.interfaces";
+import {LocalNotifications} from "@capacitor/local-notifications";
+
+import './Layout.css';
+import {NotificationsList} from "../../pages/notifications/NotificationsList";
 
 function Layout(): JSX.Element {
 
+    const router = useIonRouter();
+
     useEffect(() => {
-        PushNotifications.checkPermissions().then((res) => {
-            if (res.receive !== 'granted') {
-                PushNotifications.requestPermissions().then((res) => {
-                    if (res.receive === 'denied') {
-                        alert('Push Notification permission denied');
-                    }
-                    else {
-                        alert('Push Notification permission granted');
-                        register();
-                    }
-                });
-            }
-            else {
-                register();
-            }
-        });
-    }, [])
+            PushNotifications.checkPermissions().then((res) => {
+                if (res.receive !== 'granted') {
+                    PushNotifications.requestPermissions().then((res) => {
+                        if (res.receive === 'denied') {
+                            alert('Push Notification permission denied');
+                        }
+                        else {
+                            alert('Push Notification permission granted');
+                            register();
+                        }
+                    });
+                }
+                else {
+                    register();
+                }
+            });
+    }, []);
 
     const register = () => {
         console.log('Initializing HomePage');
@@ -41,7 +56,7 @@ function Layout(): JSX.Element {
         PushNotifications.addListener('registration',
             (token: Token) => {
                 registerDevice(token.value).then(() => {
-                   alert('Push registration success');
+                   console.log("-- registration success --");
                 })
             }
         );
@@ -53,19 +68,47 @@ function Layout(): JSX.Element {
             }
         );
 
+        let index = 1;
+
         // Show us the notification payload if the app is open on our device
         PushNotifications.addListener('pushNotificationReceived',
-            (notification: PushNotificationSchema) => {
-                // setnotifications(notifications => [...notifications, { id: notification.id, title: notification.title, body: notification.body, type: 'foreground' }])
+            (notification: any) => {
+                let data : NotificationData = notification.data;
+                console.log(data.image);
+                LocalNotifications.schedule({
+                    notifications: [
+                        {
+                            id: index,
+                            title: data.title,
+                            body: data.content,
+                            attachments: [
+                                {
+                                    id: '1',
+                                    url: data.image,
+                                }
+                            ],
+                            extra: data
+                        }
+                    ]
+                }).then(r => {
+                    console.log(r, " Notification received");
+                    index++;
+                })
             }
         );
 
         // Method called when tapping on a notification
         PushNotifications.addListener('pushNotificationActionPerformed',
             (notification: ActionPerformed) => {
-                // setnotifications(notifications => [...notifications, { id: notification.notification.data.id, title: notification.notification.data.title, body: notification.notification.data.body, type: 'action' }])
+                let data : NotificationData = notification.notification.data;
+                router.push(data.link);
             }
         );
+
+        LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
+            let data : NotificationData = notification.notification.extra;
+            router.push(data.link);
+        });
     }
 
     return (
@@ -89,11 +132,11 @@ function Layout(): JSX.Element {
                 <Route path="/user/auctions" exact={true}>
                     <AuctionList/>
                 </Route>
-                <Route path="/user/auctions/historic" exact={true}>
-                    <AuctionHistoric/>
-                </Route>
                 <Route path="/user/account/recharge" exact={true}>
                     <AccountRecharge/>
+                </Route>
+                <Route path="/user/notifications" exact={true}>
+                    <NotificationsList />
                 </Route>
             </IonRouterOutlet>
         </>

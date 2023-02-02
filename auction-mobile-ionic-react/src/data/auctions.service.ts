@@ -62,6 +62,9 @@ export const getAuctions = async (page: number) => {
     return list;
 }
 
+export const clearAuctions = () => {
+    sessionStorage.removeItem("auctions");
+}
 
 const getAuctionsInStorage = () => {
     let list: any = sessionStorage.getItem("auctions");
@@ -79,5 +82,6 @@ export const getAuction = async (auction_id: number) => {
     let result = await http.get(serverUrl(`users/${id()}/auctions/${auction_id}`), {
         headers: getHeaders()
     });
+    clearAuctions();
     return result.data.data as Auction;
 }

@@ -2,15 +2,15 @@ import {Menu} from "./MenuItem";
 
 export const menuItem: Menu[] = [
     {
-        title: 'Create Auction',
+        title: 'Creer un enchere',
         path: '/user/auction/new'
     },
     {
-        title: 'My Auctions',
+        title: 'Mes encheres',
         path: '/user/auctions'
     },
     {
-        title: 'My Account',
+        title: 'Mon compte',
         path: '/user/account/recharge',
     }
 ];
