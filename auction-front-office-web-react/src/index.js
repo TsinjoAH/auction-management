@@ -11,17 +11,21 @@ import reportWebVitals from './reportWebVitals';import  {
   } from "react-router-dom";
 import AuctionList from "./views/auction/AuctionList";
 import Historic from "./views/auction/Historic";
+import Bid from "./views/bid/Bid";
+import AuctionProfil from "./views/auction/AuctionProfil";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-    <Route path={'/'} element={<Login/>} ></Route>
-    <Route path={'/register'} element={<Register/>} ></Route>
-    <Route path={'/home'} element={<Home/>} ></Route>
-    <Route path={'/auctions'} element={<AuctionList/>} ></Route>
-    <Route path={'/history'} element={<Historic/>} ></Route>
+        <Route path={'/'} element={<Login/>} ></Route>
+        <Route path={'/register'} element={<Register/>} ></Route>
+        <Route path={'/home'} element={<Home/>} ></Route>
+        <Route path={'/auctions'} element={<AuctionList/>} ></Route>
+        <Route path={'/history'} element={<Historic/>} ></Route>
+        <Route path={'/auctions/profil'} element={<AuctionProfil/>} ></Route>
+        <Route path={'/auctions/profil/bid'} element={<Bid/>} ></Route>
     </Routes>
   </BrowserRouter>
 );

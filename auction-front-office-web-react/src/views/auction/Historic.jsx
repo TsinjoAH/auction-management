@@ -2,6 +2,7 @@ import {Component} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuctionListItem from "../../components/AuctionListItem";
+import AdvancedSearch from "../../components/AdvancedSearch";
 
 export default class Historic extends Component{
     render(){
@@ -9,6 +10,7 @@ export default class Historic extends Component{
             <>
                 <Navbar/>
                 <main>
+                    <AdvancedSearch/>
                     <div className="favourite-place place-padding">
                         <div className="container">
                             <div className="row">
