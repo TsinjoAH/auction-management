@@ -26,7 +26,7 @@ import AuctionList from "./pages/auction/AuctionList";
 import AuctionHistoric from "./pages/auction/AuctionHistoric";
 import AccountRecharge from "./pages/deposit/AccountRecharge";
 import {Login} from "./pages/login/Login";
-import Layout from "./components/menu/Menu";
+import Layout from "./components/menu/Layout";
 import {AuctionProfile} from "./pages/auction/auctionProfile/AuctionProfile";
 
 setupIonicReact();

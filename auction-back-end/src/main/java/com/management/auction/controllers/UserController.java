@@ -28,7 +28,7 @@ public class UserController extends LoginController<User, UserLoginService> {
         return "user_token";
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<?> signup (@RequestBody User user) throws CustomException {
         return returnSuccess(this.userService.create(user), HttpStatus.OK);
     }
