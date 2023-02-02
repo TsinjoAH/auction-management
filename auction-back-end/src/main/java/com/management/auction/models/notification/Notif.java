@@ -1,4 +1,5 @@
-package com.management.auction.models;
+package com.management.auction.models.notification;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -11,6 +12,18 @@ public class Notif {
     String link;
     Date date;
     Long user;
+
+    public Notif() {
+    }
+
+    public Notif(String title, String content, String image, String link, Date date, Long user) {
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.link = link;
+        this.date = date;
+        this.user = user;
+    }
 
     public String getTitle() {
         return title;
@@ -59,4 +72,5 @@ public class Notif {
     public void setDate(Date date) {
         this.date = date;
     }
+
 }
