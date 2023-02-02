@@ -1,4 +1,4 @@
-drop owned by auction;
+-- drop owned by auction;
 
 create table admin
 (
