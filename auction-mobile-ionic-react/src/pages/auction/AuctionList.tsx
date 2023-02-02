@@ -3,7 +3,7 @@ import {
     IonButtons,
     IonContent,
     IonGrid,
-    IonHeader,
+    IonHeader, IonIcon,
     IonMenuButton,
     IonPage,
     IonRow,
@@ -14,6 +14,8 @@ import React, {useState} from "react";
 import AuctionListItem from "../../components/auctionList/AuctionListItem";
 import './AuctionList.css'
 import {Auction, getAuctions} from "../../data/auctions.service";
+import {barbellSharp, notifications, notificationsSharp} from "ionicons/icons";
+import {PageHeader} from "../../components/PageHeader";
 
 const AuctionList: React.FC = () => {
 
@@ -48,15 +50,7 @@ const AuctionList: React.FC = () => {
 
     return (
         <IonPage id="main-content">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
-                    </IonButtons>
-                    <IonTitle>Liste de vos encheres</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-
+            <PageHeader title={"Mes encheres" } />
             <IonContent className="content">
                 <IonGrid>
                     <IonRow>

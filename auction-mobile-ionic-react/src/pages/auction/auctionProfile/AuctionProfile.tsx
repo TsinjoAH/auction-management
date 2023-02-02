@@ -59,7 +59,7 @@ export const AuctionProfile: React.FC = () => {
                         >
                             {auction?.images.map((img, i) =>
                                 <SwiperSlide key={i} >
-                                    <img src={serverUrl(img.picPath)} alt="" width="100%"/>
+                                    <img src={serverUrl(img.picPath)} alt="" className="img-100"/>
                                 </SwiperSlide>
                             )}
                         </Swiper>

@@ -2,7 +2,7 @@ import {
     IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardTitle,
     IonCol,
     IonContent,
-    IonGrid, IonHeader,
+    IonGrid, IonHeader, IonIcon,
     IonInput,
     IonItem,
     IonLabel,
@@ -15,6 +15,8 @@ import {Deposit, DepositItem} from "./DepositItem";
 import {getUser, login, User} from "../../data/user.service";
 import {fetchDepositHistory, makeDeposit} from "../../data/deposits.service";
 import './AuctionRecharge.css';
+import {notificationsSharp} from "ionicons/icons";
+import {PageHeader} from "../../components/PageHeader";
 
 const AccountRecharge: React.FC = () => {
 
@@ -84,14 +86,7 @@ const AccountRecharge: React.FC = () => {
 
     return (
         <IonPage id="main-content">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
-                    </IonButtons>
-                    <IonTitle>Votre compte</IonTitle>
-                </IonToolbar>
-            </IonHeader>
+            <PageHeader title={"Mon compte"} />
             <IonContent fullscreen>
                 <IonCard color="light" >
                     <IonCardTitle className="ion-padding">

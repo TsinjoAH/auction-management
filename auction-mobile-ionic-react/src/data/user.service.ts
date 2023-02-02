@@ -24,12 +24,19 @@ const login = async (data: any) => {
     sessionStorage.setItem("connected_user", JSON.stringify(info.entity));
 }
 
+class registering {
+    static key = "registered";
+    static set = () => sessionStorage.setItem(registering.key, "true");
+    static get = () => sessionStorage.getItem(registering.key) === "true";
+}
+
 const registerDevice = async (token: string) => {
     let result = await http.put(serverUrl(`users/${id()}/devices`), {
         deviceToken: token
     }, {
         headers: getHeaders()
     });
+    registering.set();
     return result.data.data
 }
 
@@ -50,13 +57,20 @@ const isLoggedIn = (): boolean => {
     return getToken() !== null;
 }
 
-const getToken = () => sessionStorage.getItem("user_token")
+const getToken = () => {
+    return sessionStorage.getItem("user_token")
+}
 
 const id = () => user().id;
 
-const user = () => JSON.parse(sessionStorage.getItem("connected_user") ?? "")as User;
-const getHeaders = (): any => {tk: getToken()};
+const user = () => {
+    return JSON.parse(sessionStorage.getItem("connected_user") ?? "") as User
+};
+
+const getHeaders = (): any => {
+    return {"tk": getToken()}
+};
 
 export const getRequestProps = () => {headers: getHeaders()}
 
-export {login, isLoggedIn, getHeaders, id, user, getUser, registerDevice};
+export {login, isLoggedIn, getHeaders, id, user, getUser, registerDevice, registering};

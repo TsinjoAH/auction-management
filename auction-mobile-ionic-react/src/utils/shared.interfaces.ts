@@ -14,3 +14,12 @@ export interface Category extends HasName{
 export interface Product extends HasName{
     category: Category
 }
+
+export interface NotificationData {
+    title: string,
+    content: string,
+    link: string,
+    image: string,
+    user: string,
+    date: Date
+}
