@@ -15,7 +15,7 @@ export default class AuctionListItem extends Component {
                                 <span><i className="fas fa-clock"></i><span><Timer expirationDate={new Date(new Date().getTime() + 500000)} /></span> </span>
                                 <h3><a href="#">Auction Title</a></h3>
                                 <p className="dolor">Category <span>/ Product</span></p>
-                                <a href="/auctions/profil" className="d-inline-block" style={{color:"#ffa800"}}>See more</a>
+                                <a href="/profil" className="d-inline-block" style={{color:"#ffa800"}}>See more</a>
 
                             </div>
                         </div>

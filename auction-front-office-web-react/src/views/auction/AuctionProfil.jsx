@@ -26,7 +26,7 @@ export default class AuctionProfil extends Component{
                                                 <h3><a href="#">Auction Title</a></h3>
                                                 <p className="dolor">Category <span>/ Product</span></p>
                                                 <p>Auction Description</p>
-                                                <a href="/auctions/profil/bid">Bid</a>
+                                                <a href="/bid" className="d-inline-block" style={{color:"#ffa800"}}>Bid</a>
                                             </div>
                                         </div>
                                     </div>
