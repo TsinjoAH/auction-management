@@ -76,17 +76,17 @@ public class StatRepoImpl implements StatRepo{
 
     @Override
     public List<HashMap<String, Object>> getProductStat(int page) {
-        String sql="SELECT * FROM product_stat LIMIT 25 OFFSET ?";
+        String sql="SELECT * FROM product_stat LIMIT 10 OFFSET ?";
         Query query=manager.createNativeQuery(sql, Tuple.class);
-        query.setParameter(1,25*page);
+        query.setParameter(1,10*page);
         return listOfTupleToMap(query.getResultList(),"id","name","auction","sold","commission","bid","ratio");
     }
 
     @Override
     public List<HashMap<String, Object>> getCategoryStat(int page) {
-        String sql="SELECT * FROM category_stat LIMIT 25 OFFSET ?";
+        String sql="SELECT * FROM category_stat LIMIT 10 OFFSET ?";
         Query query=manager.createNativeQuery(sql, Tuple.class);
-        query.setParameter(1,25*page);
+        query.setParameter(1,10*page);
         return listOfTupleToMap(query.getResultList(),"id","name","auction","sold","commission","bid","ratio");
     }
 
