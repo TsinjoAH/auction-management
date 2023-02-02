@@ -38,7 +38,7 @@ public class Config {
                     .requestMatchers(HttpMethod.POST,"/categories/**","/products/**","/stats/**","/deposits/**").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.GET,"/categories/**","/products/**","/stats/**","/deposits/**", "/commission").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/categories/**","/products/**","**/stats/**").hasAuthority("ROLE_ADMIN")
-                    .requestMatchers(HttpMethod.POST,"/users/login","/admin/login","/admin","/users").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/users/login","/admin/login","/admin","/users/signup").permitAll()
                     .requestMatchers(HttpMethod.DELETE,"/users/logout","/admin/logout").permitAll()
                     .requestMatchers(HttpMethod.GET, "/images/**", "/notifs/test").permitAll()
                     .anyRequest().hasAuthority("ROLE_USER")
