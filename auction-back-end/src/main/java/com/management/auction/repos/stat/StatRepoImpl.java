@@ -97,6 +97,7 @@ public class StatRepoImpl implements StatRepo{
         }
         return result;
     }
+
     private List<HashMap<String,Object>> listOfTupleToMap(List<Tuple> list,String... keys){
         List<HashMap<String,Object>> result=new ArrayList<>();
         for(Tuple tuple:list){

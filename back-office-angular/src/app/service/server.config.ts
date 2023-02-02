@@ -1,5 +1,5 @@
 
-const _url = "https://auction-management-production.up.railway.app/";
+const _url = "http://localhost:8080/";
 export const baseUrl = (url: string) => _url + url;
 
 export interface Response<T> {

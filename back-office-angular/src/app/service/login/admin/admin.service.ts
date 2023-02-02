@@ -7,7 +7,7 @@ import {AuthService} from "../auth.service";
 export class AdminService extends AuthService{
 
   constructor() {
-    super("admin", "admin_token");
+    super("admin", "tk");
   }
 
 }

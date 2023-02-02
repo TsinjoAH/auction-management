@@ -37,9 +37,11 @@ export class LoginComponent implements OnInit {
 
           this.service.login(this.loginForm.value).subscribe({
             next: res => {
+              console.log("success");
               sessionStorage.setItem("admin", JSON.stringify(res.data.entity));
-              sessionStorage.setItem("admin_token", res.data.token);
-              this.router.navigate(["dashboard"]);
+              sessionStorage.setItem("tk", res.data.token);
+              this.router.navigate(["/dashboard"]).then(() => console.log("redirected")).catch((r) => console.log(r));
+              this.clicked = false;
             },
             error: err => {
               Swal.fire({
