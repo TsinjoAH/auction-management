@@ -5,6 +5,7 @@ import com.management.auction.models.User;
 import com.management.auction.repos.DepositRepo;
 import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ import java.util.List;
 @Service
 public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo> {
 
+    @Autowired
+    NotifService notifService;
+
     public DepositService(DepositRepo repo) {
         super(repo);
     }
@@ -27,7 +31,9 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
         if (obj == null ) throw new CustomException("invalid deposit");
         obj.setStatus(20);
         obj.setStatusChangeDate(Timestamp.valueOf(LocalDateTime.now()));
-        return this.repo.save(obj);
+        Deposit dep = this.repo.save(obj);
+        notifService.scheduleForDeposit(dep);
+        return dep;
     }
 
     public List<Deposit> notValidated () {
@@ -45,9 +51,12 @@ public class DepositService extends CrudServiceWithFK<Deposit, User, DepositRepo
         deposit.setStatus(10);
         deposit.setStatusChangeDate(Timestamp.valueOf(LocalDateTime.now()));
         this.update(deposit);
+        notifService.scheduleForDeposit(deposit);
         return deposit;
     }
+
     public List<Deposit> findForFkPageable(Long user,int page){
         return this.repo.findByUserIdOrderByIdDesc(user, PageRequest.of(page,5)).toList();
     }
+    
 }
