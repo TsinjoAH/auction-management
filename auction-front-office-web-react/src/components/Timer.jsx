@@ -15,7 +15,7 @@ export const Timer : React.FC<TimerProps> = ({expirationDate}: TimerProps) => {
         const now = new Date().getTime();
 
         // Find the distance between now and the count down date
-        const distance = expirationDate.getTime() - now;
+        const distance = expirationDate - now;
 
         // Time calculations for days, hours, minutes and seconds
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -24,11 +24,11 @@ export const Timer : React.FC<TimerProps> = ({expirationDate}: TimerProps) => {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element
-        setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
-
         if (distance < 0) {
             clearInterval(interval);
             setText("FINISHED")
+        }else{
+            setText(days + "d " + hours + "h " + minutes + "m " + seconds + "s ");
         }
     }, 1000);
 
