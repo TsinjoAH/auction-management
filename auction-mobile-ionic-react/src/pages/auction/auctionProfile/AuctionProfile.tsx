@@ -33,15 +33,15 @@ export const AuctionProfile: React.FC = () => {
     const [redirect, setRedirect] = useState<boolean>();
 
     useIonViewWillEnter(() => {
-        setRedirect(false);
-    })
-
-    useEffect(() => {
+        setRedirect(false)
         getAuction(parseInt(params.id)).then((data) => {
-            console.log(data);
             setAuction(data);
         });
     }, [params.id])
+
+    // useEffect(() => {
+    //
+    // }, [params.id])
 
     return (
         redirect ? <Redirect to={"/user/auctions"}/> :
@@ -66,7 +66,7 @@ export const AuctionProfile: React.FC = () => {
                             </Swiper>
                         </div>
 
-                        <div className="">
+                        <div >
                             <IonCard>
                                 <IonCardTitle className="ion-padding">
                                     Informations generales
@@ -74,9 +74,7 @@ export const AuctionProfile: React.FC = () => {
                                 <IonCardContent className="pt-0">
                                     <p><u>Produit</u>: {auction?.product.name}</p>
                                     <p><u>Category</u>: {auction?.product.category.name}</p>
-                                    <p><u>Description</u>: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Alias atque aut esse, eum, fugiat illo laborum neque, nesciunt nisi nostrum
-                                        placeat qui quidem quisquam. Animi cum dolorem eligendi iusto quia?</p>
+                                    <p><u>Description</u>: {auction?.description}</p>
                                 </IonCardContent>
                             </IonCard>
                         </div>
@@ -107,5 +105,6 @@ export const AuctionProfile: React.FC = () => {
                 </IonContent>
             </IonPage>
     )
+
 }
 

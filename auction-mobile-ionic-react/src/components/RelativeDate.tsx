@@ -24,14 +24,17 @@ export const RelativeDate : React.FC<RelativeDateProps> = ({date}: RelativeDateP
         if (diffWeeks > 0) {
             setText(rtf.format(-diffWeeks, "weeks"));
         }
-        if (diffDays > 0) {
+        else if (diffDays > 0) {
             setText(rtf.format(-diffDays, "days"));
         }
-        if (diffHours > 0) {
+        else if (diffHours > 0) {
             setText(rtf.format(-diffHours, "hours"));
         }
-        if (diffMinutes > 0) {
+        else if (diffMinutes > 0) {
             setText(rtf.format(-diffMinutes, "minutes"));
+        }
+        else {
+            setText(date.toString)
         }
     });
 

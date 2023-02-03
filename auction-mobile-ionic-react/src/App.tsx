@@ -46,10 +46,10 @@ const App: React.FC = () => {
             <Route path="/login" exact={true}>
               <Login />
             </Route>
-            <Route path="/user" >
+            <Route path="/user/**" exact={true} >
               <Layout></Layout>
             </Route>
-            <Route path="/auctions/:id" exact={true} >
+            <Route path="/auctions/:id" >
               <AuctionProfile></AuctionProfile>
             </Route>
           </IonRouterOutlet>

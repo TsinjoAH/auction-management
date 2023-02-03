@@ -242,7 +242,7 @@ const AuctionCreation: React.FC = () => {
 
     const pickImage = () => {
         Camera.getPhoto({
-            quality: 100,
+            quality: 75,
             resultType: CameraResultType.Uri,
             source: CameraSource.Photos
         }).then((data) => {

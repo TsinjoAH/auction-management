@@ -46,7 +46,9 @@ export const NotificationsList: React.FC = () => {
                                 <h2 className="notifications">
                                     {notification.title} <br/>
                                     <span className="date">
-                                        <IonNote><RelativeDate date={new Date(notification.date)} /></IonNote>
+                                        <IonNote>
+                                            {new Date(notification.date).toLocaleString()}
+                                        </IonNote>
                                     </span>
                                 </h2>
                                 <h3>
