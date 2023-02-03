@@ -61,7 +61,7 @@ public class NotifService {
         Notif notif = new Notif();
         notif.setTitle("Enchere terminée");
         notif.setContent("L'enchere " + auction.getTitle() + " est terminée, Clickez pour plus de details et voir les resultats");
-        notif.setLink("/auctions/" + auction.getId());
+        notif.setLink("/user/auctions/" + auction.getId());
         notif.setUser(auction.getUser().getId());
         notif.setImage(baseUrl + auction.getImages().get(0).getPicPath());
         notif.setDate(auction.getEndDate());
