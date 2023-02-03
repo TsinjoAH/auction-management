@@ -70,7 +70,7 @@ export default function AuctionProfil(props){
                                         </div>
                                         <div className="place-cap">
                                             <div className="place-cap-top">
-                                                <span><i className="fas fa-clock"></i><span><Timer expirationDate={Date.parse(data.endDate)} /></span> </span>
+                                                <span><i className="fas fa-clock"></i><span><Timer expirationDate={Date.parse(data.endDate)} beginDate={Date.parse(data.beginDate)} /></span> </span>
                                                 <h3>{auction.title}</h3>
                                                 <p className="dolor">{data.product.category.name} <span>/ {data.product.name}</span></p>
                                                 <p>{data.description}</p>
@@ -96,7 +96,8 @@ export default function AuctionProfil(props){
                                                 </table>
                                                 {data.status === 1 ?
                                                     <BidForm auction={data} user={user.data} redirect={setConnected}/>
-                                                    :""
+                                                    :
+                                                    ""
                                                 }
                                             </div>
                                         </div>

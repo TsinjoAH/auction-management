@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 
 interface TimerProps {
-    expirationDate: Date
+    expirationDate: Date,
+    beginDate : Date
 }
 
-export const Timer : React.FC<TimerProps> = ({expirationDate}: TimerProps) => {
+export const Timer : React.FC<TimerProps> = ({expirationDate,beginDate}: TimerProps) => {
 
     const [text, setText] = useState("");
 
@@ -24,7 +25,7 @@ export const Timer : React.FC<TimerProps> = ({expirationDate}: TimerProps) => {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element
-        if((now-expirationDate)<0){
+        if((beginDate-now)<0){
             clearInterval(interval);
             setText("NOT STARTED YET");
         }
