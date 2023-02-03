@@ -17,7 +17,7 @@ public class DeviceService extends CrudService<UserDevice, DeviceRepo> {
 
     public UserDevice register (UserDevice userDevice) throws CustomException {
         System.out.println("Device registration: "+userDevice.getDeviceToken());
-        Optional<UserDevice> found = this.repo.findByDeviceToken(userDevice.getDeviceToken());
+        Optional<UserDevice> found = this.repo.findByDeviceTokenAndUserId(userDevice.getDeviceToken(), userDevice.getUserId());
         if (found.isPresent()) return found.get();
         return create(userDevice);
     }

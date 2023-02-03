@@ -632,10 +632,13 @@ insert into bid(auction_id, user_id, amount,bid_date) values(1,1,200,'2021-01-02
                                                             (16,9,200,'2021-07-02 22:10');
 
 
+drop table user_device;
+
 create table user_device (
     id serial primary key,
     user_id int not null references "user"(id),
-    device_token text not null unique
+    device_token text not null,
+    unique (user_id, device_token)
 );
 
 
