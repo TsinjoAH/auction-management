@@ -4,6 +4,7 @@ import com.management.auction.models.Bid;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.repos.BidRepo;
 import com.management.auction.repos.UserRepo;
+import com.management.auction.repos.auction.AuctionRepo;
 import custom.springutils.exception.CustomException;
 import custom.springutils.service.CrudServiceWithFK;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class BidService extends CrudServiceWithFK<Bid, Auction, BidRepo> {
 
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    AuctionRepo auctionRepo;
 
     public BidService(BidRepo repo) {
         super(repo);
@@ -30,8 +33,17 @@ public class BidService extends CrudServiceWithFK<Bid, Auction, BidRepo> {
     @Override
     @Transactional(rollbackFor = {CustomException.class})
     public Bid create(Bid obj) throws CustomException {
-        double maxBid = this.repo.getMaxBid(obj.getAuctionId());
+        double maxBid =0;
+        Auction auction=auctionRepo.findById(obj.getAuctionId()).get();
+        try {
+            this.repo.getMaxBid(obj.getAuctionId());
+        }catch (Exception e){
+            maxBid=0;
+        }
         if (maxBid >= obj.getAmount()) {
+            throw new CustomException("bid invalid");
+        }
+        if(obj.getAmount()<auction.getStartPrice()){
             throw new CustomException("bid invalid");
         }
         if (userRepo.getAccountBalance(obj.getUser().getId()) < obj.getAmount()) {

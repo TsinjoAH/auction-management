@@ -1,5 +1,6 @@
 import {Component, useState} from "react";
 import global from "../global.json";
+import {Navigate} from "react-router-dom";
 
 export default function BidForm(props){
     const [error,setError]=useState("");
@@ -21,6 +22,7 @@ export default function BidForm(props){
         }).then(result=>{
             if(result.ok){
                 alert("Auction validate");
+                window.location.reload(true);
             }else{
                 result.text().then(t=>{
                     setError(JSON.parse(t).message);
