@@ -25,7 +25,7 @@ public class UserController extends LoginController<User, UserLoginService> {
 
     @Override
     public String getRequestHeaderKey() {
-        return "user_token";
+        return "tk";
     }
 
     @PostMapping("/signup")

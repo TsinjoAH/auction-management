@@ -54,12 +54,12 @@ export default function AuctionList(props){
                                     <div className="single-wrap d-flex justify-content-center">
                                         <nav aria-label="Page navigation example">
                                             <ul className="pagination justify-content-start">
-                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page-1)}><span
+                                                <li key={0} className="page-item"><p className="page-link" onClick={()=>setPage(page-1)}><span
                                                     className="flaticon-arrow roted left-arrow"></span></p></li>
-                                                <li className="page-item active"><p className="page-link">{page}</p></li>
-                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} >{page+1}</p></li>
-                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+2)} >{page+2}</p></li>
-                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} ><span
+                                                <li key={1} className="page-item active"><p className="page-link">{page}</p></li>
+                                                <li key={2} className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} >{page+1}</p></li>
+                                                <li key={3} className="page-item"><p className="page-link" onClick={()=>setPage(page+2)} >{page+2}</p></li>
+                                                <li key={4} className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} ><span
                                                     className="flaticon-arrow right-arrow"></span></p></li>
                                             </ul>
                                         </nav>

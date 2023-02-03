@@ -1,6 +1,7 @@
+import Wow from 'wow.min.js';
 (function ($)
   { "use strict"
-  
+
 /* 1. Proloder */
     $(window).on('load', function () {
       $('#preloader-active').delay(450).fadeOut('slow');
@@ -12,14 +13,14 @@
 
 /* 2. slick Nav */
 // mobile_menu
-    var menu = $('ul#navigation');
-    if(menu.length){
+  const menu = $('ul#navigation');
+  if(menu.length){
       menu.slicknav({
         prependTo: ".mobile_menu",
         closedSymbol: '+',
         openedSymbol:'-'
       });
-    };
+    }
 
 
 /* 3. MainSlider-1 */
@@ -214,7 +215,7 @@
 
 
 /* 10. WOW active */
-    new WOW().init();
+    new Wow().init();
 
 /* 11. Datepicker */
     
