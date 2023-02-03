@@ -12,7 +12,7 @@ import java.util.List;
 public class AuctionView extends AuctionBase{
     @Column
     private Integer status;
-    @Formula("(SELECT b.user_id FROM bid b WHERE b.auction_id=id AND b.amount=(SELECT max(v.amount) FROM bid v WHERE v.auction_id=id))")
+    @Formula("(SELECT b.user_id FROM bid b WHERE b.auction_id=id AND b.amount=(SELECT max(v.amount) FROM bid v WHERE v.auction_id=id) LIMIT 1)")
     private Long winner;
 
     public Integer getStatus() {
