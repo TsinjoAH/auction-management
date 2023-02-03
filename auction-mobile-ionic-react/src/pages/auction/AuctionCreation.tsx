@@ -197,6 +197,11 @@ const AuctionCreation: React.FC = () => {
             setClicked(false);
         }
         else {
+            if (auction.startDate.getTime() < new Date().getTime()) {
+                alert("Veuillez choisir une date debut valide");
+                setClicked(false);
+                return;
+            }
             let data = {
                 auction: auction,
                 images: images
