@@ -39,8 +39,10 @@ public class Config {
                     .requestMatchers(HttpMethod.POST,"/categories/**","/products/**","/stats/**","/deposits/**").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/categories/**","/products/**","**/stats/**").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.POST,"/users/login","/admin/login","/admin","/users/signup").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/users/**","/admin/login","/admin","/users").permitAll()
                     .requestMatchers(HttpMethod.DELETE,"/users/logout","/admin/logout").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/images/**", "/notifs/test").permitAll()
+                    .requestMatchers(HttpMethod.GET,"/auctions/profile/**").hasAuthority("ROLE_USER")
+                    .requestMatchers(HttpMethod.GET, "/images/**","/auctions/**","/categories", "/notifs/test").permitAll()
                     .anyRequest().hasAuthority("ROLE_USER")
                 ).httpBasic();
         return httpSecurity.build();

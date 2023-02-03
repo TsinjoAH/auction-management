@@ -9,6 +9,7 @@ import custom.springutils.model.HasFK;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -45,7 +46,8 @@ public class AuctionBase extends HasFK<User> {
 
     @Transient
     private List<Bid> bids;
-
+    @Formula("(SELECT MAX(b.amount) FROM bid b WHERE b.auction_id=id)")
+    private Double max=Double.valueOf(0);
     public List<Bid> getBids() {
         return bids;
     }
@@ -88,5 +90,13 @@ public class AuctionBase extends HasFK<User> {
 //        }
 //        this.startDate = startDate;
 //    }
+
+    public Double getMax() {
+        if(max!=null){
+            return max;
+        }else {
+            return 0.0;
+        }
+    }
 }
 

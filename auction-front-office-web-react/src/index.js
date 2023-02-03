@@ -6,27 +6,24 @@ import Register from './views/register/Register';
 import Home from './views/home/Home';
 
 
-import reportWebVitals from './reportWebVitals';import  {
-  BrowserRouter,Routes,Route
-  } from "react-router-dom";
+import reportWebVitals from './reportWebVitals';import {
+    BrowserRouter, Routes, Route, useNavigate
+} from "react-router-dom";
 import AuctionList from "./views/auction/AuctionList";
 import Historic from "./views/auction/Historic";
-import Bid from "./views/bid/Bid";
 import AuctionProfil from "./views/auction/AuctionProfil";
 import AboutUs from "./views/about/AboutUs";
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-        <Route path={'/'} element={<Login/>} ></Route>
+        <Route path={'/'} element={<Home/>} ></Route>
         <Route path={'/register'} element={<Register/>} ></Route>
-        <Route path={'/home'} element={<Home/>} ></Route>
+        <Route path={'/login'} element={<Login/>} ></Route>
         <Route path={'/auctions'} element={<AuctionList/>} ></Route>
         <Route path={'/history'} element={<Historic/>} ></Route>
-        <Route path={'/profil'} element={<AuctionProfil/>} ></Route>
-        <Route path={'/bid'} element={<Bid/>} ></Route>
+        <Route path={'/profile'} element={<AuctionProfil/>} ></Route>
         <Route path={'/about'} element={<AboutUs/>} ></Route>
     </Routes>
   </BrowserRouter>

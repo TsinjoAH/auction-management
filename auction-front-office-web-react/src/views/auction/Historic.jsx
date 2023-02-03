@@ -1,16 +1,42 @@
-import {Component} from "react";
+import {Component, useEffect, useState} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuctionListItem from "../../components/AuctionListItem";
 import AdvancedSearch from "../../components/AdvancedSearch";
+import global from "../../global.json";
+import {Navigate} from "react-router-dom";
 
-export default class Historic extends Component{
-    render(){
+export default function Historic(props){
+        const [data,setData]=useState([]);
+        const [connected,setConnected]=useState(true);
+        useEffect(()=>{
+            let user=JSON.parse(localStorage.getItem("user"));
+            if(user===null){
+                alert("please log to see historic, thanks ");
+                setConnected(false);
+            }else{
+                fetch(global.link+"/users/"+user.data.entity.id+"/auctions/history",{
+                    headers:{
+                        [global.tokenHeader]:user.data.token
+                    }
+                }).then(result=>result.json())
+                    .then(data=>{
+                        if(data!==undefined){
+                            setData(data.data);
+                        }
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        alert("Please relog again to see historic , thanks")
+                        setConnected(false);
+                    });
+            }
+        },[]);
         return(
+            connected ?
             <>
                 <Navbar/>
                 <main>
-                    <AdvancedSearch/>
                     <div className="favourite-place place-padding">
                         <div className="container">
                             <div className="row">
@@ -22,41 +48,13 @@ export default class Historic extends Component{
                                 </div>
                             </div>
                             <div className="row">
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="pagination-area pb-100 text-center">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-xl-12">
-                                    <div className="single-wrap d-flex justify-content-center">
-                                        <nav aria-label="Page navigation example">
-                                            <ul className="pagination justify-content-start">
-                                                <li className="page-item"><a className="page-link" href="#"><span
-                                                    className="flaticon-arrow roted left-arrow"></span></a></li>
-                                                <li className="page-item active"><a className="page-link"
-                                                                                    href="#">01</a></li>
-                                                <li className="page-item"><a className="page-link" href="#">02</a></li>
-                                                <li className="page-item"><a className="page-link" href="#">03</a></li>
-                                                <li className="page-item"><a className="page-link" href="#"><span
-                                                    className="flaticon-arrow right-arrow"></span></a></li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
+                                {data.map(auction=><AuctionListItem auction={auction} />)}
                             </div>
                         </div>
                     </div>
                 </main>
                 <Footer/>
             </>
+        : <Navigate to={"/login"} />
         )
-    }
 }
