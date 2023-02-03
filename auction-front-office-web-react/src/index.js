@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Login from './views/login/Login';
 import Register from './views/register/Register';
-import Home from './views/home/Home';
-
 
 import reportWebVitals from './reportWebVitals';import {
     BrowserRouter, Routes, Route, useNavigate
@@ -18,10 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-        <Route path={'/'} element={<Home/>} ></Route>
         <Route path={'/register'} element={<Register/>} ></Route>
         <Route path={'/login'} element={<Login/>} ></Route>
-        <Route path={'/auctions'} element={<AuctionList/>} ></Route>
+        <Route path={'/'} element={<AuctionList/>} ></Route>
         <Route path={'/history'} element={<Historic/>} ></Route>
         <Route path={'/profile'} element={<AuctionProfil/>} ></Route>
         <Route path={'/about'} element={<AboutUs/>} ></Route>
