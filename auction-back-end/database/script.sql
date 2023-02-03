@@ -279,17 +279,13 @@ values ('tsinjoah', 'tsinjoah@gmail.com', '602260addce6b6f6f7a3b3bd8f55d95241dd0
       
 
 
+
+
 insert into account_deposit(user_id, amount, status, status_change_date)
 values (1, 5000, 20, '2023-01-24'),
        (2, 8000, 20, '2023-01-23'),
        (3, 7000, 20, '2023-01-22'),
-       (4, 6000, 20, '2023-01-21'),
-       (5, 9000, 20, '2023-01-20'),
-       (6, 10000, 20, '2023-01-19'),
-       (7, 2000, 20, '2023-01-18'),
-       (8, 3000, 20, '2023-01-17'),
-       (9, 5000, 20, '2023-01-16'),
-       (10, 8500, 20, '2023-01-15');
+       (4, 6000, 20, '2023-01-21');
 
 
 CREATE VIEW auctionPerDay AS
@@ -377,23 +373,30 @@ select count(*) bidcount,p.category_id category from bid JOIN auction a ON bid.a
 insert into auction
 (title, description,user_id, start_date, end_date, duration, product_id, start_price,commission) 
 values
-('Une affaire magnifique de fleur','fleur de jade',1,'2021-01-02 02:00','2021-01-03 02:00',1440,1,150,0.5),
-('Une magnifique de tetine','tetine dore',2,'2022-11-29 08:00','2022-11-30 08:30',30,2,150,0.5),
-('Une  Tele genereux','Tele sans fil',3,'2023-01-02 00:00','2023-01-05 02:00',4680,3,150,0.5),
-('Un clavier ','msi rgb',4,'2021-11-02 02:00','2021-11-03 02:00',1440,4,150,0.5),
-('Un Chapeau','chapeau de paille',5,'2023-01-02 02:00','2023-01-03 02:00',1440,5,150,0.5),
-('Une fiore ','de poudelard',6,'2022-01-02 02:00','2022-01-03 02:00',1440,6,150,0.5),
-('Une affaire magnifique de telephone','iphone 13 pro max',7,'2023-01-15 02:00','2023-01-16 02:00',1440,7,150,0.5),
-('Une argent','dolard signe MC',8,'2021-07-02 02:00','2021-08-03 02:00',43800,8,150,0.5),
+('Rollex','Une montre qui attise la curiosite des femmes',1,'2023-02-03 13:36','2023-02-10 13:36',10080,1,2500,0.5),
+('Bibelot en jade','Une vache en jade',2,'2023-02-03 13:44','2023-02-10 13:44',10080,4,150,0.5),
+('La Joconde','Une replique de Mona Lisa',3,'2023-02-03 13:46','2023-02-10 13:46',10080,5,2500,0.5),
+('Cute barbie doll','Une poupee de barbie magnifique',4,'2023-02-03 13:50','2023-02-10 13:50',10080,6,250,0.5),
+('Voiture','Un voiture enfantin attiran',1,'2023-02-03 13:55','2023-02-10 13:55',10080,7,2500,0.5);
 
-('Une affaire de parapluie','parapluie mexicain',9,'2022-01-02 11:30','2022-01-02 23:30',720,1,200,0.5),
-('Un ordinateur','MSI:RTX 3080',10,'2023-08-10 08:00','2023-08-11 08:30',1470,2,1500,0.5),
-('Un album queen','Somebody to love',1,'2021-06-02 00:00','2021-06-02 18:00',1080,3,150,0.5),
-('Un chat de bonheur ','chat de jade',2,'2023-01-06 02:00','2023-01-07 02:00',1440,4,250,0.5),
-('Un Anime Hors Prix','slam dunk',3,'2023-11-02 02:00','2023-11-03 02:00',1440,5,150,0.5),
-('Un slip kangourou ','de poudelard',4,'2022-05-02 02:00','2022-05-03 02:00',1440,6,150,0.5),
-('Head golden version','Gol D Roger',5,'2023-03-15 02:00','2023-03-16 02:00',1440,7,150,0.5),
-('Replique de pokeball','Une Master Ball',6,'2022-07-02 02:00','2022-07-03 02:00',1440,8,150,0.5);                                                                                                                    
+
+insert into auction_pic(auction_id, pic_path) values(1,'images/Rolex.jpg'),
+                                                (2,'images/Bibelot.jpg'),
+                                                (3,'images/BeauxArt.jpg'),
+                                                (4,'images/Cute.jpg'),
+                                                (5,'images/Kids.jpg');
+
+
+insert into bid(auction_id, user_id, amount,bid_date) values(1,2,2550,'2023-02-03 15:36'),
+                                                            (1,3,2600,'2023-02-03 15:39'),
+                                                            (2,1,255,'2023-02-03 14:36'),
+                                                            (2,4,290,'2023-02-03 14:39'), 
+                                                            (3,1,2700,'2023-02-03 16:36'),
+                                                            (3,2,2750,'2023-02-03 17:39'),
+                                                            (4,2,255,'2023-02-03 21:36'),
+                                                            (4,3,270,'2023-02-03 21:58'),
+                                                            (5,3,2555,'2023-02-03 23:36'),
+                                                            (5,1,2600,'2023-02-03 23:58');
 
 
 
@@ -551,3 +554,8 @@ create table user_device (
 );
 
 
+      
+--------------------to restart all data to 0------------------------
+-- TRUNCATE TABLE "user" RESTART IDENTITY CASCADE;
+-- TRUNCATE TABLE auction RESTART IDENTITY CASCADE;
+-- TRUNCATE TABLE bid RESTART IDENTITY CASCADE;
