@@ -17,10 +17,9 @@ export default class Navbar extends Component{
                                         <div className="main-menu f-right d-none d-lg-block">
                                             <nav>
                                                 <ul id="navigation">
-                                                    <li><a href="/">Home</a></li>
-                                                    <li><a href="">Auction</a>
+                                                    <li><a href="/">Auction</a>
                                                         <ul className="submenu">
-                                                            <li><a href="/auctions">List</a></li>
+                                                            <li><a href="/">List</a></li>
                                                             <li><a href="/history">Historic</a></li>
                                                         </ul>
                                                     </li>
