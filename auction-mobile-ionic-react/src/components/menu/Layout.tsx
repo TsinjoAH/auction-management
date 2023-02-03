@@ -25,92 +25,93 @@ import {NotificationsList} from "../../pages/notifications/NotificationsList";
 import { AuctionProfile } from '../../pages/auction/auctionProfile/AuctionProfile';
 
 function Layout(): JSX.Element {
-    
-/*
-    // useEffect(() => {
-    //         PushNotifications.checkPermissions().then((res) => {
-    //             if (res.receive !== 'granted') {
-    //                 PushNotifications.requestPermissions().then((res) => {
-    //                     if (res.receive === 'denied') {
-    //                         alert('Push Notification permission denied');
-    //                     }
-    //                     else {
-    //                         alert('Push Notification permission granted');
-    //                         register();
-    //                     }
-    //                 });
-    //             }
-    //             else {
-    //                 register();
-    //             }
-    //         });
-    // }, []);
 
-    // const register = () => {
-    //     console.log('Initializing HomePage');
+    const router = useIonRouter();
 
-    //     // Register with Apple / Google to receive push via APNS/FCM
-    //     PushNotifications.register();
+    useEffect(() => {
+            PushNotifications.checkPermissions().then((res) => {
+                if (res.receive !== 'granted') {
+                    PushNotifications.requestPermissions().then((res) => {
+                        if (res.receive === 'denied') {
+                            alert('Push Notification permission denied');
+                        }
+                        else {
+                            alert('Push Notification permission granted');
+                            register();
+                        }
+                    });
+                }
+                else {
+                    register();
+                }
+            });
+    }, []);
 
-    //     // On success, we should be able to receive notifications
-    //     PushNotifications.addListener('registration',
-    //         (token: Token) => {
-    //             registerDevice(token.value).then(() => {
-    //                console.log("-- registration success --");
-    //             })
-    //         }
-    //     );
+    const register = () => {
+        console.log('Initializing HomePage');
 
-    //     // Some issue with our setup and push will not work
-    //     PushNotifications.addListener('registrationError',
-    //         (error: any) => {
-    //             alert('Error on registration: ' + JSON.stringify(error));
-    //         }
-    //     );
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
 
-    //     let index = 1;
+        // On success, we should be able to receive notifications
+        PushNotifications.addListener('registration',
+            (token: Token) => {
+                registerDevice(token.value).then(() => {
+                   console.log("-- registration success --");
+                })
+            }
+        );
 
-    //     // Show us the notification payload if the app is open on our device
-    //     PushNotifications.addListener('pushNotificationReceived',
-    //         (notification: any) => {
-    //             let data : NotificationData = notification.data;
-    //             console.log(data.image);
-    //             LocalNotifications.schedule({
-    //                 notifications: [
-    //                     {
-    //                         id: index,
-    //                         title: data.title,
-    //                         body: data.content,
-    //                         attachments: [
-    //                             {
-    //                                 id: '1',
-    //                                 url: data.image,
-    //                             }
-    //                         ],
-    //                         extra: data
-    //                     }
-    //                 ]
-    //             }).then(r => {
-    //                 console.log(r, " Notification received");
-    //                 index++;
-    //             })
-    //         }
-    //     );
+        // Some issue with our setup and push will not work
+        PushNotifications.addListener('registrationError',
+            (error: any) => {
+                alert('Error on registration: ' + JSON.stringify(error));
+            }
+        );
 
-    //     // Method called when tapping on a notification
-    //     PushNotifications.addListener('pushNotificationActionPerformed',
-    //         (notification: ActionPerformed) => {
-    //             let data : NotificationData = notification.notification.data;
-    //             router.push(data.link);
-    //         }
-    //     );
+        let index = 1;
 
-    //     LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
-    //         let data : NotificationData = notification.notification.extra;
-    //         router.push(data.link);
-    //     });
-    // }
-*/
+        // Show us the notification payload if the app is open on our device
+        PushNotifications.addListener('pushNotificationReceived',
+            (notification: any) => {
+                let data : NotificationData = notification.data;
+                console.log(data.image);
+                LocalNotifications.schedule({
+                    notifications: [
+                        {
+                            id: index,
+                            title: data.title,
+                            body: data.content,
+                            attachments: [
+                                {
+                                    id: '1',
+                                    url: data.image,
+                                }
+                            ],
+                            extra: data
+                        }
+                    ]
+                }).then(r => {
+                    console.log(r, " Notification received");
+                    index++;
+                })
+            }
+        );
+
+        // Method called when tapping on a notification
+        PushNotifications.addListener('pushNotificationActionPerformed',
+            (notification: ActionPerformed) => {
+                let data : NotificationData = notification.notification.data;
+                router.push(data.link);
+            }
+        );
+
+        LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
+            let data : NotificationData = notification.notification.extra;
+            router.push(data.link);
+        });
+    }
+
     
     return (
         <>

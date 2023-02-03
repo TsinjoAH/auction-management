@@ -14,7 +14,7 @@ export const Login: React.FC = () => {
     const [presentAlert] = useIonAlert();
 
     const [data, updateData] = React.useState({
-        email: 'tsinjo@gmail.com', password: 'tsinjo'
+        email: 'lahatra@gmail.com', password: 'gemmedecristal'
     });
 
     const [redirect, setRedirect] = React.useState(false);
