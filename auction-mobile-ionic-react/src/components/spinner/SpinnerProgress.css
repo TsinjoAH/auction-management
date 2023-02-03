@@ -1,0 +1,14 @@
+.spinner-center {
+    margin: 0 auto;
+    transform: scale(3);
+}
+
+.loading-text {
+    margin-top: 40px;
+    font-size: 30px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+}

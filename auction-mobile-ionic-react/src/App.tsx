@@ -49,9 +49,6 @@ const App: React.FC = () => {
             <Route path="/user/**" exact={true} >
               <Layout></Layout>
             </Route>
-            <Route path="/auctions/:id" >
-              <AuctionProfile></AuctionProfile>
-            </Route>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

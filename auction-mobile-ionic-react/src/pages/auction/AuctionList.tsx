@@ -1,27 +1,21 @@
 import {
-    IonButton,
-    IonButtons,
-    IonContent,
-    IonGrid,
-    IonHeader, IonIcon,
-    IonMenuButton,
-    IonPage,
-    IonRow,
-    IonTitle,
-    IonToolbar, useIonViewWillEnter
+    IonButton, IonContent,
+    IonGrid, IonPage,
+    IonRow, useIonViewWillEnter
 } from "@ionic/react";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AuctionListItem from "../../components/auctionList/AuctionListItem";
-import './AuctionList.css'
-import {Auction, getAuctions} from "../../data/auctions.service";
-import {barbellSharp, notifications, notificationsSharp} from "ionicons/icons";
-import {PageHeader} from "../../components/PageHeader";
+import { ModalLoader } from "../../components/modal-loader/ModalLoader";
+import { PageHeader } from "../../components/PageHeader";
+import { Auction, getAuctions } from "../../data/auctions.service";
+import './AuctionList.css';
 
 const AuctionList: React.FC = () => {
 
     const [auctions, setAuctions] = useState<Auction[]>([]);
     const [page, setPage] = useState<number>(0);
     const [clicked, setClicked] = useState<boolean>(false);
+    const [onload, load] = useState<boolean>(false);
 
     useIonViewWillEnter(() => {
         fetchNextPage();
@@ -29,8 +23,12 @@ const AuctionList: React.FC = () => {
 
     const fetchNextPage = ()  => {
         setClicked(true);
+        load(true)
         if (page === 0) {
-            getAuctions(page).then(setAuctions);
+            getAuctions(page).then((data) => {
+                setAuctions(data);
+                stopLoading();
+            });
             setPage(page + 1)
             setClicked(false);
         }
@@ -44,14 +42,20 @@ const AuctionList: React.FC = () => {
                     setAuctions([...auctions, ...data]);
                 }
                 setClicked(false);
+                stopLoading();
             });
         }
+    }
+
+    const stopLoading = () => {
+        load(false);
     }
 
     return (
         <IonPage id="main-content">
             <PageHeader title={"Mes encheres" } />
             <IonContent className="content">
+                <ModalLoader isOpen={onload}/>
                 <IonGrid>
                     <IonRow>
                         {auctions.map((auction, i) => {

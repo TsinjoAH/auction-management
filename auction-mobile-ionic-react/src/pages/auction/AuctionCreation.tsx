@@ -224,20 +224,27 @@ const AuctionCreation: React.FC = () => {
         let val = e.target.value;
         if (name === 'duration' || name === 'startDate') {
             if (name === 'startDate') {
+                val=new Date(val);
+                console.log("VAL", val);
                 setEnd(new Date(new Date(val).getTime() + auction.duration * 60000));
             } else {
                 setEnd(new Date(new Date(auction.startDate).getTime() + val * 60000));
             }
         }
-        setAuction({
+        let _new = {
             ...auction,
             [name]: val
-        })
+        };
+        // console.log(_new);
+        // console.log(val);
+        setAuction(_new);
     }
 
     const format = (d: Date) => {
         const append = (n: number) => n < 10 ? '0' + n : n;
-        return d.getFullYear() + '-' + append(d.getMonth() + 1) + '-' + append(d.getDate()) + ' ' + append(d.getHours()) + ':' + append(d.getMinutes());
+        let _str = d.getFullYear() + '-' + append(d.getMonth() + 1) + '-' + append(d.getDate()) + ' ' + append(d.getHours()) + ':' + append(d.getMinutes());
+        // console.log(_str);
+        return _str;
     }
 
     const pickImage = () => {
@@ -307,10 +314,7 @@ const AuctionCreation: React.FC = () => {
 
                     <IonItem className="mt" fill="outline">
                         <IonLabel>Debut</IonLabel>
-                        <IonDatetimeButton datetime="datetime"></IonDatetimeButton>
-                        <IonModal keepContentsMounted={true}>
-                            <IonDatetime name="startDate" onIonChange={handleChange} locale="EAT" id="datetime"></IonDatetime>
-                        </IonModal>
+                        <IonInput type="datetime-local" name="startDate" onIonChange={handleChange} value={format(auction.startDate)}  required/>
                     </IonItem>
 
                     <IonItem fill="outline" className="mt">
