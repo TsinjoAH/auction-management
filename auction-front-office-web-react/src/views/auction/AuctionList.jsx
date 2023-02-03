@@ -24,6 +24,9 @@ export default function AuctionList(props){
             <>
                 <Navbar/>
                 <main>
+                    <br/><br/>
+                    <br/>
+
                     <AdvancedSearch setData={setData}/>
                     <div className="favourite-place place-padding">
                         <div className="container">

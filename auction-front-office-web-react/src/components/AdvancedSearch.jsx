@@ -48,6 +48,7 @@ export default function AdvancedSearch(props){
         return (
             <>
                 <div className="slider-area ">
+                    <br/>
                     <div className="single-slider slider-height2 d-flex align-items-center" style={{background:"#f0f0f0"}}>
                         <div className="container">
                             <div className="row">
@@ -62,31 +63,42 @@ export default function AdvancedSearch(props){
                                     <br/>
                                     <div className="row">
                                         <div className="col-lg-3">
+                                            <br/>
                                             Min start date
                                             <input type={"datetime-local"} className="form-control" id={"mins"}/>
                                         </div>
                                         <div className="col-lg-3">
+                                            <br/>
                                             Max start date
                                             <input type={"datetime-local"} className="form-control" id={"maxs"}/>
                                         </div>
                                         <div className="col-lg-3">
+                                            <br/>
                                             Min end date
                                             <input type={"datetime-local"} className="form-control" id={"mine"}/>
                                         </div>
                                         <div className="col-lg-3">
+                                            <br/>
                                             Max en date
                                             <input type={"datetime-local"} className="form-control" id={"maxe"}/>
                                         </div>
-                                        <div className="col-lg-3">
+                                        <div className="col-lg-4">
+                                            <br/>
                                             <select className="form-control" id="categ">
                                                 <option value={""}>Category</option>
                                                 {categ.map(cat=> <option value={cat.id}>{cat.name}</option>)}
                                             </select>
                                         </div>
-                                        <div className="col-lg-3">
+                                        <br/>
+
+                                        <div className="col-lg-4">
+                                            <br/>
+
                                             <input type="text" className="form-control" id={"price"} placeholder="Price"/>
                                         </div>
-                                        <div className="col-lg-3">
+                                        <div className="col-lg-4">
+                                            <br/>
+
                                             <select className="form-control" id="status">
                                                 <option value={""}>Status</option>
                                                 <option value="1">In Progress</option>

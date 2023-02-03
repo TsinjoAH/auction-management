@@ -52,21 +52,6 @@ export default function AuctionProfil(props){
                                                     </div>
                                                 )}
                                             </div>
-                                            <div>
-                                                <a className="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev">
-                                                    <span className="carousel-control-prev-icon"></span>
-                                                    <span className="visually-hidden">Previous</span>
-                                                </a>
-                                                <a className="carousel-control-next" href="#carousel-1" role="button" data-bs-slide="next">
-                                                    <span className="carousel-control-next-icon"></span>
-                                                    <span className="visually-hidden">Next</span>
-                                                </a>
-                                            </div>
-                                            <ol className="carousel-indicators">
-                                                <li data-bs-target="#carousel-1" data-bs-slide-to="0" className="active"></li>
-                                                <li data-bs-target="#carousel-1" data-bs-slide-to="1"></li>
-                                                <li data-bs-target="#carousel-1" data-bs-slide-to="2"></li>
-                                            </ol>
                                         </div>
                                         <div className="place-cap">
                                             <div className="place-cap-top">
@@ -78,23 +63,31 @@ export default function AuctionProfil(props){
                                                 <p>start price : {data.startPrice}</p>
                                                 <p>current price : {data.max}</p>
                                                 <h3 style={{color:"#ffa800"}}>Bids : </h3>
-                                                <table width={400} border={1}>
-                                                    <tr>
-                                                        <th>Date</th>
-                                                        <th>User</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                    {
-                                                        data.bids.map(bid=>
+                                                <div className="table-responsive" style={{fontFamily: "Barlow Condensed",fontSize: 18,boxShadow: "1px 1px 16px #61616196",borderRadius:5}}>
+                                                    <table className="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>User</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {
+                                                            data.bids.map(bid =>
+
                                                                 <tr>
                                                                     <td>{new Date(bid.bidDate).toDateString()}</td>
                                                                     <td>{bid.user.name}</td>
                                                                     <td>{bid.amount} Ar</td>
                                                                 </tr>
-                                                        )
-                                                    }
-                                                </table>
-                                                {data.status === 1 ?
+                                                            )
+                                                        }
+
+                                                        </tbody>
+                                                    </table>
+                                                    </div>
+                                                    {data.status === 1 ?
                                                     <BidForm auction={data} user={user.data} redirect={setConnected}/>
                                                     :
                                                     ""

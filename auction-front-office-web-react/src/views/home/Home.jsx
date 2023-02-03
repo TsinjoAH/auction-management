@@ -5,7 +5,9 @@ export default function Home(props){
         return(
             <>
         <Navbar/>
-        <div className="slider-area ">
+                <br/><br/>
+                <br/><br/>
+                <div className="slider-area ">
             <div className="slider-active">
                 <div className="single-slider slider-height d-flex align-items-center" style={{ backgroundImage:"url('assets/img/hero/Picsart_23-02-01_20-50-06-306.jpg')" }}>
                     <div className="container">
