@@ -24,7 +24,11 @@ export const Timer : React.FC<TimerProps> = ({expirationDate}: TimerProps) => {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element
-        if (distance < 0) {
+        if((now-expirationDate)<0){
+            clearInterval(interval);
+            setText("NOT STARTED YET");
+        }
+        else if (distance < 0) {
             clearInterval(interval);
             setText("FINISHED")
         }else{

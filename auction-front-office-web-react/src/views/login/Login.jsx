@@ -22,7 +22,7 @@ export default function Login(props) {
                     alert(data.message);
                 } else {
                     localStorage.setItem("user", JSON.stringify(data));
-                    navigate("/home");
+                    navigate("/");
                 }
             });
     };

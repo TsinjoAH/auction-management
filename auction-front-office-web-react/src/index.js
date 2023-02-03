@@ -18,9 +18,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-        <Route path={'/'} element={<Login/>} ></Route>
+        <Route path={'/'} element={<Home/>} ></Route>
         <Route path={'/register'} element={<Register/>} ></Route>
-        <Route path={'/home'} element={<Home/>} ></Route>
+        <Route path={'/login'} element={<Login/>} ></Route>
         <Route path={'/auctions'} element={<AuctionList/>} ></Route>
         <Route path={'/history'} element={<Historic/>} ></Route>
         <Route path={'/profile'} element={<AuctionProfil/>} ></Route>

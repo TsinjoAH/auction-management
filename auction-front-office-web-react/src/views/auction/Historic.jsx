@@ -12,6 +12,7 @@ export default function Historic(props){
         useEffect(()=>{
             let user=JSON.parse(localStorage.getItem("user"));
             if(user===null){
+                alert("please log to see historic, thanks ");
                 setConnected(false);
             }else{
                 fetch(global.link+"/users/"+user.data.entity.id+"/auctions/history",{
@@ -26,6 +27,7 @@ export default function Historic(props){
                     })
                     .catch(err=>{
                         console.log(err);
+                        alert("Please relog again to see historic , thanks")
                         setConnected(false);
                     });
             }
@@ -53,6 +55,6 @@ export default function Historic(props){
                 </main>
                 <Footer/>
             </>
-        : <Navigate to={"/"} />
+        : <Navigate to={"/login"} />
         )
 }

@@ -2,9 +2,6 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import {Navigate} from "react-router-dom";
 export default function Home(props){
-        if(localStorage.getItem("user")===null){
-            return <Navigate to={"/"} />
-        }
         return(
             <>
         <Navbar/>

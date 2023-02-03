@@ -8,7 +8,6 @@ import global from "../../global.json";
 
 export default function AuctionList(props){
     const [data,setData]=useState([]);
-    const [connected,setConnected]=useState(true);
     const [page,setPage]=useState(0);
     useEffect(()=>{
         fetch(global.link+"/auctions/"+page).then(result=>result.json())
@@ -17,11 +16,9 @@ export default function AuctionList(props){
             })
             .catch(err=>{
                 console.log(err);
-                setConnected(false);
             });
         },[])
         return(
-            connected ?
             <>
                 <Navbar/>
                 <main>
@@ -64,6 +61,6 @@ export default function AuctionList(props){
                     </div>
                 </main>
                 <Footer/>
-            </>: <Navigate to={"/"}/>
+                </>
         )
     }

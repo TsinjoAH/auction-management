@@ -36,7 +36,7 @@ public class Config {
                     auhtz.requestMatchers(HttpMethod.POST,"/categories/**","/products/**","/stats/**").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.PUT,"/categories/**","/products/**","/stats/**","/deposits/**").hasAuthority("ROLE_ADMIN")
                     .requestMatchers(HttpMethod.DELETE,"/categories/**","/products/**","**/stats/**").hasAuthority("ROLE_ADMIN")
-                    .requestMatchers(HttpMethod.POST,"/users/login","/admin/login","/admin","/users").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/users/**","/admin/login","/admin","/users").permitAll()
                     .requestMatchers(HttpMethod.DELETE,"/users/logout","/admin/logout").permitAll()
                     .requestMatchers(HttpMethod.GET,"/auctions/profile/**").hasAuthority("ROLE_USER")
                     .requestMatchers(HttpMethod.GET, "/images/**","/auctions/**","/categories", "/notifs/test").permitAll()

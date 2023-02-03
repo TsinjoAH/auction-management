@@ -11,16 +11,24 @@ export default function AuctionProfil(props){
     const [connected,setConnected]=useState(true);
     const location=useLocation();
     const auction=location.state;
-    const user=JSON.parse(localStorage.getItem("user")).data;
+    const user=JSON.parse(localStorage.getItem("user"));
     useEffect(()=>{
-        fetch(global.link+"/auctions/profile/"+auction.id,{
-            headers:{
-                [global.tokenHeader]:user.token
-            }
-        })
-            .then(result=> result.json())
-            .then(data=>setData(data.data))
-            .catch(err=> setConnected(false))
+        if(user===null){
+            alert("please log to see auction profil ")
+            setConnected(false);
+        }else {
+            fetch(global.link+"/auctions/profile/"+auction.id,{
+                headers:{
+                    [global.tokenHeader]:user.data.token
+                }
+            })
+                .then(result=> result.json())
+                .then(data=>setData(data.data))
+                .catch(err=>{
+                    alert("please relog again , thanks")
+                    setConnected(false)
+                })
+        }
     },[]);
         return(
             connected ?
@@ -87,7 +95,7 @@ export default function AuctionProfil(props){
                                                     }
                                                 </table>
                                                 {data.status === 1 ?
-                                                    <BidForm auction={data} user={user} redirect={setConnected}/>
+                                                    <BidForm auction={data} user={user.data} redirect={setConnected}/>
                                                     :""
                                                 }
                                             </div>
@@ -112,6 +120,7 @@ export default function AuctionProfil(props){
                             </div>
                         </div>
                     </div>
-            : <Navigate to={"/"} />
+            :
+                <Navigate to={"/login"} />
         )
 }
