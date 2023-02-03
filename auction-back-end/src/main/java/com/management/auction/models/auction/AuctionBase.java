@@ -82,5 +82,11 @@ public class AuctionBase extends HasFK<User> {
         }
     }
 
+//    public void setStartDate(){
+//        if (startDate.before(Timestamp.valueOf(LocalDateTime.now()))) {
+//
+//        }
+//        this.startDate = startDate;
+//    }
 }
 
