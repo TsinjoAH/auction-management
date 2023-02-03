@@ -20,6 +20,7 @@ public class Config {
 
     @Autowired
     private AdminLoginService admin;
+
     @Autowired
     private UserLoginService user;
 

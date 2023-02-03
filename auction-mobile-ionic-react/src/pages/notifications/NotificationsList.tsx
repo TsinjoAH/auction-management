@@ -17,6 +17,7 @@ import React from "react";
 import {fetchNotifications} from "../../data/notifications.service";
 
 import './NotificationsList.css';
+import {RelativeDate} from "../../components/RelativeDate";
 
 export const NotificationsList: React.FC = () => {
 
@@ -45,7 +46,7 @@ export const NotificationsList: React.FC = () => {
                                 <h2 className="notifications">
                                     {notification.title} <br/>
                                     <span className="date">
-                                        <IonNote>{new Date(notification.date).toLocaleString()}</IonNote>
+                                        <IonNote><RelativeDate date={new Date(notification.date)} /></IonNote>
                                     </span>
                                 </h2>
                                 <h3>
