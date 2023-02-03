@@ -1,16 +1,31 @@
-import {Component} from "react";
+import {Component, useEffect, useState} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuctionListItem from "../../components/AuctionListItem";
 import AdvancedSearch from "../../components/AdvancedSearch";
+import {Navigate} from "react-router-dom";
+import global from "../../global.json";
 
-export default class AuctionList extends Component{
-    render(){
+export default function AuctionList(props){
+    const [data,setData]=useState([]);
+    const [connected,setConnected]=useState(true);
+    const [page,setPage]=useState(0);
+    useEffect(()=>{
+        fetch(global.link+"/auctions/"+page).then(result=>result.json())
+            .then(data=>{
+                setData(data.data);
+            })
+            .catch(err=>{
+                console.log(err);
+                setConnected(false);
+            });
+        },[])
         return(
+            connected ?
             <>
                 <Navbar/>
                 <main>
-                    <AdvancedSearch/>
+                    <AdvancedSearch setData={setData}/>
                     <div className="favourite-place place-padding">
                         <div className="container">
                             <div className="row">
@@ -22,13 +37,7 @@ export default class AuctionList extends Component{
                                 </div>
                             </div>
                             <div className="row">
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
-                                <AuctionListItem/>
+                                {data.map(auction=> <AuctionListItem auction={auction} />)}
                             </div>
                         </div>
                     </div>
@@ -39,14 +48,13 @@ export default class AuctionList extends Component{
                                     <div className="single-wrap d-flex justify-content-center">
                                         <nav aria-label="Page navigation example">
                                             <ul className="pagination justify-content-start">
-                                                <li className="page-item"><a className="page-link" href="#"><span
-                                                    className="flaticon-arrow roted left-arrow"></span></a></li>
-                                                <li className="page-item active"><a className="page-link"
-                                                                                    href="#">01</a></li>
-                                                <li className="page-item"><a className="page-link" href="#">02</a></li>
-                                                <li className="page-item"><a className="page-link" href="#">03</a></li>
-                                                <li className="page-item"><a className="page-link" href="#"><span
-                                                    className="flaticon-arrow right-arrow"></span></a></li>
+                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page-1)}><span
+                                                    className="flaticon-arrow roted left-arrow"></span></p></li>
+                                                <li className="page-item active"><p className="page-link">{page}</p></li>
+                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} >{page+1}</p></li>
+                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+2)} >{page+2}</p></li>
+                                                <li className="page-item"><p className="page-link" onClick={()=>setPage(page+1)} ><span
+                                                    className="flaticon-arrow right-arrow"></span></p></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -56,7 +64,6 @@ export default class AuctionList extends Component{
                     </div>
                 </main>
                 <Footer/>
-            </>
+            </>: <Navigate to={"/"}/>
         )
     }
-}

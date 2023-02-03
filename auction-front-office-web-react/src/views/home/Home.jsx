@@ -1,8 +1,10 @@
-import { Component } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-export default class Home extends Component{
-    render(){
+import {Navigate} from "react-router-dom";
+export default function Home(props){
+        if(localStorage.getItem("user")===null){
+            return <Navigate to={"/"} />
+        }
         return(
             <>
         <Navbar/>
@@ -25,5 +27,4 @@ export default class Home extends Component{
         <Footer/>
         </>
         );
-    }
 }

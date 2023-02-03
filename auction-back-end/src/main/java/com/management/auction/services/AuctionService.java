@@ -69,7 +69,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         if (auction == null) {
             return null;
         }
-        auction.setBids(bidRepo.findByAuctionIdOrderByAmountDesc(id));
+        auction.setBids(bidRepo.findByAuctionIdOrderByIdDesc(id));
         return auction;
     }
 
@@ -78,7 +78,7 @@ public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo
         if (auction == null) {
             return null;
         }
-        auction.setBids(bidRepo.findByAuctionIdOrderByAmountDesc(id));
+        auction.setBids(bidRepo.findByAuctionIdOrderByIdDesc(id));
         return auction;
     }
 

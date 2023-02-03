@@ -13,19 +13,29 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 
+import static custom.springutils.util.ControllerUtil.returnSuccess;
+
 @RestController
 @RequestMapping("/auctions")
 public class AuctionFilterController{
     @Autowired
     private AuctionService service;
     @GetMapping("/filter")
-    public ResponseEntity<SuccessResponse> filter(@RequestParam(required = false)String keyword, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss") Timestamp startMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp startMaxDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")Timestamp endMaxDate, @RequestParam(required = false)Long product, @RequestParam(required = false)Long category, @RequestParam(required = false)Double price, @RequestParam(required = false)Integer status) throws CustomException {
+    public ResponseEntity<SuccessResponse> filter(@RequestParam(required = false)String keyword, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss") String startMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")String startMaxDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")String endMinDate, @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss")String endMaxDate, @RequestParam(required = false)Long product, @RequestParam(required = false)Long category, @RequestParam(required = false)Double price, @RequestParam(required = false)Integer status) throws CustomException {
         Criteria criteria=new Criteria();
         criteria.setKeyword(keyword);
-        criteria.setStartMinDate(startMinDate);
-        criteria.setStartMaxDate(startMaxDate);
-        criteria.setEndMinDate(endMinDate);
-        criteria.setEndMaxDate(endMaxDate);
+        if(startMinDate!=null){
+            criteria.setStartMinDate(Timestamp.valueOf(startMinDate));
+        }
+        if(startMaxDate!=null){
+            criteria.setStartMaxDate(Timestamp.valueOf(startMaxDate));
+        }
+        if(endMinDate!=null){
+            criteria.setEndMinDate(Timestamp.valueOf(endMinDate));
+        }
+        if(endMaxDate!=null){
+            criteria.setEndMaxDate(Timestamp.valueOf(endMaxDate));
+        }
         criteria.setProduct(product);
         criteria.setCategory(category);
         criteria.setPrice(price);
@@ -39,5 +49,9 @@ public class AuctionFilterController{
     @GetMapping("/auctionnotfinish")
     public ResponseEntity<SuccessResponse>  AuctionNotFinish() {
         return ControllerUtil.returnSuccess(this.service.AuctionNotFinish(), HttpStatus.OK);
+    }
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<SuccessResponse> findById(@PathVariable("id") Long id) {
+        return returnSuccess(this.service.findByIdView(id), HttpStatus.OK);
     }
 }
