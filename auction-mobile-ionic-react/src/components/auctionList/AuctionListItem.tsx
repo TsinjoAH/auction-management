@@ -11,7 +11,7 @@ const AuctionListItem: React.FC<{ auction: Auction }> = ({auction}) => {
 
     return (
         <IonCol sizeMd="3" sizeSm="6" size="12">
-            <IonCard className="card" routerLink={`/auctions/`+auction.id}>
+            <IonCard className="card" routerLink={`/user/auctions/`+auction.id}>
                 <img alt="auction" className="img-100" src={serverUrl(auction.images[0].picPath)}/>
                 <IonBadge className="price" color="success"><h2>2000 ar</h2></IonBadge>
                 <IonCardHeader>

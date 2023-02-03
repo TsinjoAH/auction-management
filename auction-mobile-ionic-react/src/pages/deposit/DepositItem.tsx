@@ -39,9 +39,9 @@ export const DepositItem: React.FC<{ deposit: Deposit }> = ({deposit}) => {
     return (
         <IonItem detail={false}>
             <IonLabel >
-                <text>
+                <span>
                     {deposit.amount.toLocaleString()} ar
-                </text>
+                </span>
                 <p>
                     {new Date(deposit.date).toDateString()}
                 </p>

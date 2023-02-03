@@ -22,95 +22,96 @@ import {LocalNotifications} from "@capacitor/local-notifications";
 
 import './Layout.css';
 import {NotificationsList} from "../../pages/notifications/NotificationsList";
+import { AuctionProfile } from '../../pages/auction/auctionProfile/AuctionProfile';
 
 function Layout(): JSX.Element {
+    
+/*
+    // useEffect(() => {
+    //         PushNotifications.checkPermissions().then((res) => {
+    //             if (res.receive !== 'granted') {
+    //                 PushNotifications.requestPermissions().then((res) => {
+    //                     if (res.receive === 'denied') {
+    //                         alert('Push Notification permission denied');
+    //                     }
+    //                     else {
+    //                         alert('Push Notification permission granted');
+    //                         register();
+    //                     }
+    //                 });
+    //             }
+    //             else {
+    //                 register();
+    //             }
+    //         });
+    // }, []);
 
-    const router = useIonRouter();
+    // const register = () => {
+    //     console.log('Initializing HomePage');
 
-    useEffect(() => {
-            PushNotifications.checkPermissions().then((res) => {
-                if (res.receive !== 'granted') {
-                    PushNotifications.requestPermissions().then((res) => {
-                        if (res.receive === 'denied') {
-                            alert('Push Notification permission denied');
-                        }
-                        else {
-                            alert('Push Notification permission granted');
-                            register();
-                        }
-                    });
-                }
-                else {
-                    register();
-                }
-            });
-    }, []);
+    //     // Register with Apple / Google to receive push via APNS/FCM
+    //     PushNotifications.register();
 
-    const register = () => {
-        console.log('Initializing HomePage');
+    //     // On success, we should be able to receive notifications
+    //     PushNotifications.addListener('registration',
+    //         (token: Token) => {
+    //             registerDevice(token.value).then(() => {
+    //                console.log("-- registration success --");
+    //             })
+    //         }
+    //     );
 
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
+    //     // Some issue with our setup and push will not work
+    //     PushNotifications.addListener('registrationError',
+    //         (error: any) => {
+    //             alert('Error on registration: ' + JSON.stringify(error));
+    //         }
+    //     );
 
-        // On success, we should be able to receive notifications
-        PushNotifications.addListener('registration',
-            (token: Token) => {
-                registerDevice(token.value).then(() => {
-                   console.log("-- registration success --");
-                })
-            }
-        );
+    //     let index = 1;
 
-        // Some issue with our setup and push will not work
-        PushNotifications.addListener('registrationError',
-            (error: any) => {
-                alert('Error on registration: ' + JSON.stringify(error));
-            }
-        );
+    //     // Show us the notification payload if the app is open on our device
+    //     PushNotifications.addListener('pushNotificationReceived',
+    //         (notification: any) => {
+    //             let data : NotificationData = notification.data;
+    //             console.log(data.image);
+    //             LocalNotifications.schedule({
+    //                 notifications: [
+    //                     {
+    //                         id: index,
+    //                         title: data.title,
+    //                         body: data.content,
+    //                         attachments: [
+    //                             {
+    //                                 id: '1',
+    //                                 url: data.image,
+    //                             }
+    //                         ],
+    //                         extra: data
+    //                     }
+    //                 ]
+    //             }).then(r => {
+    //                 console.log(r, " Notification received");
+    //                 index++;
+    //             })
+    //         }
+    //     );
 
-        let index = 1;
+    //     // Method called when tapping on a notification
+    //     PushNotifications.addListener('pushNotificationActionPerformed',
+    //         (notification: ActionPerformed) => {
+    //             let data : NotificationData = notification.notification.data;
+    //             router.push(data.link);
+    //         }
+    //     );
 
-        // Show us the notification payload if the app is open on our device
-        PushNotifications.addListener('pushNotificationReceived',
-            (notification: any) => {
-                let data : NotificationData = notification.data;
-                console.log(data.image);
-                LocalNotifications.schedule({
-                    notifications: [
-                        {
-                            id: index,
-                            title: data.title,
-                            body: data.content,
-                            attachments: [
-                                {
-                                    id: '1',
-                                    url: data.image,
-                                }
-                            ],
-                            extra: data
-                        }
-                    ]
-                }).then(r => {
-                    console.log(r, " Notification received");
-                    index++;
-                })
-            }
-        );
-
-        // Method called when tapping on a notification
-        PushNotifications.addListener('pushNotificationActionPerformed',
-            (notification: ActionPerformed) => {
-                let data : NotificationData = notification.notification.data;
-                router.push(data.link);
-            }
-        );
-
-        LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
-            let data : NotificationData = notification.notification.extra;
-            router.push(data.link);
-        });
-    }
-
+    //     LocalNotifications.addListener('localNotificationActionPerformed', (notification) => {
+    //         let data : NotificationData = notification.notification.extra;
+    //         router.push(data.link);
+    //     });
+    // }
+*/
+    
     return (
         <>
             <IonMenu contentId="main-content">
@@ -138,6 +139,7 @@ function Layout(): JSX.Element {
                 <Route path="/user/notifications" exact={true}>
                     <NotificationsList />
                 </Route>
+                <Route path="/user/auctions/:id" exact={true} render={() => <AuctionProfile />} />
             </IonRouterOutlet>
         </>
     );

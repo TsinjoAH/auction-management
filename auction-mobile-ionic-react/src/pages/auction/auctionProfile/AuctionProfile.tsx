@@ -24,29 +24,31 @@ import '@ionic/react/css/ionic-swiper.css';
 import './pagination.css';
 import {Pagination} from "swiper";
 import {AuctionTimer} from "../../../components/timer/AuctionTimer";
+import { ModalLoader } from "../../../components/modal-loader/ModalLoader";
 
 
 export const AuctionProfile: React.FC = () => {
 
-    const params = useParams<{ id: string }>();
     const [auction, setAuction] = useState<Auction>();
-    const [redirect, setRedirect] = useState<boolean>();
+    const [redirect, setRedirect] = useState<boolean>(false);
+    const [onload, load] = useState<boolean>(false);
+    const { id } = useParams<{ id: string }>();
 
     useIonViewWillEnter(() => {
         setRedirect(false)
-        getAuction(parseInt(params.id)).then((data) => {
+        load(true)
+        getAuction(parseInt(id)).then((data) => {
+            load(false);
             setAuction(data);
         });
-    }, [params.id])
+    }, [id])
 
-    // useEffect(() => {
-    //
-    // }, [params.id])
 
     return (
         redirect ? <Redirect to={"/user/auctions"}/> :
             <IonPage>
                 <IonContent fullscreen>
+                    <ModalLoader isOpen={onload} />
                     <div>
                         <div>
                             <IonIcon onClick={() => setRedirect(true)} className="back-icon" slot="start"
@@ -80,7 +82,7 @@ export const AuctionProfile: React.FC = () => {
                         </div>
                         <IonCard>
                             <IonCardContent>
-                                {auction ? <AuctionTimer auction={auction}/> : ""}
+                                {auction ? <AuctionTimer auction={auction}/> : <></>}
                             </IonCardContent>
                         </IonCard>
                         <IonCard>
@@ -97,7 +99,7 @@ export const AuctionProfile: React.FC = () => {
                                     ))}
                                     {auction?.bids.length == 0 ? (<IonItem>
                                         Aucune
-                                    </IonItem>) : ""}
+                                    </IonItem>) : <></>}
                                 </IonList>
                             </IonCardContent>
                         </IonCard>

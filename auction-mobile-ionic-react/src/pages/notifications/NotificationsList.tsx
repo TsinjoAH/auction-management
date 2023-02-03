@@ -13,32 +13,31 @@ import {
 } from "@ionic/react";
 import {notificationsSharp} from "ionicons/icons";
 import {NotificationData} from "../../utils/shared.interfaces";
-import React from "react";
+import React, { useState } from "react";
 import {fetchNotifications} from "../../data/notifications.service";
 
 import './NotificationsList.css';
-import {RelativeDate} from "../../components/RelativeDate";
+import { PageHeader } from "../../components/PageHeader";
+import { ModalLoader } from "../../components/modal-loader/ModalLoader";
 
 export const NotificationsList: React.FC = () => {
 
     const [notifications, setNotifications] = React.useState<NotificationData[]>([]);
+    const [onload, load] = useState<boolean>(false);
 
     useIonViewWillEnter(() => {
-        fetchNotifications().then(setNotifications);
+        load(true);
+        fetchNotifications().then((data) => {
+            setNotifications(data);
+            load(false);
+        });
     })
 
     return (
         <IonPage id="main-content">
-            <IonHeader>
-                <IonToolbar>
-                    <IonButtons slot="start">
-                        <IonMenuButton></IonMenuButton>
-                    </IonButtons>
-                    <IonTitle>Notifications</IonTitle>
-                    <IonIcon icon={notificationsSharp} slot="end" className="notification-icon"></IonIcon>
-                </IonToolbar>
-            </IonHeader>
+           <PageHeader title={"Notifications"} />
             <IonContent fullscreen>
+                <ModalLoader isOpen={onload} />
                 <IonList>
                     {notifications.map((notification, i) => (
                         <IonItem key={i} routerLink={notification.link} >
