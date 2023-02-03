@@ -3,13 +3,13 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import AuctionListItem from "../../components/AuctionListItem";
 import AdvancedSearch from "../../components/AdvancedSearch";
-import {Navigate} from "react-router-dom";
 import global from "../../global.json";
 
 export default function AuctionList(props){
-    const [data,setData]=useState([]);
+    const [data,setData]=useState(null);
     const [page,setPage]=useState(0);
     useEffect(()=>{
+        setData(null);
         fetch(global.link+"/auctions/"+page).then(result=>result.json())
             .then(data=>{
                 setData(data.data);
@@ -17,8 +17,10 @@ export default function AuctionList(props){
             .catch(err=>{
                 console.log(err);
             });
-        },[])
+        },[page])
         return(
+            data !=null ?
+
             <>
                 <Navbar/>
                 <main>
@@ -33,9 +35,13 @@ export default function AuctionList(props){
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                {data.map(auction=> <AuctionListItem auction={auction} />)}
-                            </div>
+                            {data.length > 0 ?
+                                <div className="row">
+                                    {data.map(auction=> <AuctionListItem auction={auction} />)}
+                                </div>
+                                :
+                                    <h1>No more auction</h1>
+                            }
                         </div>
                     </div>
                     <div className="pagination-area pb-100 text-center">
@@ -62,5 +68,16 @@ export default function AuctionList(props){
                 </main>
                 <Footer/>
                 </>
+                :
+                <div id="preloader-active">
+                    <div className="preloader d-flex align-items-center justify-content-center">
+                        <div className="preloader-inner position-relative">
+                            <div className="preloader-circle"></div>
+                            <div className="preloader-img pere-text">
+                                <img src="./assets/img/logo/laptop.png" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         )
     }

@@ -1,9 +1,11 @@
-import { Component } from "react";
+import {Component, useState} from "react";
 import global from "../../global.json";
 import {Navigate, useNavigate} from "react-router-dom";
 export default function Login(props) {
+    const [connected,setConnected]=useState(true);
     const navigate=useNavigate();
     const log = (event) => {
+        setConnected(false);
         let email = document.getElementById("email");
         let password = document.getElementById("password");
         let login = {
@@ -16,17 +18,22 @@ export default function Login(props) {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then(result => result.json())
-            .then(data => {
-                if (data.code === 400) {
-                    alert(data.message);
-                } else {
+        }).then(result =>{
+            if(result.ok){
+                result.json().then(data=>{
                     localStorage.setItem("user", JSON.stringify(data));
                     navigate("/");
-                }
-            });
+                });
+            }else{
+                result.text().then(t=>{
+                   alert(t.message);
+                    setConnected(true);
+                });
+            }
+        } );
     };
     return (
+        connected ?
         <div className="authincation h-100" style={{marginTop: 150}}>
             <div className="container-fluid h-100">
                 <div className="row justify-content-center h-100 align-items-center">
@@ -39,7 +46,7 @@ export default function Login(props) {
                                         <div className="form-group">
                                             <label><strong>Email</strong></label>
                                             <input type="email" className="form-control" name="email" id={"email"}
-                                                   defaultValue="Steven@exemple.com"/>
+                                                   defaultValue="lahatra@gmail.com"/>
                                         </div>
                                         <div className="form-group">
                                             <label><strong>Password</strong></label>
@@ -65,5 +72,16 @@ export default function Login(props) {
                 </div>
             </div>
         </div>
+            :
+            <div id="preloader-active">
+                <div className="preloader d-flex align-items-center justify-content-center">
+                    <div className="preloader-inner position-relative">
+                        <div className="preloader-circle"></div>
+                        <div className="preloader-img pere-text">
+                            <img src="./assets/img/logo/laptop.png" alt=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
     )
 }

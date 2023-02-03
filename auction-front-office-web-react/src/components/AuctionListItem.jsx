@@ -20,7 +20,7 @@ export default function AuctionListItem(props){
                         }
                         <div className="place-cap">
                             <div className="place-cap-top">
-                                <span><i className="fas fa-clock"></i><span><Timer expirationDate={Date.parse(props.auction.endDate)} /></span> </span>
+                                <span><i className="fas fa-clock"></i><span><Timer expirationDate={Date.parse(props.auction.endDate)} beginDate={Date.parse(props.auction.beginDate)} /></span> </span>
                                 <h3 onClick={()=>clicked(props.auction)} style={{cursor:"pointer"}}>{props.auction.title}</h3>
                                 <p className="dolor">{props.auction.product.category.name} <span>/ {props.auction.product.name}</span></p>
                                 <p className="dolor">{props.auction.max} Ar</p>
