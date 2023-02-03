@@ -30,6 +30,7 @@ import java.util.List;
 public class AuctionService extends CrudServiceWithFK<Auction, User, AuctionRepo> {
 
     private final UserRepo userRepo;
+    @Autowired
     private EntityManager manager;
     private final AuctionViewRepo auctionViewRepo;
     private final AuctionPicRepo auctionPicRepository;

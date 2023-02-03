@@ -4,6 +4,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.management.auction.models.Deposit;
 import com.management.auction.models.UserDevice;
 import com.management.auction.models.auction.Auction;
 import com.management.auction.models.notification.Notif;
@@ -57,14 +58,33 @@ public class NotifService {
         scheduleNotification(notif);
     }
 
+    public void scheduleForDeposit (Deposit deposit) {
+        Notif notif = buildNotif(deposit);
+        save(notif);
+        scheduleNotification(notif);
+    }
+
     private Notif buildNotif(Auction auction) {
         Notif notif = new Notif();
         notif.setTitle("Enchere terminée");
         notif.setContent("L'enchere " + auction.getTitle() + " est terminée, Clickez pour plus de details et voir les resultats");
-        notif.setLink("/auctions/" + auction.getId());
+        notif.setLink("/user/auctions/" + auction.getId());
         notif.setUser(auction.getUser().getId());
         notif.setImage(baseUrl + auction.getImages().get(0).getPicPath());
         notif.setDate(auction.getEndDate());
+        return notif;
+    }
+
+    private Notif buildNotif(Deposit deposit) {
+        Notif notif = new Notif();
+        String title = deposit.getStatus() == 20 ? "Depot en validee" : "Depot rejetée";
+        notif.setTitle(title);
+        String content = deposit.getStatus() == 20 ? "validée" : "rejetée";
+        notif.setContent("Votre depot de " + deposit.getAmount() + " AR a ete " + content);
+        notif.setLink("/user/account/recharge");
+        notif.setUser(deposit.getUser().getId());
+        notif.setImage("");
+        notif.setDate(new Date());
         return notif;
     }
 

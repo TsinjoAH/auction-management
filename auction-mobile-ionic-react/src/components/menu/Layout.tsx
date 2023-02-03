@@ -22,6 +22,7 @@ import {LocalNotifications} from "@capacitor/local-notifications";
 
 import './Layout.css';
 import {NotificationsList} from "../../pages/notifications/NotificationsList";
+import { AuctionProfile } from '../../pages/auction/auctionProfile/AuctionProfile';
 
 function Layout(): JSX.Element {
 
@@ -111,6 +112,7 @@ function Layout(): JSX.Element {
         });
     }
 
+    
     return (
         <>
             <IonMenu contentId="main-content">
@@ -138,6 +140,7 @@ function Layout(): JSX.Element {
                 <Route path="/user/notifications" exact={true}>
                     <NotificationsList />
                 </Route>
+                <Route path="/user/auctions/:id" exact={true} render={() => <AuctionProfile />} />
             </IonRouterOutlet>
         </>
     );

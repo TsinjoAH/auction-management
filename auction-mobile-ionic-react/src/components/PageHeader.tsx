@@ -1,4 +1,4 @@
-import {IonButtons, IonHeader, IonIcon, IonMenuButton, IonTitle, IonToolbar, useIonRouter} from "@ionic/react";
+import {IonButton, IonButtons, IonHeader, IonIcon, IonMenuButton, IonMenuToggle, IonTitle, IonToolbar, useIonRouter} from "@ionic/react";
 import {notificationsSharp} from "ionicons/icons";
 import React from "react";
 
@@ -13,7 +13,11 @@ export const PageHeader: React.FC<{title: string}> = ({title}) => {
                     <IonMenuButton></IonMenuButton>
                 </IonButtons>
                 <IonTitle>{title}</IonTitle>
-                <IonIcon onClick={() => router.push("/user/notifications")} icon={notificationsSharp} slot="end" className="notification-icon" ></IonIcon>
+                <IonButtons slot="end">
+                    <IonButton routerLink="/user/notifications" >
+                        <IonIcon icon={notificationsSharp} slot="end" className="notification-icon" ></IonIcon>
+                    </IonButton>
+                </IonButtons>
             </IonToolbar>
         </IonHeader>
     );

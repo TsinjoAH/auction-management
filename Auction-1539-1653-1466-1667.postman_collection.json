@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8eb25374-3a5e-41ce-a837-1cfe6f47eea3",
+		"_postman_id": "e3d39a1e-ad04-4268-b296-d01a21d64bcb",
 		"name": "Auction",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,13 +14,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/1/deposits",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/deposits",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
@@ -46,16 +42,11 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app//users/1/deposits",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/deposits",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
-								"",
 								"users",
 								"1",
 								"deposits"
@@ -70,17 +61,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/deposits/1/validate",
-							"protocol": "https",
+							"raw": "{{host}}/deposits/9/validate",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"deposits",
-								"1",
+								"9",
 								"validate"
 							]
 						}
@@ -93,13 +80,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/deposits/not-validated",
-							"protocol": "https",
+							"raw": "{{host}}/deposits/not-validated",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"deposits",
@@ -115,17 +98,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/deposits/15/reject",
-							"protocol": "https",
+							"raw": "{{host}}/deposits/10/reject",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"deposits",
-								"15",
+								"10",
 								"reject"
 							]
 						}
@@ -143,13 +122,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/commission",
-							"protocol": "https",
+							"raw": "{{host}}/commission",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"commission"
@@ -165,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"rate\":0.12\n}\n",
+							"raw": "{\n    \"rate\":0.69\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -173,13 +148,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/commission",
-							"protocol": "https",
+							"raw": "{{host}}/commission",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"commission"
@@ -200,7 +171,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Sac\"\n}",
+							"raw": "{\n    \"name\": \"Sports\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -208,13 +179,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/categories",
-							"protocol": "https",
+							"raw": "{{host}}/categories",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"categories"
@@ -229,13 +196,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/categories",
-							"protocol": "https",
+							"raw": "{{host}}/categories",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"categories"
@@ -250,17 +213,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/categories/1",
-							"protocol": "https",
+							"raw": "{{host}}/categories/6",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"categories",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -273,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Modified\"\n}",
+							"raw": "{\n    \"name\": \"Sports car\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,17 +240,13 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/categories/1",
-							"protocol": "https",
+							"raw": "{{host}}/categories/6",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"categories",
-								"1"
+								"6"
 							]
 						}
 					},
@@ -309,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"lahatra@exemple.com\",\n    \"password\": \"lahatra\"\n}",
+							"raw": "{\n    \"email\": \"test@test.test\",\n    \"password\": \"test\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -317,13 +272,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/login",
-							"protocol": "https",
+							"raw": "{{host}}/users/login",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
@@ -345,17 +296,14 @@
 							}
 						],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/logout",
-							"protocol": "https",
+							"raw": "{{host}}/users/logout/",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
-								"logout"
+								"logout",
+								""
 							]
 						}
 					},
@@ -368,7 +316,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"lahatra\",\r\n    \"email\":\"lahatra@exemple.com\",\r\n    \"password\":\"lahatra\"\r\n}",
+							"raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@test.test\",\r\n    \"password\":\"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -376,16 +324,13 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users",
-							"protocol": "https",
+							"raw": "{{host}}/users/signup",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
-								"users"
+								"users",
+								"signup"
 							]
 						}
 					},
@@ -397,26 +342,128 @@
 			"name": "auction",
 			"item": [
 				{
-					"name": "auction by pagination",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://auction-management-production.up.railway.app/auctions/0",
-							"protocol": "https",
-							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
-							],
-							"path": [
-								"auctions",
-								"0"
-							]
+					"name": "filter and pagination",
+					"item": [
+						{
+							"name": "auction not finished",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/auctions/auctionnotfinish",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auctions",
+										"auctionnotfinish"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "auction by pagination",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/auctions/0",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auctions",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "auction full profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/auctions/profile/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auctions",
+										"profile",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "advanced search",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/auctions/filter?keyword=jo",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auctions",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "startMinDate",
+											"value": "2023-02-25 12:15:00",
+											"disabled": true
+										},
+										{
+											"key": "startMaxDate",
+											"value": "2023-02-25 12:15:00",
+											"disabled": true
+										},
+										{
+											"key": "endMinDate",
+											"value": "2023-02-25 12:15:00",
+											"disabled": true
+										},
+										{
+											"key": "endMaxDate",
+											"value": "2023-02-25 12:15:00",
+											"disabled": true
+										},
+										{
+											"key": "product",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "category",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "4500",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "keyword",
+											"value": "jo"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "get auctions",
@@ -431,18 +478,42 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/2/auctions",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/auctions",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
-								"2",
+								"1",
 								"auctions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get auctions by user with pagination",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/users/1/auctions/pages/0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"auctions",
+								"pages",
+								"0"
 							]
 						}
 					},
@@ -461,19 +532,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/1/auctions/32",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/auctions/1",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
 								"1",
 								"auctions",
-								"32"
+								"1"
 							]
 						}
 					},
@@ -494,13 +561,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/1/auctions",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/auctions",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
@@ -517,44 +580,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/1/auctions/history",
-							"protocol": "https",
+							"raw": "{{host}}/users/1/auctions/history",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"users",
 								"1",
 								"auctions",
 								"history"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "auction by pagination and fkid",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://auction-management-production.up.railway.app/users/1/auctions/pages/0",
-							"protocol": "https",
-							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
-							],
-							"path": [
-								"users",
-								"1",
-								"auctions",
-								"pages",
-								"0"
 							]
 						}
 					},
@@ -572,7 +606,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"admin@gmail.com\",\r\n    \"password\":\"admin\"\r\n}",
+							"raw": "{\r\n    \"email\":\"admin@example.com\",\r\n    \"password\":\"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -580,13 +614,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/admin/login",
-							"protocol": "https",
+							"raw": "{{host}}/admin/login",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"admin",
@@ -629,13 +659,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/products",
-							"protocol": "https",
+							"raw": "{{host}}/products",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"products"
@@ -651,7 +677,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"stylo\",\r\n    \"category\":{\r\n        \"id\":2\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\":\"Basket Air Jordan golden collector\",\r\n    \"category\":{\r\n        \"id\":2\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -659,13 +685,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/products",
-							"protocol": "https",
+							"raw": "{{host}}/products",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"products"
@@ -680,13 +702,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/products/3",
-							"protocol": "https",
+							"raw": "{{host}}/products/3",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"products",
@@ -703,7 +721,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"souris\",\r\n    \"category\":{\r\n        \"id\":3\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\":\"Air jordan purple and gold\",\r\n    \"category\":{\r\n        \"id\":3\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -711,16 +729,13 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/3",
-							"protocol": "https",
+							"raw": "{{host}}/products/16",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
-								"3"
+								"products",
+								"16"
 							]
 						}
 					},
@@ -732,13 +747,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/products/search?name=rol",
-							"protocol": "https",
+							"raw": "{{host}}/products/search?name=jordan",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"products",
@@ -747,7 +758,7 @@
 							"query": [
 								{
 									"key": "name",
-									"value": "rol"
+									"value": "jordan"
 								}
 							]
 						}
@@ -760,13 +771,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/products/pages/0",
-							"protocol": "https",
+							"raw": "{{host}}/products/pages/0",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"products",
@@ -797,13 +804,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/auctions/1/bids",
-							"protocol": "https",
+							"raw": "{{host}}/auctions/1/bids",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"auctions",
@@ -817,7 +820,7 @@
 			]
 		},
 		{
-			"name": "statistique",
+			"name": "statistic",
 			"item": [
 				{
 					"name": "per day",
@@ -825,13 +828,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/perday?min=2020-01-19&max=2023-11-20",
-							"protocol": "https",
+							"raw": "{{host}}/stats/perday?min=2020-01-19&max=2023-11-20",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -857,13 +856,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/commissionperday?min=2020-01-19&max=2024-01-20",
-							"protocol": "https",
+							"raw": "{{host}}/stats/commissionperday?min=2020-01-19&max=2024-01-20",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -889,13 +884,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/totalIncrease",
-							"protocol": "https",
+							"raw": "{{host}}/stats/totalIncrease",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -911,13 +902,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/usersale",
-							"protocol": "https",
+							"raw": "{{host}}/stats/usersale",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -933,13 +920,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/usertotalIncrease",
-							"protocol": "https",
+							"raw": "{{host}}/stats/usertotalIncrease",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -955,13 +938,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/commissiontotalIncrease",
-							"protocol": "https",
+							"raw": "{{host}}/stats/commissiontotalIncrease",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -977,13 +956,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/product/0",
-							"protocol": "https",
+							"raw": "{{host}}/stats/product/0",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -1000,13 +975,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://auction-management-production.up.railway.app/stats/category/0",
-							"protocol": "https",
+							"raw": "{{host}}/stats/category/0",
 							"host": [
-								"auction-management-production",
-								"up",
-								"railway",
-								"app"
+								"{{host}}"
 							],
 							"path": [
 								"stats",
@@ -1018,6 +989,105 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "get all notifs for a specific user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/users/1/notifications",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "devices",
+			"item": [
+				{
+					"name": "register a device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\":1,\n    \"deviceToken\":\"abcdefghijklmn1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/1/devices",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"devices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "7cce273970f3f127e1dbef27b9a0f14b0d84dfb6",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "tk",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://auction-management-production-a966.up.railway.app",
+			"type": "default"
 		}
 	]
 }
