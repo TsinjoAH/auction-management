@@ -1,3 +1,5 @@
+-- drop owned by auction;
+
 create table admin
 (
     id       serial primary key,
@@ -222,8 +224,12 @@ select user_id, amount from account_deposit where status = 20;
 create view v_deposit_final as
 select user_id, sum(amount) as amount from v_deposit group by user_id;
 
-create view v_auction_user_bid as
-select auction_id, user_id, max(amount) amount from bid group by auction_id, user_id;
+
+create or replace view v_auction_user_bid as
+select t.auction_id, user_id, t.amount from
+    (select auction_id,  max(amount) amount from bid group by auction_id) t
+        join bid on t.auction_id = bid.auction_id and t.amount = bid.amount;
+
 
 create view v_user_bids as
 select user_id, sum(amount) amount from v_auction_user_bid group by user_id;
