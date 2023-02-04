@@ -1,12 +1,12 @@
 import { Component } from "react";
 import global from "../global.json";
-import {Navigate} from "react-router-dom";
-export default class Navbar extends Component{
-    render(){
+import {Navigate, useNavigate} from "react-router-dom";
+export default function Navbar(props){
+    let navigate=useNavigate();
         return(
             <header>
                 <nav className="navbar navbar-light navbar-expand-md fixed-top py-3" style={{fontFamily: "Barlow Condensed",fontSize: 18,background: "#fff",boxShadow: "1px 1px 16px #61616196"}}>
-                    <div className="container"><a className="navbar-brand d-flex align-items-center" href="#"><span
+                    <div className="container"><a className="navbar-brand d-flex align-items-center" href="/"><span
                         style={{fontWeight: "bold",fontSize:22}}>Auction</span></a>
                         <button data-bs-toggle="collapse" className="navbar-toggler" data-bs-target="#navcol-3"><span
                             className="visually-hidden"></span><span
@@ -28,8 +28,7 @@ export default class Navbar extends Component{
                                     headers:{
                                         [global.tokenHeader]:user.data.token
                                     }
-                                }).then(result=>localStorage.removeItem("user"))
-                                    .then(<Navigate to={"/"} />);
+                                }).then(result=>{localStorage.removeItem("user");navigate("/")})
                             }
                             } style={{background:"none",borderWidth:1,borderStyle:"solid",borderColor:"blue",width:100,height:40, color:"blue",borderRadius:5}}>Logout</button>
                         </div>
@@ -37,5 +36,4 @@ export default class Navbar extends Component{
                 </nav>
             </header>
     );
-    }
 }
