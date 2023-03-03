@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Document(collection = "notif")
 public class Notif {
+
     String title;
     String content;
     String image;
